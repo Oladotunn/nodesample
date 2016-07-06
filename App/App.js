@@ -26,7 +26,12 @@ const getSceneStyle = () => ({
 }
 
 export default class App extends Component {
+    constructor(props){
+        super(props)
+        this.state = {isProfileEditing:false}
+    }
     render() {
+        let title = this.props.isProfileEditing ? 'Save':'Edit'
         return (
             <Router getSceneStyle={getSceneStyle}>
                 <Scene key="modal" component={Modal} >
@@ -43,11 +48,13 @@ export default class App extends Component {
                     />
                         <Scene
                             key="main"
-                            tabs={true}>
+                            tabs={true} tabBarStyle={{backgroundColor:'#fff',borderTopWidth:1,borderColor:'#eeeeee'}}>
+                            
                             <Scene key="profile" initial component={ProfilePage} title="TRiBL"
                                    navigationBarStyle={{backgroundColor:'#D80324',borderWidth:0}}
-                                   titleStyle={{color:'#fff'}}
-                                   icon={TabIcon}/>
+                                   titleStyle={{color:'#fff'}} onRight={()=> console.log('yey')}
+                                   rightTitle={title} icon={TabIcon} rightButtonTextStyle={{color:'#fff'}}/>
+
                             <Scene key="match"  component={PageTwo} title="Match" icon={TabIcon}/>
                             <Scene key="messages"  component={PageTwo} title="Messages" icon={TabIcon}/>
                             <Scene key="settings"  component={PageTwo} title="Settings" icon={TabIcon}/>
