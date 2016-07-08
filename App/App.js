@@ -10,7 +10,8 @@ import Flags from './containers/flags/index'
 import {primaryFontColor,primaryThemeColor,whiteFont} from '@theme/colors'
 import TabIcon from '@components/tabIcon'
 import ProfilePage from '@containers/profile/profilePage'
-
+import MatchPage from '@containers/profile/match'
+import DetailProfilePage from '@containers/profile/detailProfilePage'
 const getSceneStyle = () => ({
     flex: 1,
     backgroundColor: '#fff',
@@ -49,13 +50,11 @@ export default class App extends Component {
                         <Scene
                             key="main"
                             tabs={true} tabBarStyle={{backgroundColor:'#fff',borderTopWidth:1,borderColor:'#eeeeee'}}>
-                            
                             <Scene key="profile" initial component={ProfilePage} title="TRiBL"
-                                   navigationBarStyle={{backgroundColor:'#D80324',borderWidth:0}}
+                                   navigationBarStyle={{backgroundColor:'#D80324'}}
                                    titleStyle={{color:'#fff'}} onRight={()=> console.log('yey')}
                                    rightTitle={title} icon={TabIcon} rightButtonTextStyle={{color:'#fff'}}/>
-
-                            <Scene key="match"  component={PageTwo} title="Match" icon={TabIcon}/>
+                            <Scene key="match" navigationBarStyle={{backgroundColor:'#D80324'}} titleStyle={{color:'#fff'}}  component={MatchPage} title="Match" icon={TabIcon} customTitle="TRiBL"/>
                             <Scene key="messages"  component={PageTwo} title="Messages" icon={TabIcon}/>
                             <Scene key="settings"  component={PageTwo} title="Settings" icon={TabIcon}/>
                         </Scene>

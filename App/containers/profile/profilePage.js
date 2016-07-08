@@ -25,19 +25,19 @@ class ProfilePage extends Component {
                             indicator={this._renderDotIndicator()}>
                             <View>
                                 <Image source={{uri: 'https://images.unsplash.com/photo-1465326117523-6450112b60b2'}}
-                                       style={[{width: 400, height: 400},styles.sliderImages]} />
+                                       style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                             <View>
                                 <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
-                                       style={[{width: 400, height: 400},styles.sliderImages]} />
+                                       style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                             <View>
                                 <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
-                                       style={[{width: 400, height: 400},styles.sliderImages]} />
+                                       style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                             <View>
                                 <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
-                                       style={[{width: 400, height: 400},styles.sliderImages]} />
+                                       style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                         </IndicatorViewPager>
                         <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
