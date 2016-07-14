@@ -18,12 +18,12 @@ class MatchPage extends Component {
 
     render() {
         return (
-            <ScrollView vertical={true} contentContainerStyle={{paddingTop:64,paddingBottom:90,flexDirection:'column',flex:1}}>
+            <ScrollView vertical={true} contentContainerStyle={{paddingTop:64,flexDirection:'column',flex:1}}>
                 <StatusBar
                     hidden={false}
                     barStyle="light-content"
                 />
-                <TouchableOpacity style={{flex:6}}>
+                <TouchableOpacity style={{flex:6}} onPress={()=> Actions.matchDetail()}>
                     <Image source={{uri: 'https://images.unsplash.com/photo-1465326117523-6450112b60b2'}}
                                    style={[{width: null, height: null,flex:1}]} >
                                 <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
@@ -35,7 +35,7 @@ class MatchPage extends Component {
                                 </View>
                             </Image>
                 </TouchableOpacity>
-                <View style={{flex:4}}>
+                <View style={{flex:4,paddingBottom:160}}>
                      <Text style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15,backgroundColor:'#FFFFFF'},styles.fontColor]}>Amateur model. Expert scientist</Text>
                     <View style={[styles.list,{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}]}>
                         <Text  style={[{lineHeight:25,marginRight:10},styles.fontColor]}>Mututal Friends:</Text>

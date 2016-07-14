@@ -27,6 +27,7 @@ let windowWidth = Dimensions.get('window').width;
 class FourthPage extends Component{
     constructor(props){
         super(props)
+        this.state = {gender:''}
     }
 
     render() {
@@ -39,12 +40,14 @@ class FourthPage extends Component{
                     <Text style={styles.textColor}>What are you looking for?</Text>
                 </View>
                 <View style={[styles.buttonGroup,{paddingLeft:20,paddingRight:20}]}>
-                    <Button containerStyle={{flex:1}} style={[styles.selectButton,{marginRight:15,height:45,lineHeight:33,color:'#696969'},borderRadius]}>
+                    
+                    <Button containerStyle={{flex:1}} onPress={()=> this.setState({gender:'men'})} style={[styles.selectButton,{marginRight:15,height:45,lineHeight:33,color:this.state.gender == 'men' ? '#da1636':'#696969',borderColor: this.state.gender == 'men' ?'#da1636':'#696969',borderWidth:1},borderRadius]}>
                         Men
                     </Button>
-                    <Button containerStyle={{flex:1}} style={[styles.selectButton,{marginLeft:15,height:45,lineHeight:33,color:'#696969'},borderRadius]}>
+                    <Button containerStyle={{flex:1}} onPress={()=> this.setState({gender:'women'})} style={[styles.selectButton,{marginLeft:15,height:45,lineHeight:33,color:this.state.gender == 'women' ? '#da1636':'#696969',borderColor:this.state.gender == 'women' ?'#da1636':'#696969'},borderRadius]}>
                         Women
                     </Button>
+
                 </View>
                 <Text style={[{textAlign:'center',marginTop:30},styles.textColor]}>Aged:</Text>
                 <View style={[styles.buttonGroup,{marginTop:15}]}>

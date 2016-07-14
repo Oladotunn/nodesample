@@ -12,6 +12,11 @@ import TabIcon from '@components/tabIcon'
 import ProfilePage from '@containers/profile/profilePage'
 import MatchPage from '@containers/profile/match'
 import DetailProfilePage from '@containers/profile/detailProfilePage'
+import Messages from '@containers/profile/messages.js'
+import Settings from '@containers/profile/settings.js'
+import SingleChat from '@containers/profile/singleChat.js'
+import SingleMatch from '@containers/profile/singleMatch.js'
+import EditProfilePage from '@containers/profile/editProfilePage.js'
 const getSceneStyle = () => ({
     flex: 1,
     backgroundColor: '#fff',
@@ -29,10 +34,9 @@ const getSceneStyle = () => ({
 export default class App extends Component {
     constructor(props){
         super(props)
-        this.state = {isProfileEditing:false}
+
     }
     render() {
-        let title = this.props.isProfileEditing ? 'Save':'Edit'
         return (
             <Router getSceneStyle={getSceneStyle}>
                 <Scene key="modal" component={Modal} >
@@ -50,13 +54,23 @@ export default class App extends Component {
                         <Scene
                             key="main"
                             tabs={true} tabBarStyle={{backgroundColor:'#fff',borderTopWidth:1,borderColor:'#eeeeee'}}>
-                            <Scene key="profile" initial component={ProfilePage} title="TRiBL"
-                                   navigationBarStyle={{backgroundColor:'#D80324'}}
-                                   titleStyle={{color:'#fff'}} onRight={()=> console.log('yey')}
-                                   rightTitle={title} icon={TabIcon} rightButtonTextStyle={{color:'#fff'}}/>
-                            <Scene key="match" navigationBarStyle={{backgroundColor:'#D80324'}} titleStyle={{color:'#fff'}}  component={MatchPage} title="Match" icon={TabIcon} customTitle="TRiBL"/>
-                            <Scene key="messages"  component={PageTwo} title="Messages" icon={TabIcon}/>
-                            <Scene key="settings"  component={PageTwo} title="Settings" icon={TabIcon}/>
+                            <Scene key="profile" initial  title="TRiBL"
+                                   navigationBarStyle={primaryThemeColor}
+                                   titleStyle={{color:'#fff'}}
+                                    icon={TabIcon} >
+                                <Scene key="profileMain" component={ProfilePage} rightTitle='Edit' title="TRiBL" onRight={()=> Actions.profileEdit({type:'replace'})} rightButtonTextStyle={{color:'#fff'}}/>
+                                <Scene key="profileEdit" component={EditProfilePage} rightTitle='Save' title="TRiBL" customTitle="Edit" onRight={()=> Actions.profileMain({type:'replace'})} rightButtonTextStyle={{color:'#fff'}}/>
+
+                            </Scene>
+                            <Scene key="match" navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff'}} title="Match" icon={TabIcon} customTitle="TRiBL">
+                                <Scene key="matchPreview"  component={MatchPage}  customTitle="TRiBL" />
+                                <Scene key="matchDetail" component={SingleMatch} customTitle="TRiBL" onRight={()=>{}} rightButtonImage="" rightButtonIconStyle={{width:30,height:30}}  hideNavBar={false} backButtonTextStyle={whiteFont} backTitle="Back" backButtonImage={require('@images/Back-50.png')}/>
+                            </Scene>
+                            <Scene key="messages"  title="Messages"   navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff'}} icon={TabIcon}>
+                                <Scene key="chatList" component={Messages} title="Messages" />
+                                <Scene key="singleChat" component={SingleChat} onRight={()=>{}} rightButtonImage="" rightButtonIconStyle={{width:30,height:30}} title="Messages"  hideNavBar={false} backButtonTextStyle={whiteFont} backTitle="Back" backButtonImage={require('@images/Back-50.png')}/>
+                            </Scene>
+                            <Scene key="settings" navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff',fontSize:20}}  component={Settings} title="Settings" icon={TabIcon}/>
                         </Scene>
                 </Scene>
                 </Scene>
