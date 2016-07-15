@@ -21,7 +21,7 @@ export default class Messages extends Component {
                         <View style={{flex:9.5,paddingLeft:15,paddingTop:5,paddingBottom:5,paddingRight:5,backgroundColor:'#fff'}}>
                             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                                 <Text>
-                                Janet Simpson
+                                Janet simpson
                             </Text>
                                 <Text>11:12AM</Text>
                             </View>
