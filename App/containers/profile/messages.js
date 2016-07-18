@@ -16,6 +16,7 @@ export default class Messages extends Component {
 
                 {/* conversations list*/}
                 <View style={{paddingBottom:50}}>
+                    <TouchableOpacity onPress={()=> Actions.singleChat({title:'Janet simpson',rightButtonImage:require('@images/messages/m2.png')})}>
                     <View style={[{backgroundColor:'#75e8c7'},styles.listItem]}>
                         <Image style={{flex:0.5}} source={require('@images/messages/m2.png')}></Image>
                         <View style={{flex:9.5,paddingLeft:15,paddingTop:5,paddingBottom:5,paddingRight:5,backgroundColor:'#fff'}}>
@@ -28,6 +29,8 @@ export default class Messages extends Component {
                             <Text style={[styles.messageFontColor,{marginTop:5}]}>Yeah,yeah- we'll see lol. What part of Ohio are you from?</Text>
                         </View>
                     </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> Actions.singleChat({title:'Renee',rightButtonImage:require('@images/messages/m3.png')})}>
                     <View style={[{backgroundColor:'#59345f'},styles.listItem]}>
                         <Image style={{flex:0.5}} source={require('@images/messages/m3.png')}></Image>
                         <View style={{flex:9.5,paddingLeft:15,paddingTop:5,paddingBottom:5,paddingRight:5,backgroundColor:'#fff'}}>
@@ -40,6 +43,8 @@ export default class Messages extends Component {
                             <Text style={[styles.messageFontColor,{marginTop:5}]}>Hey, what's up?</Text>
                         </View>
                     </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> Actions.singleChat({title:'Jean Grey',rightButtonImage:require('@images/messages/m4.png')})}>
                     <View style={[{backgroundColor:'#fff782'},styles.listItem]}>
                         <Image style={{flex:0.5}} source={require('@images/messages/m4.png')}></Image>
                         <View style={{flex:9.5,paddingLeft:15,paddingTop:5,paddingBottom:5,paddingRight:5,backgroundColor:'#fff'}}>
@@ -52,6 +57,7 @@ export default class Messages extends Component {
                             <Text style={[styles.messageFontColor,{marginTop:5}]}>I have lived in houston for about 5 years now. You?</Text>
                         </View>
                     </View>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         )

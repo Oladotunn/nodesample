@@ -6,19 +6,25 @@ import {
     StyleSheet,
     Image,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager';
 import {borderRadius} from '@theme/colors'
 import Button from 'react-native-button';
 import LinearGradient from 'react-native-linear-gradient';
-
+let topPadding;
+if(Platform.OS =='android'){
+    topPadding = 54
+}else{
+    topPadding=64
+}
 class MatchPage extends Component {
 
     render() {
         return (
-            <ScrollView vertical={true} contentContainerStyle={{paddingTop:64,flexDirection:'column',flex:1}}>
+            <ScrollView vertical={true} contentContainerStyle={{paddingTop:topPadding,flexDirection:'column',flex:1}}>
                 <StatusBar
                     hidden={false}
                     barStyle="light-content"

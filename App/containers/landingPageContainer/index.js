@@ -8,6 +8,7 @@ View,
 Image,
   StyleSheet,
 Text,
+    TouchableOpacity,
     StatusBar
 } from 'react-native'
 
@@ -27,7 +28,8 @@ class LandingPage extends Component{
                 <Text style= {[transparentBg,secondaryFont,{color:'#fff'}]}>of all <Text style={[primaryFontColor]}>colors</Text> and <Text style={[primaryFontColor]}>cultures</Text>.</Text>
               </View>
               <View style={[styles.lowerPart,styles.center]}>
-                  <Text style={[transparentBg,styles.whiteColor,primaryFont,{borderWidth:1},{borderColor:'#fff'},padding20]} onPress={Actions.profileSetup}>Connect With Facebook</Text>
+                <TouchableOpacity style={[{borderWidth:1,borderColor:'#fff',justifyContent:'center',flexDirection:"column",alignItems:'center'},padding20]} onPress={Actions.profileSetup}>
+                  <Text style={[transparentBg,styles.whiteColor,primaryFont,{textAlign:'center'}]} >Connect With Facebook</Text></TouchableOpacity>
               </View>
             </View>
           </Image>

@@ -8,7 +8,8 @@ import {
     View,
     Image,
     StyleSheet,
-    Text
+    Text,
+    TouchableOpacity
 } from 'react-native'
 import {
     transparentBg,
@@ -54,7 +55,7 @@ class ProfileSetUp extends Component {
                                 <Image source={require('@images/trible_logo.png')} style={styles.logo}></Image>
                             </View>
                             <View style={{alignItems:'center',marginTop:20}}>
-                                <Text style={styles.textColor}>Let's start by setting up your profile</Text>
+                                <Text style={styles.textColor}>Let's start by setting up your profile s</Text>
                                 <Text style={[{marginTop:20},styles.textColor]}>We pulled a few pictures from
                                     your</Text>
                                 <Text style={styles.textColor}>Facebook page. When you're happy with</Text>
@@ -68,23 +69,30 @@ class ProfileSetUp extends Component {
                                     <Image source={require('@images/Cancel-50.png')} style={styles.cancelIcon}></Image>
                                 </View>
                                 <View style={[styles.innerBoxWrapper]}>
+                                    <View>
                                     <View
                                         style={[styles.innerBox,styles.boxBgColor,borderRadius,{borderWidth:1},{borderColor:'#979797'}]}>
+                                    </View>
                                         <Image source={require('@images/Cancel-50.png')}
                                                style={styles.cancelIcon}></Image>
                                     </View>
+                                    <View>
                                     <View
                                         style={[styles.innerBox,styles.boxBgColor,borderRadius,{borderWidth:1},{borderColor:'#979797'}]}>
+                                    </View>
                                         <Image source={require('@images/Cancel-50.png')}
                                                style={styles.cancelIcon}></Image>
                                     </View>
                                 </View>
                                 <View style={styles.innerBoxWrapper}>
+                                    <View>
                                     <View
                                         style={[styles.innerBox,styles.boxBgColor,borderRadius,{borderWidth:1},{borderColor:'#979797'}]}>
+                                    </View>
                                         <Image source={require('@images/Cancel-50.png')}
                                                style={styles.cancelIcon}></Image>
                                     </View>
+
                                     <View
                                         style={[styles.innerBox,borderRadius,{borderWidth:1},{borderColor:'#D50321'},{justifyContent:'center'},{alignItems:'center'}]}>
                                         <Image source={require('@images/plus.png')}></Image>
@@ -92,13 +100,17 @@ class ProfileSetUp extends Component {
                                 </View>
                             </View>
                             <View style={[{alignItems:'center',marginTop:20}]}>
-                                <Button
-                                    style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
+                                {/*<Button
+                                    style={[{fontSize: 16, color: '#fff',lineHeight:30},styles.button,borderRadius]}
                                     styleDisabled={{color: 'red'}}
+                                    containerStyle={{borderRadius:4}}
                                     onPress={()=>this.setState({currentView:1})}
                                 >
                                     Next Step
-                                </Button>
+                                </Button> */}
+                                <TouchableOpacity style={[styles.button]} onPress={()=>this.setState({currentView:1})}>
+                                    <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+                                </TouchableOpacity>
                             </View>
                             <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
                                 <Image source={require('@images/activePage.png')}

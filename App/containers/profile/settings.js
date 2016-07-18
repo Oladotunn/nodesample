@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet,Image,ScrollView} from 'react-native';
+import { View, Text,StyleSheet,Image,ScrollView,Platform} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from 'react-native-button';
+let topPadding;
 
+if(Platform.OS =='android'){
+    topPadding = 54
+}else{
+    topPadding = 64
+}
 export default class Settings extends Component {
     render() {
         return (
-            <ScrollView style={{paddingTop:64}}>
+            <ScrollView style={{paddingTop:topPadding}}>
                 {/*main section*/}
                 <View style={{paddingBottom:50}}>
                     <Text style={[styles.title]}>Preferences</Text>

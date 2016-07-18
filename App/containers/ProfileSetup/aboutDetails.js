@@ -68,14 +68,17 @@ class AboutDetails extends Component{
                 </View>
 
                 <View style={[{alignItems:'center',marginTop:20}]}>
-                  <Button
+                  {/*<Button
                       containerStyle={{borderRadius:4}}
                       style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
                       styleDisabled={{color: 'red'}}
                       onPress={()=> {this.props.callbackParent()}}
                   >
                     Next Step
-                  </Button>
+                  </Button>*/}
+                  <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
+                    <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+                  </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
                   <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>

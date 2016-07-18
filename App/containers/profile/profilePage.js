@@ -4,17 +4,26 @@ import {
     Text,
 ScrollView,
     StyleSheet,
+Platform,
 Image,
     StatusBar
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager';
 import {borderRadius} from '@theme/colors'
+
+let topPadding;
+if(Platform.OS =='android'){
+    topPadding = 54
+}else{
+    topPadding=64
+}
 class ProfilePage extends Component {
     
     render() {
+
         return (
-                <ScrollView vertical={true} contentContainerStyle={{paddingTop:64,paddingBottom:90}}>
+                <ScrollView vertical={true} contentContainerStyle={{paddingTop:topPadding}}>
                     <StatusBar
                         hidden={false}
                         barStyle="light-content"
@@ -50,7 +59,7 @@ class ProfilePage extends Component {
                             <Image source={require('@images/country/brazil.png')} style={[styles.flag,borderRadius]}></Image>
                         </View>
                     </View>
-                <View style={{flex:7}}>
+                <View style={{flex:7,paddingBottom:100}}>
                    <Text style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15,backgroundColor:'#FFFFFF'},styles.fontColor]}>Ambitious entrepreneur</Text>
                     <View style={{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}}>
                         <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>

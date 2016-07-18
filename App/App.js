@@ -17,6 +17,7 @@ import Settings from '@containers/profile/settings.js'
 import SingleChat from '@containers/profile/singleChat.js'
 import SingleMatch from '@containers/profile/singleMatch.js'
 import EditProfilePage from '@containers/profile/editProfilePage.js'
+
 const getSceneStyle = () => ({
     flex: 1,
     backgroundColor: '#fff',
@@ -68,7 +69,7 @@ export default class App extends Component {
                             </Scene>
                             <Scene key="messages"  title="Messages"   navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff'}} icon={TabIcon}>
                                 <Scene key="chatList" component={Messages} title="Messages" />
-                                <Scene key="singleChat" component={SingleChat} onRight={()=>{}} rightButtonImage="" rightButtonIconStyle={{width:30,height:30}} title="Messages"  hideNavBar={false} backButtonTextStyle={whiteFont} backTitle="Back" backButtonImage={require('@images/Back-50.png')}/>
+                                <Scene key="singleChat" component={SingleChat} onRight={()=>{}} rightButtonImage="" rightButtonIconStyle={{width:30,height:30,borderRadius:15}} title="Messages"  hideNavBar={false} backButtonTextStyle={whiteFont} backTitle="Back" backButtonImage={require('@images/Back-50.png')}/>
                             </Scene>
                             <Scene key="settings" navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff',fontSize:20}}  component={Settings} title="Settings" icon={TabIcon}/>
                         </Scene>

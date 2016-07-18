@@ -53,37 +53,40 @@ class ThirdPage extends Component{
                     <Text style={styles.textColor}>What do you like?</Text>
                 </View>
                 <View style={[styles.buttonGroups]}>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(1) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(1) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(1)}>Sports</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(2) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(2) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(2)}>Art</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(3) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(3) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(3)}>Fitness</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(4) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(4) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(4)}>Food</Button>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(1) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(1)}><Text style={[this.state.likes.indexOf(1) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Sports</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(2) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(2)}><Text style={[this.state.likes.indexOf(2) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Art</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(3) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(3)}><Text style={[this.state.likes.indexOf(3) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Fitness</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(4) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(4)}><Text style={[this.state.likes.indexOf(4) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Food</Text></TouchableOpacity>
                 </View>
                 <View style={[styles.buttonGroups]}>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(5) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(5) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(5)}>Literature</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(6) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(6) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(6)}>Movies</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(7) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(7) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(7)}>Theator</Button>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(5) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(5)}><Text style={[this.state.likes.indexOf(5) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Literature</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(6) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(6)}><Text style={[this.state.likes.indexOf(6) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Movies</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(7) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(7)}><Text style={[this.state.likes.indexOf(7) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Theator</Text></TouchableOpacity>
                 </View>
 
                 <View style={[styles.buttonGroups]}>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(8) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(8) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(8)}>Fashion</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(9) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(9) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(9)}>Technology</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(10) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(10) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(10)}>Politics</Button>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(8) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(8)}><Text style={[this.state.likes.indexOf(8) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Fashion</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(9) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(9)}><Text style={[this.state.likes.indexOf(9) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Technology</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(10) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(10)}><Text style={[this.state.likes.indexOf(10) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Politics</Text></TouchableOpacity>
                     </View>
 
                 <View style={[styles.buttonGroups]}>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(11) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(11) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(11)}>Music</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(12) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(12) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(12)}>Travel</Button>
-                    <Button style={[styles.checkboxButton,this.state.likes.indexOf(13) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor,this.state.likes.indexOf(13) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(13)}>Video Games</Button>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(11) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(11)}><Text style={[this.state.likes.indexOf(11) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Music</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(12) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(12)}><Text style={[this.state.likes.indexOf(12) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Travel</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(13) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(13)}><Text style={[this.state.likes.indexOf(13) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Video Games</Text></TouchableOpacity>
                     </View>
                 <View style={[{alignItems:'center',marginTop:20}]}>
-                    <Button
+                    {/*<Button
                         style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
                         styleDisabled={{color: 'red'}}
                         onPress={()=>this.setState({currentView:1})}
                         onPress={()=> {this.props.callbackParent()}}
                     >
                         Next Step
-                    </Button>
+                    </Button>*/}
+                    <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
+                        <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
                     <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
@@ -129,7 +132,8 @@ const styles = StyleSheet.create({
         paddingRight:20
     },
     buttonTextColor:{
-        color:'#59345F'
+        color:'#59345F',
+        fontSize:12,
     },
     checkboxButton:{
         paddingTop:10,
@@ -138,7 +142,6 @@ const styles = StyleSheet.create({
         paddingRight:12,
         borderColor:'#59345F',
         borderWidth:1,
-        fontSize:12,
         borderRadius:4,
         overflow:'hidden'
     },
@@ -146,7 +149,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#59345F'
     },
     activeButtonTextColor:{
-        color:'#fff'
+        color:'#fff',
+        fontSize:12
     }
 })
 

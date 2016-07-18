@@ -41,22 +41,24 @@ class FourthPage extends Component{
                 </View>
                 <View style={[styles.buttonGroup,{paddingLeft:20,paddingRight:20}]}>
                     
-                    <Button containerStyle={{flex:1}} onPress={()=> this.setState({gender:'men'})} style={[styles.selectButton,{marginRight:15,height:45,lineHeight:33,color:this.state.gender == 'men' ? '#da1636':'#696969',borderColor: this.state.gender == 'men' ?'#da1636':'#696969',borderWidth:1},borderRadius]}>
-                        Men
-                    </Button>
-                    <Button containerStyle={{flex:1}} onPress={()=> this.setState({gender:'women'})} style={[styles.selectButton,{marginLeft:15,height:45,lineHeight:33,color:this.state.gender == 'women' ? '#da1636':'#696969',borderColor:this.state.gender == 'women' ?'#da1636':'#696969'},borderRadius]}>
-                        Women
-                    </Button>
+                    <TouchableOpacity  onPress={()=> this.setState({gender:'men'})} style={[styles.selectButton,{marginRight:15,height:45,borderColor: this.state.gender == 'men' ?'#da1636':'#696969',borderWidth:1},borderRadius]}>
+                        <Text style={{ fontSize:16,lineHeight:33,color:this.state.gender == 'men' ? '#da1636':'#696969',textAlign:'center',marginTop:10}}>Men</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> this.setState({gender:'women'})} style={[styles.selectButton,{marginLeft:15,height:45,borderColor:this.state.gender == 'women' ?'#da1636':'#696969'},borderRadius]}>
+                       <Text style={{ fontSize:16,lineHeight:33,color:this.state.gender == 'women' ? '#da1636':'#696969',textAlign:'center',marginTop:10}}> Women</Text>
+                    </TouchableOpacity>
 
                 </View>
                 <Text style={[{textAlign:'center',marginTop:30},styles.textColor]}>Aged:</Text>
                 <View style={[styles.buttonGroup,{marginTop:15}]}>
-                    <Button onPress={()=> this.props.picker.toggle()} style={[styles.selectButton,{marginRight:15,height:45,lineHeight:33,color:'#696969',width:74},borderRadius]}>
-                        {this.props.firstAge}
-                    </Button>
-                    <Button onPress={()=> this.props.picker2.toggle()} style={[styles.selectButton,{marginLeft:15,height:45,lineHeight:33,color:'#696969',width:74},borderRadius]}>
-                        {this.props.secondAge}
-                    </Button>
+                    <TouchableOpacity onPress={()=> this.props.picker.toggle()} style={[{borderColor:'#595959',
+        borderWidth:1,marginRight:15,height:45,width:74},borderRadius]}>
+                        <Text style={{lineHeight:33,color:'#696969',textAlign:'center',marginTop:10}}>{this.props.firstAge}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> this.props.picker2.toggle()} style={[{borderColor:'#595959',
+        borderWidth:1,marginLeft:15,height:45,width:74},borderRadius]}>
+                        <Text style={{lineHeight:33,color:'#696969',textAlign:'center',marginTop:10}}>{this.props.secondAge}</Text>
+                    </TouchableOpacity>
                 </View>
                 <Text style={[{textAlign:'center',marginTop:30,marginBottom:15},styles.textColor]}>Located in:</Text>
                 <TouchableOpacity style={styles.list} >
@@ -64,11 +66,14 @@ class FourthPage extends Component{
                     <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
                 </TouchableOpacity>
                 <View style={[{alignItems:'center',marginTop:20}]}>
-                    <Button style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
+                    {/*<Button style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
                         styleDisabled={{color: 'red'}}
                         onPress={()=>Actions.main()}>
                         Next Step
-                    </Button>
+                    </Button> */}
+                    <TouchableOpacity style={[styles.button]} onPress={()=>Actions.main()}>
+                        <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
                     <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
@@ -114,7 +119,6 @@ const styles = StyleSheet.create({
     selectButton:{
         borderColor:'#595959',
         borderWidth:1,
-        fontSize:16,
         flex:1
     },
     list:{
