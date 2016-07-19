@@ -6,10 +6,12 @@ import {
     ScrollView,
     StyleSheet,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    Platform
 } from 'react-native';
 import  SearchBar from 'react-native-search-bar'
-
+import { Container, Header, InputGroup, Input, Icon, Button } from 'native-base';
+import myTheme from '@nativeBaseTheme/myTheme';
 class GeographicPage extends Component {
     constructor(props){
         super(props)
@@ -22,13 +24,27 @@ class GeographicPage extends Component {
                     hidden={false}
                     barStyle="light-content"
                 />
-                <SearchBar
-                    ref='searchBar'
-                    placeholder='Search'
-                    onCancelButtonPress={() => this.setState({showsCancelButton: false})}
-                    onFocus={() => this.setState({showsCancelButton: true})}
-                    showsCancelButton={this.state.showsCancelButton}
-                />
+                {
+                    Platform.OS =='android' ?
+                        <Header searchBar rounded theme={myTheme} >
+                            <InputGroup>
+                                <Input placeholder="Search" />
+                            </InputGroup>
+                            <Button transparent>
+                                Search
+                            </Button>
+                        </Header>
+                        :
+                    <SearchBar
+                     ref='searchBar'
+                     placeholder='Search'
+                     onCancelButtonPress={() => this.setState({showsCancelButton: false})}
+                     onFocus={() => this.setState({showsCancelButton: true})}
+                     showsCancelButton={this.state.showsCancelButton}
+                     />
+
+                }
+
                 <ScrollView style={{flex:1}}>
                     <TouchableOpacity style={[styles.listItem,styles.sectionHeader]} onPress={(e)=> console.log(e)}>
                         <Text style={[styles.boldFonts,styles.listText]}>

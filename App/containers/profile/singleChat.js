@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet,Image,ScrollView,TextInput} from 'react-native';
+import { View, Text,StyleSheet,Image,ScrollView,TextInput,Platform} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from 'react-native-button';
-
+let topPadding;
+if(Platform.OS =='android'){
+    topPadding = 54
+}else{
+    topPadding=64
+}
 export default class SingleChat extends Component {
     render() {
         return (
             <View style={{flexDirection:'column',flex:9.5,paddingBottom:50}}>
-                <ScrollView style={{paddingTop:64,flex:9}}>
+                <ScrollView style={{paddingTop:topPadding,flex:9}}>
                     <View style={{backgroundColor:'#f9f9f9',padding:12,borderBottomWidth:2,borderBottomColor:'#d2d2d2'}}>
                         <Text style={{color:'#717171',textAlign:'center',marginBottom:12}}>Break the Ice</Text>
                         <Text style={{color:'#959595',textAlign:'center'}}>Who's got the title this year, Warriors or Spurs?</Text>

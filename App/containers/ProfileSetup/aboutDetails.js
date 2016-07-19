@@ -3,7 +3,8 @@
 import React, { Component } from 'react'
 import { Actions } from 'react-native-router-flux'
 import Container from '@components/Container'
-
+import {InputGroup, Input } from 'native-base';
+import myTheme from '@nativeBaseTheme/textArea';
 import {
     View,
     Image,
@@ -23,6 +24,9 @@ import {
 } from '@theme/colors'
 import Dimensions from 'Dimensions';
 import Button from 'react-native-button';
+import {
+    TextInputCell,
+} from 'react-native-forms';
 
 let windowWidth = Dimensions.get('window').width;
 class AboutDetails extends Component{
@@ -43,7 +47,7 @@ class AboutDetails extends Component{
                   <TextInput
                       multiline={true}
                       returnKeyType={'next'}
-                      style={[{height: 90, borderColor: 'gray', borderWidth: 1,fontSize:14,padding:10,justifyContent:'center'},borderRadius]}
+                      style={[{height: 90, borderColor: 'gray', borderTopWidth: 1,fontSize:14,padding:10,justifyContent:'center'},borderRadius]}
                       placeholder="Type your bio here"
                       ref="textInput"
                       onSubmitEditing={this.containerTouched.bind(this)}

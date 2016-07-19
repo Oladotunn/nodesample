@@ -30,7 +30,7 @@ class MatchPage extends Component {
                     barStyle="light-content"
                 />
                 <TouchableOpacity style={{flex:6}} onPress={()=> Actions.matchDetail()}>
-                    <Image source={{uri: 'https://images.unsplash.com/photo-1465326117523-6450112b60b2'}}
+                    <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/07/08113512/2016-07-04-abigail-keenan-barnimages-005-1024x683-760x507.jpg'}}
                                    style={[{width: null, height: null,flex:1}]} >
                                 <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
                                     <Text style={{color:'#fff',fontSize:20}}>Lisa, 27</Text>
@@ -42,7 +42,7 @@ class MatchPage extends Component {
                             </Image>
                 </TouchableOpacity>
                 <View style={{flex:4,paddingBottom:160}}>
-                     <Text style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15,backgroundColor:'#FFFFFF'},styles.fontColor]}>Amateur model. Expert scientist</Text>
+                     <View style={{backgroundColor:'#FFFFFF',padding:15}}><Text style={[styles.fontColor]}>Amateur model. Expert scientist</Text></View>
                     <View style={[styles.list,{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}]}>
                         <Text  style={[{lineHeight:25,marginRight:10},styles.fontColor]}>Mututal Friends:</Text>
                         <Image source={require('@images/first.png')} style={{width:40,height:40,marginRight:10}}></Image>

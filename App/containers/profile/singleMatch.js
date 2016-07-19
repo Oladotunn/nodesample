@@ -33,19 +33,19 @@ class SingleMatch extends Component {
                         style={{height:200,flex:1}}
                         indicator={this._renderDotIndicator()}>
                         <View>
-                            <Image source={{uri: 'https://images.unsplash.com/photo-1465326117523-6450112b60b2'}}
+                            <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/07/08113512/2016-07-04-abigail-keenan-barnimages-005-1024x683-760x507.jpg'}}
                                    style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                         </View>
                         <View>
-                            <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
+                            <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/07/08113512/2016-07-04-abigail-keenan-barnimages-005-1024x683-760x507.jpg'}}
                                    style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                         </View>
                         <View>
-                            <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
+                            <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/07/08113512/2016-07-04-abigail-keenan-barnimages-005-1024x683-760x507.jpg'}}
                                    style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                         </View>
                         <View>
-                            <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
+                            <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/07/08113512/2016-07-04-abigail-keenan-barnimages-005-1024x683-760x507.jpg'}}
                                    style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                         </View>
                     </IndicatorViewPager>
@@ -58,7 +58,7 @@ class SingleMatch extends Component {
                     </View>
                 </View>
                 <View style={{flex:7}}>
-                    <Text style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15,backgroundColor:'#FFFFFF'},styles.fontColor]}>Ambitious entrepreneur</Text>
+                    <View style={{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15,backgroundColor:'#FFFFFF'}}><Text style={[styles.fontColor]}>Ambitious entrepreneur</Text></View>
                     <View style={[styles.list,{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}]}>
                         <Text  style={[{lineHeight:25,marginRight:10},styles.fontColor]}>Mututal Friends:</Text>
                         <Image source={require('@images/first.png')} style={{width:40,height:40,marginRight:10}}></Image>

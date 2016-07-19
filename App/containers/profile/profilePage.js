@@ -33,19 +33,19 @@ class ProfilePage extends Component {
                             style={{height:200,flex:1}}
                             indicator={this._renderDotIndicator()}>
                             <View>
-                                <Image source={{uri: 'https://images.unsplash.com/photo-1465326117523-6450112b60b2'}}
+                                <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/05/31094432/tumblr_o6egnt6dfi1ted1sho1_500.jpg'}}
                                        style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                             <View>
-                                <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
+                                <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/05/31094432/tumblr_o6egnt6dfi1ted1sho1_500.jpg'}}
                                        style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                             <View>
-                                <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
+                                <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/05/31094432/tumblr_o6egnt6dfi1ted1sho1_500.jpg'}}
                                        style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                             <View>
-                                <Image source={{uri: 'https://images.unsplash.com/photo-1460186136353-977e9d6085a1'}}
+                                <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/05/31094432/tumblr_o6egnt6dfi1ted1sho1_500.jpg'}}
                                        style={[{width: null, height: null,flex:1},styles.sliderImages]} />
                             </View>
                         </IndicatorViewPager>
@@ -60,7 +60,8 @@ class ProfilePage extends Component {
                         </View>
                     </View>
                 <View style={{flex:7,paddingBottom:100}}>
-                   <Text style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15,backgroundColor:'#FFFFFF'},styles.fontColor]}>Ambitious entrepreneur</Text>
+                    <View style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15}]}>
+                   <Text style={[{backgroundColor:'#FFFFFF'},styles.fontColor]}>Ambitious entrepreneur</Text></View>
                     <View style={{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}}>
                         <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
                             <Image source={require('@images/Instagram-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>

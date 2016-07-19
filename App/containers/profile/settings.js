@@ -4,19 +4,21 @@ import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from 'react-native-button';
 let topPadding;
-
+let bottomPadding;
 if(Platform.OS =='android'){
     topPadding = 54
+    bottomPadding = 100
 }else{
     topPadding = 64
+    bottomPadding = 50
 }
 export default class Settings extends Component {
     render() {
         return (
             <ScrollView style={{paddingTop:topPadding}}>
                 {/*main section*/}
-                <View style={{paddingBottom:50}}>
-                    <Text style={[styles.title]}>Preferences</Text>
+                <View style={{paddingBottom:bottomPadding}}>
+                    <View style={[styles.title]}><Text>Preferences</Text></View>
                     <View style={[styles.listItem]}>
                         <Text>I am a</Text>
                         <Text style={{color:'#d91434'}}>Man</Text>
@@ -38,7 +40,7 @@ export default class Settings extends Component {
                         <Text style={{color:'#d91434'}}>24 to 27</Text>
                     </View>
                     <View style={[styles.borderTop]}>
-                    <Text style={[styles.title]}>Notifications</Text></View>
+                    <View style={[styles.title]}><Text>Notifications</Text></View></View>
                     <View style={[styles.listItem]}>
                         <Text>Push Notifications</Text>
                         <Text style={{color:'#d91434'}}>On</Text>
@@ -49,7 +51,7 @@ export default class Settings extends Component {
                     </View>
 
                     <View style={[styles.borderTop]}>
-                        <Text style={[styles.title]}>Profile</Text></View>
+                        <View style={[styles.title]}><Text >Profile</Text></View></View>
                     <View style={[styles.listItem]}>
                         <Text>Account Type</Text>
                         <Text style={{color:'#d91434'}}>PRO</Text>
@@ -58,7 +60,7 @@ export default class Settings extends Component {
                         <Text>Visibility</Text>
                         <Text style={{color:'#d91434'}}>Public</Text>
                     </View>
-                    <View style={{paddingTop:15,paddingBottom:15,backgroundColor:'#f4f4f4'}}>
+                    <View style={{paddingTop:15,paddingBottom:20,backgroundColor:'#f4f4f4'}}>
                     <LinearGradient colors={['#E80438', '#D2021D']} style={[styles.linearGradient]}>
                         <Button
                             containerStyle={{flex:1,backgroundColor:'transparent',paddingTop:10,paddingBottom:10,borderRadius:0}}
