@@ -11,10 +11,17 @@
 
 #import "RCTRootView.h"
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
+#import "AppHub.h"
+
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [AppHub setApplicationID:@"GoDW6bi0MjFzl3JcSQ7S"];
   NSURL *jsCodeLocation;
 
   /**
@@ -42,6 +49,11 @@ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?p
    */
 
  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  
+  
+  AHBuild *build = [[AppHub buildManager] currentBuild];
+//  jsCodeLocation = [build.bundle URLForResource:@"main"
+//                                  withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"trible"
@@ -54,7 +66,21 @@ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?p
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  return YES;
+  //return YES;
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                  didFinishLaunchingWithOptions:launchOptions];
+}
+
+// Facebook SDK
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [FBSDKAppEvents activateApp];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation];
 }
 
 @end
