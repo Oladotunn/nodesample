@@ -2,21 +2,21 @@ import React, {Component} from 'react';
 import {Scene, Reducer, Router, Switch, TabBar, Modal, Schema, Actions} from 'react-native-router-flux'
 
 import LandingPage from './containers/landingPageContainer/index';
-import PageOne from './containers/PageOne'
+import PageOne from './containers/PageOne';
 import PageTwo from './containers/PageTwo';
-import ProfileSetup from './containers/ProfileSetup/index'
-import ProfileAbout from './containers/ProfileSetup/aboutDetails.js'
-import Flags from './containers/flags/index'
-import {primaryFontColor,primaryThemeColor,whiteFont} from '@theme/colors'
-import TabIcon from '@components/tabIcon'
-import ProfilePage from '@containers/profile/profilePage'
-import MatchPage from '@containers/profile/match'
-import DetailProfilePage from '@containers/profile/detailProfilePage'
-import Messages from '@containers/profile/messages.js'
-import Settings from '@containers/profile/settings.js'
-import SingleChat from '@containers/profile/singleChat.js'
-import SingleMatch from '@containers/profile/singleMatch.js'
-import EditProfilePage from '@containers/profile/editProfilePage.js'
+import ProfileSetUp from './containers/ProfileSetup/index.js';
+import ProfileAbout from './containers/ProfileSetup/aboutDetails.js';
+import Flags from './containers/flags/index';
+import {primaryFontColor,primaryThemeColor,whiteFont} from '@theme/colors';
+import TabIcon from '@components/tabIcon';
+import ProfilePage from '@containers/profile/profilePage';
+import MatchPage from '@containers/profile/match';
+import DetailProfilePage from '@containers/profile/detailProfilePage';
+import Messages from '@containers/profile/messages.js';
+import Settings from '@containers/profile/settings.js';
+import SingleChat from '@containers/profile/singleChat.js';
+import SingleMatch from '@containers/profile/singleMatch.js';
+import EditProfilePage from '@containers/profile/editProfilePage.js';
 
 const getSceneStyle = () => ({
     flex: 1,
@@ -25,12 +25,12 @@ const getSceneStyle = () => ({
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 3,
-})
- const styles = {
-    container: {
-        backgroundColor: 'white',
-    },
-}
+});
+const styles = {
+  container: {
+    backgroundColor: 'white',
+  },
+};
 
 export default class App extends Component {
     constructor(props){
@@ -43,7 +43,7 @@ export default class App extends Component {
                 <Scene key="modal" component={Modal} >
                 <Scene key="root" navigationBarStyle={styles.container}>
                     <Scene key="landingPage" component={LandingPage} initial={true} hideNavBar={true}/>
-                    <Scene key="profileSetup" component={ProfileSetup} hideNavBar={true}/>
+                    <Scene key="profileSetup" component={ProfileSetUp} hideNavBar={true}/>
                     <Scene key="profileAbout" component={ProfileAbout} hideNavBar={true}/>
                     <Scene key="flags" component={Flags} backTitle="Back" 
                            hideNavBar={false}

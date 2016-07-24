@@ -24,35 +24,29 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb966176273453141</string>
-      </array>
-    </dict>
-  </array>
-  <key>FacebookAppID</key>
-  <string>966176273453141</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fbapi</string>
-    <string>fb-messenger-api</string>
-    <string>fbauth2</string>
-    <string>fbshareextension</string>
-  </array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
+	<key>CFBundleURLTypes</key>
+	<array>
 		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb966176273453141</string>
+			</array>
 		</dict>
-	</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>966176273453141</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+  <dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+  </dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>

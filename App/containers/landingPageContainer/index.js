@@ -11,27 +11,45 @@ import {
   TouchableOpacity,
   StatusBar
 } from 'react-native';
+import _ from 'lodash';
 const { FBLoginManager } = require('react-native-facebook-login');
 
 
 import {transparentBg,primaryFont,secondaryFont,padding20,primaryFontColor} from '@theme/colors';
 class LandingPage extends Component{
+  constructor(props) {
+    super(props);
+    this._getUserPictures = _.bind(this._getUserPictures, this);
+    this._loginWithFB = _.bind(this._loginWithFB, this);
+  }
+
+  _getUserPictures(userData) {
+    const { token } = userData.credentials;
+    fetch(`https://graph.facebook.com/v2.7/me/albums?access_token=${token}`)
+    .then(data => data.json())
+    .then(pictureData => {
+      const profilePictureAlbum = _.find(pictureData.data, data => data.name === 'Profile Pictures');
+      userData.profilePictureAlbum = profilePictureAlbum;
+      Actions.profileSetup({ userData });
+    })
+    .catch(err => {
+      console.log(`could not get Facebook photos: ${err}`);
+    });
+  }
+
   _loginWithFB() {
-    FBLoginManager.loginWithPermissions(["email","user_friends"], function(error, data){
+    FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data) => {
       if (!error) {
-        // Actions.profileSetup
-        console.log("Login data: ", data);
+        this._getUserPictures(data);
       } else {
-        console.log("Error: ", data);
+        console.log("Error (Facebook): ", data);
       }
     });
   }
   render() {
     return (
       <View style={styles.imageContainer}>
-        <StatusBar
-          hidden={true}
-        />
+        <StatusBar hidden/>
         <Image style={styles.bgImage} source={require('@images/splash.png')}>
           <View style={styles.content}>
             <View style={[styles.upperPart,styles.center]}>
