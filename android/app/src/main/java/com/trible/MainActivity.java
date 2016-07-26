@@ -3,6 +3,7 @@ package com.trible;
 import com.facebook.react.ReactActivity;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.magus.fblogin.FacebookLoginPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -38,7 +39,8 @@ public class MainActivity extends ReactActivity {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
             new RNSpinkitPackage(),
-            new LinearGradientPackage()
+            new LinearGradientPackage(),
+            new FacebookLoginPackage()
         );
     }
 }

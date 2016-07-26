@@ -1,36 +1,41 @@
 /* @flow */
 
-import React, { Component } from 'react'
-import { Actions } from 'react-native-router-flux'
-import Container from '@components/Container'
+import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+import Container from '@components/Container';
 import {InputGroup, Input } from 'native-base';
 import myTheme from '@nativeBaseTheme/textArea';
 import {
-    View,
-    Image,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity
-} from 'react-native'
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity
+} from 'react-native';
 import {
-    transparentBg,
-    primaryFont,
-    secondaryFont,
-    padding20,
-    primaryFontColor,
-    modalWhite,
-    borderRadius,
-} from '@theme/colors'
+  transparentBg,
+  primaryFont,
+  secondaryFont,
+  padding20,
+  primaryFontColor,
+  modalWhite,
+  borderRadius,
+} from '@theme/colors';
 import Dimensions from 'Dimensions';
 import Button from 'react-native-button';
 import {
-    TextInputCell,
+  TextInputCell,
 } from 'react-native-forms';
+import { connect } from 'react-redux';
+import {
+  updateUserBioAction,
+} from '../../action-creators';
 
-let windowWidth = Dimensions.get('window').width;
+const windowWidth = Dimensions.get('window').width;
 class AboutDetails extends Component{
   containerTouched(event) {
+    this.props.dispatchUserBio(event.nativeEvent.text);
     this.refs.textInput.blur();
     return false;
   }
@@ -49,6 +54,7 @@ class AboutDetails extends Component{
             returnKeyType={'next'}
             style={[{height: 90, borderColor: 'gray', borderTopWidth: 1,fontSize:14,padding:10,justifyContent:'center'},borderRadius]}
             placeholder="Type your bio here"
+            defaultValue={this.props.userInfo.bio}
             ref="textInput"
             onSubmitEditing={this.containerTouched.bind(this)}
             blurOnSubmit={true}/>
@@ -72,25 +78,17 @@ class AboutDetails extends Component{
         </View>
 
         <View style={[{alignItems:'center',marginTop:20}]}>
-          {/*<Button
-             containerStyle={{borderRadius:4}}
-             style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
-             styleDisabled={{color: 'red'}}
-             onPress={()=> {this.props.callbackParent()}}
-             >
-             Next Step
-             </Button>*/}
-             <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
-               <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
-             </TouchableOpacity>
-           </View>
-           <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
-             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-             <Image source={require('@images/activePage.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-             <Image source={require('@images/pager.png')} style={{resizeMode:'contain'}}></Image>
-           </View>
-         </View>
+          <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
+            <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
+          <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+          <Image source={require('@images/activePage.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+          <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+          <Image source={require('@images/pager.png')} style={{resizeMode:'contain'}}></Image>
+        </View>
+      </View>
     )
   }
 }
@@ -159,4 +157,18 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AboutDetails
+const mapStateToProps = state => {
+  return {
+    ...state,
+  }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatchUserBio: bio => dispatch(updateUserBioAction(bio)),
+  };
+};
+
+export default  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AboutDetails);

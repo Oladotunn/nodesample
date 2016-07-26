@@ -36,9 +36,7 @@ class LandingPage extends Component{
     };
   }
 
-  _getUserPictures() {
-    const { token } = this.props.credentials;
-
+  _getUserPictures(token) {
     fetch(`https://graph.facebook.com/v2.7/me/albums?access_token=${token}`)
     .then(data => data.json())
     .then(pictureData => {
@@ -52,10 +50,11 @@ class LandingPage extends Component{
   }
 
   _loginWithFB() {
+    this.setState({ ready: false });
     FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data) => {
       if (!error) {
-        this.props.dispatchUpdateFbCreds(userData.credentials);
-        this._getUserPictures();
+        this.props.dispatchUpdateFbCreds(data.credentials);
+        this._getUserPictures(data.credentials.token);
       } else {
         console.log("Error (Facebook): ", data);
       }
@@ -71,10 +70,10 @@ class LandingPage extends Component{
             {
               justifyContent:'center',
               alignSelf: 'center',
-              backgroundColor: 'white'
             }
           }
-          color='red'
+          type='CircleFlip'
+          color='#FF0000'
         />
       ); 
     } 
@@ -100,7 +99,7 @@ class LandingPage extends Component{
   componentWillMount() {
     FBLoginManager.getCredentials((error, data) => {
       if (!error) {
-        // _.delay(Actions.main, 5000);
+        _.delay(Actions.main, 5000);
       } else {
         this.setState({ ready: true });
       }
@@ -171,8 +170,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dispatchUpdateFbCreds: creds => dispatch(updateFbCredsAction(creds)),
-      dispatchUpdateFbReady: state => dispatch(updateFbReadyAction(state)),
-        dispatchUpdateProfileAlbumDetails: albumDetails => dispatch(updateProfilePictureAlbumDetailsAction(albumDetails)),
+    dispatchUpdateFbReady: state => dispatch(updateFbReadyAction(state)),
+    dispatchUpdateProfileAlbumDetails: albumDetails => {
+      dispatch(updateProfilePictureAlbumDetailsAction(albumDetails));
+    },
   };
 };
 
@@ -180,5 +181,3 @@ export default  connect(
   mapStateToProps,
   mapDispatchToProps
 )(LandingPage);
-
-export default LandingPage

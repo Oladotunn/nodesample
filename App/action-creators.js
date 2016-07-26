@@ -5,7 +5,23 @@ import {
   UPDATE_PROFILE_PICTURE_ALBUM_DETAILS,
   UPDATE_FB_TOKEN,
   UPDATE_FB_CREDS,
+  UPDATE_USER_BIO,
+  UPDATE_USER_FLAG,
 } from './actions';
+
+const updateUserBioAction = bio => {
+  return {
+    type: UPDATE_USER_BIO,
+    bio,
+  };
+};
+
+const updateUserFlagAction = flag => {
+  return {
+    type: UPDATE_USER_FLAG,
+    flag,
+  };
+};
 
 const addProfilePictureAction = () => {
   return {
@@ -29,7 +45,7 @@ const initProfilePictureAction = profilePictures => {
 
 const updateProfilePictureAlbumDetailsAction = albumDetails => {
   return {
-    type: UPDATE_PROFILE_PICTURE_ALBUM_ID,
+    type: UPDATE_PROFILE_PICTURE_ALBUM_DETAILS,
     albumDetails,
   };
 };
@@ -63,4 +79,6 @@ export {
   updateFbTokenAction,
   updateFbCredsAction,
   updateFbReadyAction,
+  updateUserBioAction,
+  updateUserFlagAction,
 };

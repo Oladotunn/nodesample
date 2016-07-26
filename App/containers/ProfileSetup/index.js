@@ -146,9 +146,10 @@ class ProfileSetUp extends Component {
   }
 
   _getProfilePictureUrls() {
-    const { profilePictureAlbumDetails: userData } = this.props.profilePictures;
-    const { id: profilePictureAlbumId } = userData.profilePictureAlbum;
-    const { token } = userData.credentials;
+    console.log(this.props);
+    const { profilePictureAlbumDetails } = this.props.profilePictures;
+    const { id: profilePictureAlbumId } = profilePictureAlbumDetails;
+    const { token } = this.props.facebook.credentials;
     fetch(`https://graph.facebook.com/${profilePictureAlbumId}/photos?access_token=${token}&fields=picture`)
     .then(pictureData => pictureData.json())
     .then(pictureData => {

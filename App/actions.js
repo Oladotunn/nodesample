@@ -7,6 +7,9 @@ const UPDATE_FB_TOKEN = 'updateFbToken';
 const UPDATE_FB_CREDS = 'updateFbCreds';
 const UPDATE_FB_READY = 'updateFbReady';
 
+const UPDATE_USER_BIO = 'updateUserBio';
+const UPDATE_USER_FLAG = 'updateUserFlag';
+
 export {
   ADD_PROFILE_PICTURE,
   DELETE_PROFILE_PICTURE,
@@ -15,4 +18,6 @@ export {
   UPDATE_FB_TOKEN,
   UPDATE_FB_CREDS,
   UPDATE_FB_READY,
+  UPDATE_USER_BIO,
+  UPDATE_USER_FLAG,
 };
