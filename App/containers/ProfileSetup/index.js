@@ -1,25 +1,25 @@
 /* @flow */
 
-import React, {Component} from 'react'
-import {Actions} from 'react-native-router-flux'
-import Container from '@components/Container'
+import React, {Component} from 'react';
+import {Actions} from 'react-native-router-flux';
+import Container from '@components/Container';
 
 import {
-    View,
-    Image,
-    StyleSheet,
-    Text,
-    TouchableOpacity
-} from 'react-native'
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {
-    transparentBg,
-    primaryFont,
-    secondaryFont,
-    padding20,
-    primaryFontColor,
-    modalWhite,
-    borderRadius
-} from '@theme/colors'
+  transparentBg,
+  primaryFont,
+  secondaryFont,
+  padding20,
+  primaryFontColor,
+  modalWhite,
+  borderRadius
+} from '@theme/colors';
 import Dimensions from 'Dimensions';
 import Button from 'react-native-button';
 import SwipeableViews from 'react-swipeable-views/lib/index.native.animated';
@@ -27,7 +27,15 @@ import AboutDetail from './aboutDetails'
 import ThirdView from './whatDoYouLike'
 import FourthView from './lookingFor'
 import Picker from 'react-native-picker'
+import styles from './styles';
 import _ from 'lodash';
+import AppStore from '../../app-store';
+import { connect } from 'react-redux';
+import {
+  initProfilePictureAction,
+  addProfilePictureAction,
+  deleteProfilePictureAction,
+} from '../../action-creators';
 
 let windowWidth = Dimensions.get('window').width;
 class ProfileSetUp extends Component {
@@ -37,10 +45,6 @@ class ProfileSetUp extends Component {
       currentView:0,
       firstAge:18,
       secondAge:22,
-      profilePictureObjects: [],
-      removedPhotos: [],
-      chosenPhotos: [],
-      numberOfProfilePictures: 0,
     };
     this._getProfilePictureUrls = _.bind(this._getProfilePictureUrls, this);
     this._buildProfilePictureBoxes = _.bind(this._buildProfilePictureBoxes, this);
@@ -53,36 +57,11 @@ class ProfileSetUp extends Component {
   }
 
   _removeProfilePicture(url) {
-    const { chosenPhotos: oldChosenPhotos, removedPhotos: oldRemovedPhotos } = this.state;
-    if (oldChosenPhotos.length === 1) return false;
-
-    const chosenPhotos = _.filter(oldChosenPhotos, photo => photo.picture !== url);
-    const removedPhotos = _.union(oldRemovedPhotos, [url]);
-    this.setState({ chosenPhotos, removedPhotos });
+    this.props.dispatchDeleteProfilePicture(url);
   }
 
   _addProfilePicture() {
-    const {
-      profilePictureObjects,
-      chosenPhotos: oldChosenPhotos,
-      removedPhotos: oldRemovedPhotos
-    } = this.state;
-    const newPhotos = _.filter(profilePictureObjects, obj => {
-      return !oldRemovedPhotos.includes(obj.picture) && !_.map(oldChosenPhotos, 'picture').includes(obj.picture)
-    });
-    if (newPhotos.length) {
-      const chosenPhotos = _.union(oldChosenPhotos, [newPhotos[0]]);
-      this.setState({
-        chosenPhotos,
-      });
-    } else {
-      const chosenPhotos = _.union(oldChosenPhotos, [oldRemovedPhotos[0]]);
-      const removedPhotos = _.slice(oldRemovedPhotos, 1); 
-      this.setState({
-        chosenPhotos,
-        removedPhotos,
-      });
-    }
+    this.props.dispatchAddProfilePicture();
   }
 
   _getCoverPhoto(source) {
@@ -109,7 +88,7 @@ class ProfileSetUp extends Component {
   }
 
   _getSubProfilePictures() {
-    const { chosenPhotos } = this.state;
+    const { chosenPhotos } = this.props.profilePictures;
     const subPhotos = _.tail(chosenPhotos);
     const numOfCols = _.ceil(subPhotos.length + 1 / 2) < 2 ? 1 : 2; 
     const cols = [];
@@ -167,19 +146,14 @@ class ProfileSetUp extends Component {
   }
 
   _getProfilePictureUrls() {
-    const { userData } = this.props;
+    const { profilePictureAlbumDetails: userData } = this.props.profilePictures;
     const { id: profilePictureAlbumId } = userData.profilePictureAlbum;
     const { token } = userData.credentials;
     fetch(`https://graph.facebook.com/${profilePictureAlbumId}/photos?access_token=${token}&fields=picture`)
     .then(pictureData => pictureData.json())
     .then(pictureData => {
       const { data: profilePictureObjects } = pictureData;
-      const chosenPhotos = _.take(profilePictureObjects, 5); 
-      this.setState({
-        profilePictureObjects,
-        chosenPhotos,
-        numberOfProfilePictures: profilePictureObjects.length
-      });
+      this.props.dispatchInitProfilePictures(profilePictureObjects);
     })
     .catch(err => {
       console.log(err);
@@ -187,17 +161,17 @@ class ProfileSetUp extends Component {
   }
 
   _buildProfilePictureBoxes() {
-    const { chosenPhotos } = this.state;
+    const { chosenPhotos } = this.props.profilePictures;
     let useDefault = false;
-    const profilePictures = [];
+    const profilePictureElements = [];
     const subProfilePictures = [];
     if (!chosenPhotos.length) useDefault = true;
-    const uri = useDefault ? '@images/Cancel-50.png' : this.state.chosenPhotos[0].picture; 
-    profilePictures.push(
+    const uri = useDefault ? '@images/Cancel-50.png' : chosenPhotos[0].picture; 
+    profilePictureElements.push(
       this._getCoverPhoto({ uri })
     );
-    profilePictures.push(this._getSubProfilePictures());
-    return profilePictures;
+    profilePictureElements.push(this._getSubProfilePictures());
+    return profilePictureElements;
   }
 
   componentWillMount() {
@@ -237,11 +211,11 @@ class ProfileSetUp extends Component {
                     { profilePictures }
                   </View>
                   <View style={[{alignItems:'center',marginTop:20}]}>
-                       <TouchableOpacity style={[styles.button]} onPress={()=>this.setState({currentView:1})}>
-                         <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
-                       </TouchableOpacity>
-                     </View>
-                     <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
+                    <TouchableOpacity style={[styles.button]} onPress={()=>this.setState({currentView:1})}>
+                      <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
                        <Image source={require('@images/activePage.png')}
                          style={{resizeMode:'contain',marginRight:10}}></Image>
                        <Image source={require('@images/pager.png')}
@@ -298,67 +272,20 @@ class ProfileSetUp extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    modal: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    modal1: {
-        height: 400,
-        backgroundColor: "#fff",
-        borderRadius: 3,
-        width: (windowWidth - 30)
-    },
-    container: {
-        flex: 1,
-        backgroundColor: 'rgb(0,0,0)',
-        alignSelf: 'stretch',
-        justifyContent: 'center'
-    },
+const mapStateToProps = state => {
+  return {
+    ...state,
+  }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatchAddProfilePicture: () => dispatch(addProfilePictureAction()),
+    dispatchInitProfilePictures: profilePictures => dispatch(initProfilePictureAction(profilePictures)),
+    dispatchDeleteProfilePicture: url => dispatch(deleteProfilePictureAction(url)),
+  };
+};
 
-    logo: {
-        width: 100,
-        height: 100,
-        resizeMode: 'contain'
-    },
-    wrapper: {
-        flex: 1
-    },
-    textColor: {
-        color: '#9E9E9E'
-    },
-    boxWrapper: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        height: 120,
-        marginTop: 20
-    },
-    boxBgColor: {
-        backgroundColor: '#D8D8D8'
-    },
-    innerBoxWrapper: {
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-    },
-    innerBox: {
-        width: 56,
-        height: 56
-    },
-    button: {
-        height: 45,
-        width: 115,
-        backgroundColor: '#D80324',
-        borderRadius: 4,
-        borderColor: '#D80324',
-        borderWidth: 1
-    },
-    cancelIcon: {
-        width: 20,
-        resizeMode: 'contain',
-        position: 'absolute',
-        right: -3,
-        top: -22
-    }
-})
-
-export default ProfileSetUp
+export default  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileSetUp);

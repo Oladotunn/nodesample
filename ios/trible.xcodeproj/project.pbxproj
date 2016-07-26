@@ -33,6 +33,7 @@
 		5DD2056D1D3D4885000A2C05 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD2056C1D3D4885000A2C05 /* libz.tbd */; };
 		66442DC4D079466090D84CA4 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CAD2649A9D4CE3ABF2E088 /* libBVLinearGradient.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		A331028AD37743E49AC8CBF7 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1860B4E2A4984D4D9A9DE93B /* libRNSpinkit.a */; };
 		F310984E1D21037000AAE68A /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F310984D1D21013000AAE68A /* libRNSearchBar.a */; };
 		F3E8398F1D227B11000B156C /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F310984D1D21013000AAE68A /* libRNSearchBar.a */; };
 /* End PBXBuildFile section */
@@ -122,6 +123,13 @@
 			remoteGlobalIDString = 555FF3BA1B37AC8D0064F175;
 			remoteInfo = AppHubTests;
 		};
+		5DE66C5E1D46E5240096199F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B5AAE85020F40DD9E3A9E82 /* RNSpinkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
+			remoteInfo = RNSpinkit;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -187,6 +195,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = trible/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = trible/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1860B4E2A4984D4D9A9DE93B /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
+		2B5AAE85020F40DD9E3A9E82 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		45CAD2649A9D4CE3ABF2E088 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 0; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		5D1462CB1D3F24E6003BC847 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		5D1462CC1D3F24E6003BC847 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -239,6 +249,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				66442DC4D079466090D84CA4 /* libBVLinearGradient.a in Frameworks */,
+				A331028AD37743E49AC8CBF7 /* libRNSpinkit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +368,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5DE66C4A1D46E5240096199F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5DE66C5F1D46E5240096199F /* libRNSpinkit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +406,7 @@
 				01F7FAAE0A5C4D919157C933 /* RNTableView.xcodeproj */,
 				6E874E3AEC314102908EE3A1 /* RNInvoke.xcodeproj */,
 				F4F377A3135C497C9F8837AC /* BVLinearGradient.xcodeproj */,
+				2B5AAE85020F40DD9E3A9E82 /* RNSpinkit.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -597,6 +617,10 @@
 					ProjectRef = B563E3F9D11244E184AAA0C6 /* RNSearchBar.xcodeproj */;
 				},
 				{
+					ProductGroup = 5DE66C4A1D46E5240096199F /* Products */;
+					ProjectRef = 2B5AAE85020F40DD9E3A9E82 /* RNSpinkit.xcodeproj */;
+				},
+				{
 					ProductGroup = F310985A1D2109FB00AAE68A /* Products */;
 					ProjectRef = 01F7FAAE0A5C4D919157C933 /* RNTableView.xcodeproj */;
 				},
@@ -685,6 +709,13 @@
 			fileType = wrapper.cfbundle;
 			path = AppHub.xctest;
 			remoteRef = 5DD205671D3D4807000A2C05 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5DE66C5F1D46E5240096199F /* libRNSpinkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSpinkit.a;
+			remoteRef = 5DE66C5E1D46E5240096199F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
@@ -827,6 +858,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "dd182b54-95ba-425f-b9f4-61f2ecd693b3";
@@ -846,6 +878,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -875,6 +908,7 @@
 					"$(SRCROOT)/../node_modules/react-native-invoke/ios/RNInvoke",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/apphub/AppHub/**",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				INFOPLIST_FILE = trible/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -906,6 +940,7 @@
 					"$(SRCROOT)/../node_modules/react-native-invoke/ios/RNInvoke",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/apphub/AppHub/**",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				INFOPLIST_FILE = trible/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -963,6 +998,7 @@
 					"$(SRCROOT)/../node_modules/react-native-tableview/RNTableView",
 					"$(SRCROOT)/../node_modules/react-native-invoke/ios/RNInvoke",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1009,6 +1045,7 @@
 					"$(SRCROOT)/../node_modules/react-native-tableview/RNTableView",
 					"$(SRCROOT)/../node_modules/react-native-invoke/ios/RNInvoke",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -12,7 +12,16 @@ import {
   StatusBar
 } from 'react-native';
 import _ from 'lodash';
+import AppStore from '../../app-store';
+import { connect } from 'react-redux';
+import {
+  updateFbReadyAction,
+  updateFbCredsAction,
+  updateProfilePictureAlbumDetailsAction,
+} from '../../action-creators';
 const { FBLoginManager } = require('react-native-facebook-login');
+const Spinner = require('react-native-spinkit');
+
 
 
 import {transparentBg,primaryFont,secondaryFont,padding20,primaryFontColor} from '@theme/colors';
@@ -21,16 +30,21 @@ class LandingPage extends Component{
     super(props);
     this._getUserPictures = _.bind(this._getUserPictures, this);
     this._loginWithFB = _.bind(this._loginWithFB, this);
+    this._getActionComponent = _.bind(this._getActionComponent, this);
+    this.state = {
+      ready: false,
+    };
   }
 
-  _getUserPictures(userData) {
-    const { token } = userData.credentials;
+  _getUserPictures() {
+    const { token } = this.props.credentials;
+
     fetch(`https://graph.facebook.com/v2.7/me/albums?access_token=${token}`)
     .then(data => data.json())
     .then(pictureData => {
       const profilePictureAlbum = _.find(pictureData.data, data => data.name === 'Profile Pictures');
-      userData.profilePictureAlbum = profilePictureAlbum;
-      Actions.profileSetup({ userData });
+      this.props.dispatchUpdateProfileAlbumDetails(profilePictureAlbum);
+      Actions.profileSetup();
     })
     .catch(err => {
       console.log(`could not get Facebook photos: ${err}`);
@@ -40,12 +54,59 @@ class LandingPage extends Component{
   _loginWithFB() {
     FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data) => {
       if (!error) {
-        this._getUserPictures(data);
+        this.props.dispatchUpdateFbCreds(userData.credentials);
+        this._getUserPictures();
       } else {
         console.log("Error (Facebook): ", data);
       }
     });
   }
+
+  _getActionComponent() {
+    if (!this.state.ready) {
+      return (
+        <Spinner
+          size={50}
+          style={
+            {
+              justifyContent:'center',
+              alignSelf: 'center',
+              backgroundColor: 'white'
+            }
+          }
+          color='red'
+        />
+      ); 
+    } 
+    return (
+      <TouchableOpacity
+        style={[
+          {
+            borderWidth:1,
+            borderColor:'#fff',
+            justifyContent:'center',
+            flexDirection:"column",alignItems:'center'},
+            padding20
+        ]}
+        onPress={this._loginWithFB}>
+        <Text
+          style={[transparentBg,styles.whiteColor,primaryFont,{textAlign:'center'}]} >
+          Connect With Facebook
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
+  componentWillMount() {
+    FBLoginManager.getCredentials((error, data) => {
+      if (!error) {
+        // _.delay(Actions.main, 5000);
+      } else {
+        this.setState({ ready: true });
+      }
+    });
+  }
+
   render() {
     return (
       <View style={styles.imageContainer}>
@@ -58,20 +119,7 @@ class LandingPage extends Component{
               <Text style= {[transparentBg,secondaryFont,{color:'#fff'}]}>of all <Text style={[primaryFontColor]}>colors</Text> and <Text style={[primaryFontColor]}>cultures</Text>.</Text>
             </View>
             <View style={[styles.lowerPart,styles.center]}>
-              <TouchableOpacity
-                style={[
-                  {
-                    borderWidth:1,
-                    borderColor:'#fff',
-                    justifyContent:'center',
-                    flexDirection:"column",alignItems:'center'},
-                    padding20
-                ]}
-                onPress={this._loginWithFB}>
-                <Text style={[transparentBg,styles.whiteColor,primaryFont,{textAlign:'center'}]} >
-                  Connect With Facebook
-                </Text>
-              </TouchableOpacity>
+              { this._getActionComponent() }
             </View>
           </View>
         </Image>
@@ -114,5 +162,23 @@ const styles = StyleSheet.create({
     resizeMode:'contain'
   }
 })
+
+const mapStateToProps = state => {
+  return {
+    ...state,
+  }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatchUpdateFbCreds: creds => dispatch(updateFbCredsAction(creds)),
+      dispatchUpdateFbReady: state => dispatch(updateFbReadyAction(state)),
+        dispatchUpdateProfileAlbumDetails: albumDetails => dispatch(updateProfilePictureAlbumDetailsAction(albumDetails)),
+  };
+};
+
+export default  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LandingPage);
 
 export default LandingPage

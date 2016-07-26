@@ -36,61 +36,61 @@ class AboutDetails extends Component{
   }
   render() {
     return (
-              <View onStartShouldSetResponder={this.containerTouched.bind(this)} style={{paddingBottom:10}}>
-                <View style={{paddingLeft:10}}>
-                  <Image source={require('@images/trible_logo.png')} style={styles.logo}></Image>
-                </View>
-                <View style={{alignItems:'center',marginTop:10}}>
-                  <Text style={styles.textColor}>Tell us about yourself.</Text>
-                </View>
-                <View style={{marginTop:20,paddingLeft:10,paddingRight:10}}>
-                  <TextInput
-                      multiline={true}
-                      returnKeyType={'next'}
-                      style={[{height: 90, borderColor: 'gray', borderTopWidth: 1,fontSize:14,padding:10,justifyContent:'center'},borderRadius]}
-                      placeholder="Type your bio here"
-                      ref="textInput"
-                      onSubmitEditing={this.containerTouched.bind(this)}
-                      blurOnSubmit={true}/>
-                </View>
-                <View style={{alignItems:'center',marginTop:20,marginBottom:20}}>
-                  <Text style={styles.textColor}>What do you represent?</Text>
-                </View>
-                <View>
-                  <TouchableOpacity style={styles.list}  onPress={()=>Actions.flags({title:"Flags" })}>
-                    <Text style={styles.textColor}>Add a flag</Text>
-                    <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.list}  onPress={()=>Actions.flags({title:"Flags" })}>
-                    <Text style={styles.textColor}>Add a flag</Text>
-                    <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={[styles.list,{borderBottomWidth:1}]}  onPress={()=>Actions.flags({title:"Flags" })}>
-                    <Text style={styles.textColor}>Add a flag</Text>
-                    <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
-                  </TouchableOpacity>
-                </View>
+      <View onStartShouldSetResponder={this.containerTouched.bind(this)} style={{paddingBottom:10}}>
+        <View style={{paddingLeft:10}}>
+          <Image source={require('@images/trible_logo.png')} style={styles.logo}></Image>
+        </View>
+        <View style={{alignItems:'center',marginTop:10}}>
+          <Text style={styles.textColor}>Tell us about yourself.</Text>
+        </View>
+        <View style={{marginTop:20,paddingLeft:10,paddingRight:10}}>
+          <TextInput
+            multiline={true}
+            returnKeyType={'next'}
+            style={[{height: 90, borderColor: 'gray', borderTopWidth: 1,fontSize:14,padding:10,justifyContent:'center'},borderRadius]}
+            placeholder="Type your bio here"
+            ref="textInput"
+            onSubmitEditing={this.containerTouched.bind(this)}
+            blurOnSubmit={true}/>
+        </View>
+        <View style={{alignItems:'center',marginTop:20,marginBottom:20}}>
+          <Text style={styles.textColor}>What do you represent?</Text>
+        </View>
+        <View>
+          <TouchableOpacity style={styles.list}  onPress={()=>Actions.flags({title:"Flags" })}>
+            <Text style={styles.textColor}>Add a flag</Text>
+            <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.list}  onPress={()=>Actions.flags({title:"Flags" })}>
+            <Text style={styles.textColor}>Add a flag</Text>
+            <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.list,{borderBottomWidth:1}]}  onPress={()=>Actions.flags({title:"Flags" })}>
+            <Text style={styles.textColor}>Add a flag</Text>
+            <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
+          </TouchableOpacity>
+        </View>
 
-                <View style={[{alignItems:'center',marginTop:20}]}>
-                  {/*<Button
-                      containerStyle={{borderRadius:4}}
-                      style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
-                      styleDisabled={{color: 'red'}}
-                      onPress={()=> {this.props.callbackParent()}}
-                  >
-                    Next Step
-                  </Button>*/}
-                  <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
-                    <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
-                  <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-                  <Image source={require('@images/activePage.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-                  <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-                  <Image source={require('@images/pager.png')} style={{resizeMode:'contain'}}></Image>
-                </View>
-              </View>
+        <View style={[{alignItems:'center',marginTop:20}]}>
+          {/*<Button
+             containerStyle={{borderRadius:4}}
+             style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
+             styleDisabled={{color: 'red'}}
+             onPress={()=> {this.props.callbackParent()}}
+             >
+             Next Step
+             </Button>*/}
+             <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
+               <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+             </TouchableOpacity>
+           </View>
+           <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
+             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+             <Image source={require('@images/activePage.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+             <Image source={require('@images/pager.png')} style={{resizeMode:'contain'}}></Image>
+           </View>
+         </View>
     )
   }
 }
