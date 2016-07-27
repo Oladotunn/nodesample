@@ -38,17 +38,24 @@ class LandingPage extends Component{
   }
 
   _getUserPictures(token) {
-    fetch(`https://graph.facebook.com/v2.7/me/?access_token=${token}&fields=name,birthday,albums`)
+    fetch(`https://graph.facebook.com/v2.7/me/?access_token=${token}&fields=name,birthday,education,work,albums`)
     .then(data => data.json())
     .then(response => {
       const {
         name,
         birthday,
+        education,
+        work,
         albums,
       } = response;
       const profilePictureAlbum = _.find(albums.data, data => data.name === 'Profile Pictures');
       this.props.dispatchUpdateProfileAlbumDetails(profilePictureAlbum);
-      this.props.dispatchUpdateUserBio({name, birthday});
+      this.props.dispatchUpdateUserBio({
+        name,
+        birthday,
+        education,
+        work,
+      });
       Actions.profileSetup();
     })
     .catch(err => {
@@ -58,7 +65,13 @@ class LandingPage extends Component{
 
   _loginWithFB() {
     this.setState({ ready: false });
-    FBLoginManager.loginWithPermissions(['email','user_friends','user_birthday'], (error, data) => {
+    FBLoginManager.loginWithPermissions([
+      'email',
+      'user_friends',
+      'user_education_history',
+      'user_work_history',
+      'user_birthday'
+    ], (error, data) => {
       if (!error) {
         this.props.dispatchUpdateFbCreds(data.credentials);
         this._getUserPictures(data.credentials.token);
