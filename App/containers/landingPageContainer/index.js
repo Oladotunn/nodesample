@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import {
   updateFbReadyAction,
   updateFbCredsAction,
+  updateUserBioAction,
   updateProfilePictureAlbumDetailsAction,
 } from '../../action-creators';
 const { FBLoginManager } = require('react-native-facebook-login');
@@ -37,11 +38,17 @@ class LandingPage extends Component{
   }
 
   _getUserPictures(token) {
-    fetch(`https://graph.facebook.com/v2.7/me/albums?access_token=${token}`)
+    fetch(`https://graph.facebook.com/v2.7/me/?access_token=${token}&fields=name,birthday,albums`)
     .then(data => data.json())
-    .then(pictureData => {
-      const profilePictureAlbum = _.find(pictureData.data, data => data.name === 'Profile Pictures');
+    .then(response => {
+      const {
+        name,
+        birthday,
+        albums,
+      } = response;
+      const profilePictureAlbum = _.find(albums.data, data => data.name === 'Profile Pictures');
       this.props.dispatchUpdateProfileAlbumDetails(profilePictureAlbum);
+      this.props.dispatchUpdateUserBio({name, birthday});
       Actions.profileSetup();
     })
     .catch(err => {
@@ -51,7 +58,7 @@ class LandingPage extends Component{
 
   _loginWithFB() {
     this.setState({ ready: false });
-    FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data) => {
+    FBLoginManager.loginWithPermissions(['email','user_friends','user_birthday'], (error, data) => {
       if (!error) {
         this.props.dispatchUpdateFbCreds(data.credentials);
         this._getUserPictures(data.credentials.token);
@@ -99,6 +106,7 @@ class LandingPage extends Component{
   componentWillMount() {
     FBLoginManager.getCredentials((error, data) => {
       if (!error) {
+        console.log(data);
         _.delay(Actions.main, 5000);
       } else {
         this.setState({ ready: true });
@@ -171,6 +179,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dispatchUpdateFbCreds: creds => dispatch(updateFbCredsAction(creds)),
     dispatchUpdateFbReady: state => dispatch(updateFbReadyAction(state)),
+    dispatchUpdateUserBio: state => dispatch(updateUserBioAction(state)),
     dispatchUpdateProfileAlbumDetails: albumDetails => {
       dispatch(updateProfilePictureAlbumDetailsAction(albumDetails));
     },

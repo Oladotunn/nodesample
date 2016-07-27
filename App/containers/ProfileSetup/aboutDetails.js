@@ -35,7 +35,9 @@ import {
 const windowWidth = Dimensions.get('window').width;
 class AboutDetails extends Component{
   containerTouched(event) {
-    this.props.dispatchUserBio(event.nativeEvent.text);
+    const { text } = event.nativeEvent;
+
+    this.props.dispatchUserBio({ text });
     this.refs.textInput.blur();
     return false;
   }
@@ -54,7 +56,7 @@ class AboutDetails extends Component{
             returnKeyType={'next'}
             style={[{height: 90, borderColor: 'gray', borderTopWidth: 1,fontSize:14,padding:10,justifyContent:'center'},borderRadius]}
             placeholder="Type your bio here"
-            defaultValue={this.props.userInfo.bio}
+            defaultValue={this.props.userInfo.bio.text}
             ref="textInput"
             onSubmitEditing={this.containerTouched.bind(this)}
             blurOnSubmit={true}/>

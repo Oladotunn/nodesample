@@ -12,14 +12,21 @@ import {
 import  SearchBar from 'react-native-search-bar';
 import { Container, Header, InputGroup, Input, Icon, Button } from 'native-base';
 import myTheme from '@nativeBaseTheme/myTheme';
+import countryApi from 'country-data';
+import _ from 'lodash';
+
 class GeographicPage extends Component {
   constructor(props){
     super(props)
     this.state = {showsCancelButton:false}
   }
+
   _getAfricanCountries() {
+    console.log(countryApi.regions[0]);
   }
+
   render() {
+    this._getAfricanCountries();
     return (
       <View style={{flex:1}}>
         <StatusBar

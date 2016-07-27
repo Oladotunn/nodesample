@@ -5,7 +5,12 @@ import {
 } from '../actions';
 
 const defaultState = {
-  bio: '',
+  bio: {
+    text: '',
+    name: '',
+    birthday: '',
+    education: {},
+  },
   flags: [],
 };
 
@@ -18,7 +23,10 @@ const userInfo = (state = defaultState, action) => {
     case UPDATE_USER_BIO: 
       return {
         ...state,
-        bio: action.bio
+        bio: {
+          ...state.bio,
+          ...action.bio,
+        }
       }
     case UPDATE_USER_FLAG: 
       return {

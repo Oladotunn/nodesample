@@ -146,7 +146,6 @@ class ProfileSetUp extends Component {
   }
 
   _getProfilePictureUrls() {
-    console.log(this.props);
     const { profilePictureAlbumDetails } = this.props.profilePictures;
     const { id: profilePictureAlbumId } = profilePictureAlbumDetails;
     const { token } = this.props.facebook.credentials;
