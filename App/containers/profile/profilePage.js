@@ -34,10 +34,12 @@ class ProfilePage extends Component {
   }
 
   _getUserDetails() {
-    console.log(AppStore.getState());
     const { name, birthday } = this.props.userInfo.bio;
     const age = moment().year() - moment(birthday).year();
     return `${name}, ${age}`;
+  }
+  _getUserBio() {
+    return this.props.userInfo.bio.text;
   }
 
   render() {
@@ -65,7 +67,7 @@ class ProfilePage extends Component {
         </View>
         <View style={{flex:7,paddingBottom:100}}>
           <View style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15}]}>
-            <Text style={[{backgroundColor:'#FFFFFF'},styles.fontColor]}>Ambitious entrepreneur</Text></View>
+            <Text style={[{backgroundColor:'#FFFFFF'},styles.fontColor]}>{this._getUserBio()}</Text></View>
           <View style={{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}}>
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
               <Image source={require('@images/Instagram-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>
