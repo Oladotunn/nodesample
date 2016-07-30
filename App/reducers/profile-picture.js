@@ -2,6 +2,7 @@ import {
   ADD_PROFILE_PICTURE,
   DELETE_PROFILE_PICTURE,
   INIT_PROFILE_PICTURES,
+  HYDRATE_PROFILE_PICTURES,
   UPDATE_PROFILE_PICTURE_ALBUM_DETAILS,
 } from '../actions';
 import _ from 'lodash';
@@ -53,6 +54,8 @@ const profilePictures =  (state = defaultAppState, action) => {
         chosenPhotos: _.take(action.profilePictures, 5),
         profilePictureObjects: action.profilePictures,
       }
+    case HYDRATE_PROFILE_PICTURES: 
+      return action.userAppState;
     case UPDATE_PROFILE_PICTURE_ALBUM_DETAILS: 
       return {
         ...state,

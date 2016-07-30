@@ -19,6 +19,9 @@ import {
   updateFbCredsAction,
   updateUserBioAction,
   updateProfilePictureAlbumDetailsAction,
+  hydrateUserAction,
+  hydrateFbAction,
+  hydrateProfilePicturesAction,
 } from '../../action-creators';
 const { FBLoginManager } = require('react-native-facebook-login');
 const Spinner = require('react-native-spinkit');
@@ -32,6 +35,7 @@ class LandingPage extends Component{
     this._getUserPictures = _.bind(this._getUserPictures, this);
     this._loginWithFB = _.bind(this._loginWithFB, this);
     this._getActionComponent = _.bind(this._getActionComponent, this);
+    this._hydrateUserAppState = _.bind(this._hydrateUserAppState, this);
     this.state = {
       ready: false,
     };
@@ -70,6 +74,7 @@ class LandingPage extends Component{
       'user_friends',
       'user_education_history',
       'user_work_history',
+      'user_religion_politics',
       'user_birthday'
     ], (error, data) => {
       if (!error) {
@@ -116,11 +121,31 @@ class LandingPage extends Component{
     );
   }
 
+  _hydrateUserAppState(facebook) {
+    fetch(`${this.props.appConfig.server}/hydrateUserAppState/${facebook.credentials.userId}`)
+    .then(data => data.json())
+    .then(serverState => {
+      // console.log(serverState);
+      if (!serverState) {
+        this.props.dispatchUpdateFbCreds(facebook.credentials);
+        this._getUserPictures(facebook.credentials.token);
+      } else {
+        const { userAppState } = serverState;
+        this.props.dispatchHydrateUser(userAppState.userInfo);
+        this.props.dispatchHydrateFb(userAppState.facebook);
+        this.props.dispatchHydrateProfilePictures(userAppState.profilePictures);
+        _.delay(Actions.main, 5000);
+      }
+    })
+    .catch(err => {
+      console.log(`error: ${err}`);
+    })
+  }
+
   componentWillMount() {
     FBLoginManager.getCredentials((error, data) => {
       if (!error) {
-        console.log(data);
-        _.delay(Actions.main, 5000);
+        this._hydrateUserAppState(data);
       } else {
         this.setState({ ready: true });
       }
@@ -190,12 +215,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    dispatchUpdateFbCreds: creds => dispatch(updateFbCredsAction(creds)),
-    dispatchUpdateFbReady: state => dispatch(updateFbReadyAction(state)),
-    dispatchUpdateUserBio: state => dispatch(updateUserBioAction(state)),
-    dispatchUpdateProfileAlbumDetails: albumDetails => {
-      dispatch(updateProfilePictureAlbumDetailsAction(albumDetails));
-    },
+    dispatchHydrateUser: userAppState => dispatch(hydrateUserAction(userAppState)),
+    dispatchHydrateFb: userAppState => dispatch(hydrateFbAction(userAppState)),
+    dispatchHydrateProfilePictures: userAppState => dispatch(hydrateProfilePicturesAction(userAppState)),
   };
 };
 

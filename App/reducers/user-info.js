@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
   UPDATE_USER_BIO,
   UPDATE_USER_FLAG,
+  HYDRATE_USER,
 } from '../actions';
 
 const defaultState = {
@@ -33,6 +34,8 @@ const userInfo = (state = defaultState, action) => {
         ...state,
         flags: _.union(oldFlags, [action.flag]) 
       }
+    case HYDRATE_USER: 
+      return action.userAppState
     default: 
       return state;
   }

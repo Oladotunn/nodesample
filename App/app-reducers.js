@@ -5,11 +5,19 @@ import userInfo from './reducers/user-info';
 
 const React = require('react-native');
 
-const ws = new WebSocket('ws://10.1.10.48:3030');
+const config = {
+  development: {
+    server: 'http://10.1.10.48:3030',
+  },
+  production: {
+    server: 'http://10.1.10.48:3030',
+  }
+}
+const websocketUrl = config[process.env.NODE_ENV || 'development'].server.replace('http', 'ws');
+const ws = new WebSocket(websocketUrl);
 
 ws.onopen = e => {
-  console.log('connected!');
-  ws.send('message', { i: 'some'});
+  console.log('socket connected!');
 };
 
 ws.onmessage = e => {
@@ -22,19 +30,16 @@ ws.onerror = (e) => {
 };
   
 ws.onclose = (e) => {
-  console.log('closed here')
   console.log(e.code, e.reason);
 };
 
-const triblSocket = () => {
-  return {
-    ws,
-  }
+const appConfig = () => {
+  return config[process.env.NODE_ENV || 'development'];
 };
 
 export default combineReducers({
   facebook,
   userInfo,
   profilePictures,
-  triblSocket,
+  appConfig,
 });

@@ -14,6 +14,7 @@ import {borderRadius} from '@theme/colors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
+import AppStore from '../../app-store';
 
 let topPadding = 64;
 if(Platform.OS =='android'){
@@ -33,6 +34,7 @@ class ProfilePage extends Component {
   }
 
   _getUserDetails() {
+    console.log(AppStore.getState());
     const { name, birthday } = this.props.userInfo.bio;
     const age = moment().year() - moment(birthday).year();
     return `${name}, ${age}`;
