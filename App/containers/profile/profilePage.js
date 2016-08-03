@@ -39,6 +39,15 @@ class ProfilePage extends Component {
     const age = moment().year() - moment(birthday).year();
     return `${name}, ${age}`;
   }
+  _getInterests() {
+    const { chosenLikes } = this.props.userInfo.interests;
+    return _.map(chosenLikes, like => {
+      return (
+        <Text key={like} style={[styles.fontColor]}>{like}</Text>
+      );
+    });
+  }
+
   _getUserBio() {
     return this.props.userInfo.bio.text;
   }
@@ -106,11 +115,7 @@ class ProfilePage extends Component {
             </View>
             <View style={styles.listItem}>
               <Text>INTERESTS</Text>
-              <Text style={[styles.fontColor]}>Sports</Text>
-              <Text style={[styles.fontColor]}>Music</Text>
-              <Text style={[styles.fontColor]}>Technology</Text>
-              <Text style={[styles.fontColor]}>Art</Text>
-              <Text style={[styles.fontColor]}>Movies</Text>
+              {this._getInterests()}
             </View>
             <View style={styles.listItem}>
               <Text>On Saturday you can find me...</Text>
