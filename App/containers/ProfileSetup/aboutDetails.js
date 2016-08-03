@@ -31,9 +31,14 @@ import { connect } from 'react-redux';
 import {
   updateUserBioAction,
 } from '../../action-creators';
+import _ from 'lodash';
 
 const windowWidth = Dimensions.get('window').width;
 class AboutDetails extends Component{
+  constructor(props) {
+    super(props);
+    this._renderFlags = _.bind(this._renderFlags, this);
+  }
   containerTouched(event) {
     const { text } = event.nativeEvent;
 
@@ -41,6 +46,34 @@ class AboutDetails extends Component{
     this.refs.textInput.blur();
     return false;
   }
+
+  _renderBlankFlag(index) {
+    return (
+      <TouchableOpacity 
+        key={`flag${index}`} style={styles.list}  onPress={()=>Actions.flags({title:"Flags", flagIndex: index })}>
+        <Text style={styles.textColor}>Add a flag</Text>
+        <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
+      </TouchableOpacity>
+    );
+  }
+
+  _renderFlags() {
+    const { flags } = this.props.userInfo;
+    console.log(flags);
+    return _.map(flags, (flag, index) => {
+      if (!flag.name) return this._renderBlankFlag(index);
+
+      const source = {uri: flag.picture};
+      return (
+        <TouchableOpacity key={`flag${index}`}
+          style={styles.list}  onPress={()=>Actions.flags({title:"Flags", flagIndex: index })}>
+          <Text style={styles.textColor}>{flag.name}</Text>
+          <Image source={source} style={styles.forwardArrow}></Image>
+        </TouchableOpacity>
+      );
+    });
+  }
+
   render() {
     return (
       <View onStartShouldSetResponder={this.containerTouched.bind(this)} style={{paddingBottom:10}}>
@@ -65,18 +98,7 @@ class AboutDetails extends Component{
           <Text style={styles.textColor}>What do you represent?</Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.list}  onPress={()=>Actions.flags({title:"Flags" })}>
-            <Text style={styles.textColor}>Add a flag</Text>
-            <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.list}  onPress={()=>Actions.flags({title:"Flags" })}>
-            <Text style={styles.textColor}>Add a flag</Text>
-            <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.list,{borderBottomWidth:1}]}  onPress={()=>Actions.flags({title:"Flags" })}>
-            <Text style={styles.textColor}>Add a flag</Text>
-            <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
-          </TouchableOpacity>
+          { this._renderFlags() }
         </View>
 
         <View style={[{alignItems:'center',marginTop:20}]}>

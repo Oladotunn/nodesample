@@ -20,8 +20,8 @@ export default React.createClass({
   render() {
     return(
       <ScrollableTabView style={{marginTop:topPadding}} tabBarActiveTextColor="#DA0327" tabBarBackgroundColor="#F4F4F4" tabBarUnderlineColor="#DA0327" scrollWithoutAnimation={true} tabBarTextStyle={{marginTop:10}}>
-        <GeographicPage tabLabel="Geographic" />
-        <CulturalPage tabLabel="Cultural" />
+        <GeographicPage tabLabel="Geographic" flagIndex={this.props.flagIndex} />
+        <CulturalPage tabLabel="Cultural" flagIndex={this.props.flagIndex} />
       </ScrollableTabView>
     )
   }

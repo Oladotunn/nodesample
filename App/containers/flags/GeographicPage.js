@@ -9,24 +9,59 @@ import {
   StatusBar,
   Platform
 } from 'react-native';
+import { connect } from 'react-redux';
 import  SearchBar from 'react-native-search-bar';
 import { Container, Header, InputGroup, Input, Icon, Button } from 'native-base';
 import myTheme from '@nativeBaseTheme/myTheme';
-import countryApi from 'country-data';
+import countryList from 'countries-list';
 import _ from 'lodash';
+import {
+  updateUserFlagAction
+} from '../../action-creators';
+import {Actions} from 'react-native-router-flux';
 
 class GeographicPage extends Component {
   constructor(props){
     super(props)
-    this.state = {showsCancelButton:false}
+    this.state = {showsCancelButton:false};
+    this._renderAfricanCountries = _.bind(this._renderAfricanCountries, this);
+    this._updateFlagData = _.bind(this._updateFlagData, this);
   }
+
 
   _getAfricanCountries() {
-    console.log(countryApi.regions[0]);
+    return _.filter(countryList.countries,country => country.continent === 'AF')
   }
 
+  _updateFlagData({ picture, name }) {
+    const { flagIndex: index } = this.props;
+    const flag = { picture, name };
+    this.props.dispatchUpdateFlag({ flag, index });
+    Actions.pop();
+  }
+
+  _renderAfricanCountries() {
+    const africanCountries = _.sortBy(this._getAfricanCountries(), 'name');
+    return  _.map(africanCountries, (country,index) => {
+      const c = _.pickBy(countryList.countries, countryFromList => countryFromList.name === country.name); 
+      const countryCode = _.keys(c)[0].toLowerCase();
+      const picture = `http://www.geonames.org/flags/x/${countryCode}.gif`;
+      const source = {uri: picture};
+      return (
+        <TouchableOpacity
+          key={country.name}
+          onPress={() => this._updateFlagData({ picture, name: country.name })}>
+          <View style={[styles.listItem]}>
+            <Text style={[styles.listText]}>{country.name}</Text>
+            <Image source={source} style={[styles.flag]} ></Image>
+          </View>
+        </TouchableOpacity>
+      );
+    });
+  }
+
+
   render() {
-    this._getAfricanCountries();
     return (
       <View style={{flex:1}}>
         <StatusBar
@@ -123,61 +158,8 @@ class GeographicPage extends Component {
                   Africa
                 </Text>
               </View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Algeria</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]} selected={true}>Angola</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Benin</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Botswana</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Burkina Faso</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Burundi</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Haiti</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Cabo Verde</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Cameroon</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Central African Republic</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Chad</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Comoros</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Congo,Democratic Republic of the</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Cote d'lvoire</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Djibouti</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Egypt</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Equatorial Guinea</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Eritrea</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Ethiopia</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Gabon</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Gambia</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Ghana</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Guinea</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Guinea-Bissau</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Kenya</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Lesotho</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Liberia</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Libya</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Madagascar</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Malawi</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Mali</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Mauritania</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Mauritius</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Morocco</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Mozambique</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Namibia</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Niger</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Nigeria</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Rwanda</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Sao Tome and Principe</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Senegal</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Seychelles</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Sierra Leone</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Somalia</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>South Africa</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Sudan</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Swaziland</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Tanzania</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Togo</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Tunisia</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Uganda</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Zambia</Text></View>
-              <View style={[styles.listItem]}><Text style={[styles.listText]}>Zimbabwe</Text></View>
+              {this._renderAfricanCountries()}
             </ScrollView>
-
           </View>
     )
   }
@@ -208,4 +190,19 @@ listItem:{
         height:30
     }
 })
-export  default GeographicPage
+
+const mapStateToProps = state => {
+  return {
+    ...state,
+  }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatchUpdateFlag: flagInformation => dispatch(updateUserFlagAction(flagInformation)),
+  };
+};
+
+export default  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GeographicPage);

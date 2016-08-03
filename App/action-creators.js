@@ -9,6 +9,7 @@ import {
   HYDRATE_FB,
   UPDATE_USER_BIO,
   UPDATE_USER_FLAG,
+  UPDATE_USER_LIKE,
   HYDRATE_USER,
 } from './actions';
 
@@ -24,6 +25,13 @@ const updateUserFlagAction = ({ flag, index }) => {
     type: UPDATE_USER_FLAG,
     flag,
     index,
+  };
+};
+
+const updateUserLikeAction = like => {
+  return {
+    type: UPDATE_USER_LIKE,
+    like,
   };
 };
 
@@ -108,5 +116,6 @@ export {
   hydrateFbAction,
   updateUserBioAction,
   updateUserFlagAction,
+  updateUserLikeAction,
   hydrateUserAction,
 };

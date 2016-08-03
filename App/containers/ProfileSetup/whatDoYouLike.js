@@ -21,82 +21,76 @@ import {
 } from '@theme/colors'
 import Dimensions from 'Dimensions';
 import Button from 'react-native-button';
+import { connect } from 'react-redux';
+import {
+  updateUserLikeAction,
+} from '../../action-creators';
 
 
 let windowWidth = Dimensions.get('window').width;
-class ThirdPage extends Component{
-    constructor(props){
-        super(props)
-        this.state = {likes:[]}
-        this.pushLikes = this.pushLikes.bind(this)
-    }
-    pushLikes(id){
-        let newArray;
-        newArray = this.state.likes
-        let index = newArray.indexOf(id)
+class WhatDoYouLike extends Component{
+  constructor(props){
+    super(props)
+  }
+  _renderLikes(index, end) {
+    const { likes, chosenLikes } = this.props.userInfo.interests;
+    return _.map(likes.slice(index, end), (like, index) => {
+      return (
+        <TouchableOpacity
+          style={[styles.checkboxButton,chosenLikes.includes(like) ? styles.activeButton:null]}
+          onPress={()=> this.props.dispatchUpdateUserLike(like)}>
+          <Text style={[chosenLikes.includes(like) ? styles.activeButtonTextColor:styles.buttonTextColor]}>
+            {like}
+          </Text>
+        </TouchableOpacity>
+      )
+    });
+  }
+  render() {
+    return (
+      <View>
+        <View style={{paddingLeft:10}}>
+          <Image source={require('@images/trible_logo.png')} style={styles.logo}></Image>
+        </View>
+        <View style={{alignItems:'center',marginTop:10}}>
+          <Text style={styles.textColor}>What do you like?</Text>
+        </View>
+        <View style={[styles.buttonGroups]}>
+          {this._renderLikes(0, 4)}
+        </View>
+        <View style={[styles.buttonGroups]}>
+          {this._renderLikes(4, 7)}
+        </View>
 
-        if(index > -1){
-        newArray.splice(index,1)
-        }else{
-            newArray.push(id)
-        }
+        <View style={[styles.buttonGroups]}>
+          {this._renderLikes(7, 10)}
+        </View>
 
-        this.setState({likes:newArray})
-    }
-    render() {
-        return (
-            <View>
-                <View style={{paddingLeft:10}}>
-                    <Image source={require('@images/trible_logo.png')} style={styles.logo}></Image>
-                </View>
-                <View style={{alignItems:'center',marginTop:10}}>
-                    <Text style={styles.textColor}>What do you like?</Text>
-                </View>
-                <View style={[styles.buttonGroups]}>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(1) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(1)}><Text style={[this.state.likes.indexOf(1) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Sports</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(2) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(2)}><Text style={[this.state.likes.indexOf(2) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Art</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(3) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(3)}><Text style={[this.state.likes.indexOf(3) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Fitness</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(4) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(4)}><Text style={[this.state.likes.indexOf(4) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Food</Text></TouchableOpacity>
-                </View>
-                <View style={[styles.buttonGroups]}>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(5) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(5)}><Text style={[this.state.likes.indexOf(5) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Literature</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(6) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(6)}><Text style={[this.state.likes.indexOf(6) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Movies</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(7) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(7)}><Text style={[this.state.likes.indexOf(7) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Theator</Text></TouchableOpacity>
-                </View>
-
-                <View style={[styles.buttonGroups]}>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(8) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(8)}><Text style={[this.state.likes.indexOf(8) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Fashion</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(9) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(9)}><Text style={[this.state.likes.indexOf(9) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Technology</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(10) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(10)}><Text style={[this.state.likes.indexOf(10) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Politics</Text></TouchableOpacity>
-                    </View>
-
-                <View style={[styles.buttonGroups]}>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(11) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(11)}><Text style={[this.state.likes.indexOf(11) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Music</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(12) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(12)}><Text style={[this.state.likes.indexOf(12) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Travel</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.checkboxButton,this.state.likes.indexOf(13) > -1 ? styles.activeButton:null]} onPress={()=> this.pushLikes(13)}><Text style={[this.state.likes.indexOf(13) > -1 ? styles.activeButtonTextColor:styles.buttonTextColor]}>Video Games</Text></TouchableOpacity>
-                    </View>
-                <View style={[{alignItems:'center',marginTop:20}]}>
-                    {/*<Button
-                        style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
-                        styleDisabled={{color: 'red'}}
-                        onPress={()=>this.setState({currentView:1})}
-                        onPress={()=> {this.props.callbackParent()}}
-                    >
-                        Next Step
-                    </Button>*/}
-                    <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
-                        <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
-                    <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-                    <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-                    <Image source={require('@images/activePage.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-                    <Image source={require('@images/pager.png')} style={{resizeMode:'contain'}}></Image>
-                </View>
-            </View>
-        )
-    }
+        <View style={[styles.buttonGroups]}>
+          {this._renderLikes(10, 13)}
+        </View>
+        <View style={[{alignItems:'center',marginTop:20}]}>
+          {/*<Button
+             style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
+             styleDisabled={{color: 'red'}}
+             onPress={()=>this.setState({currentView:1})}
+             onPress={()=> {this.props.callbackParent()}}
+             >
+             Next Step
+             </Button>*/}
+             <TouchableOpacity style={[styles.button]} onPress={()=> {this.props.callbackParent()}}>
+               <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+             </TouchableOpacity>
+           </View>
+           <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
+             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+             <Image source={require('@images/activePage.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+             <Image source={require('@images/pager.png')} style={{resizeMode:'contain'}}></Image>
+           </View>
+         </View>
+    )
+  }
 }
 const styles = StyleSheet.create({
     container:{
@@ -154,4 +148,18 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ThirdPage
+const mapStateToProps = state => {
+  return {
+    ...state,
+  }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatchUpdateUserLike: like => dispatch(updateUserLikeAction(like)),
+  };
+};
+
+export default  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WhatDoYouLike);

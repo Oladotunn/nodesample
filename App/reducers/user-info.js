@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
   UPDATE_USER_BIO,
   UPDATE_USER_FLAG,
+  UPDATE_USER_LIKE,
   HYDRATE_USER,
 } from '../actions';
 
@@ -11,13 +12,40 @@ const defaultState = {
     name: '',
     birthday: '',
     education: {},
+    ethnicity: '',
+    occupation: '',
+    religion: '',
+    likes: [],
   },
-  flags: [],
+  flags: [
+    {},
+    {},
+    {},
+  ],
+  interests: {
+    likes: [
+      'Sports',
+      'Art',
+      'Fitness',
+      'Food',
+      'Literature',
+      'Movies',
+      'Theater',
+      'Fashion',
+      'Technology',
+      'Politics',
+      'Music',
+      'Travel',
+      'Video Games',
+    ],
+    chosenLikes: [],
+  }
 };
 
 const userInfo = (state = defaultState, action) => {
   const {
-    flags: oldFlags
+    flags: oldFlags,
+    interests,
   } = state;
 
   switch(action.type) {
@@ -30,14 +58,26 @@ const userInfo = (state = defaultState, action) => {
         }
       }
     case UPDATE_USER_FLAG: 
-      const newFlagWithRemainingItems = oldFlags.slice(action.index + 1).splice(0,action.flag);
-      const newFlagState = _.union(
-        ...oldFlags.slice(0, action.index),
-        ...newFlagWithRemainingItems
-      );
+      const newFlagState = oldFlags.slice(0);
+      newFlagState[action.index] = action.flag;
       return {
         ...state,
         flags: newFlagState, 
+      }
+    case UPDATE_USER_LIKE: 
+      const {chosenLikes: oldChosenLikes} = interests;
+      const chosenLikes = oldChosenLikes.slice(0);
+      if (chosenLikes.includes(action.like)) {
+        _.pull(chosenLikes, action.like)
+      } else {
+        chosenLikes.push(action.like);
+      } 
+      return {
+        ...state,
+        interests: {
+          ...state.interests,
+          chosenLikes,
+        }
       }
     case HYDRATE_USER: 
       return action.userAppState
