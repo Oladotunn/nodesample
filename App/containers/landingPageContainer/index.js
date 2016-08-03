@@ -218,6 +218,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatchHydrateUser: userAppState => dispatch(hydrateUserAction(userAppState)),
     dispatchHydrateFb: userAppState => dispatch(hydrateFbAction(userAppState)),
     dispatchHydrateProfilePictures: userAppState => dispatch(hydrateProfilePicturesAction(userAppState)),
+    dispatchUpdateFbCreds: creds => dispatch(updateFbCredsAction(creds)),
+    dispatchUpdateProfileAlbumDetails: profileAlbum => {
+      dispatch(updateProfilePictureAlbumDetailsAction(profileAlbum));
+    }, 
+    dispatchUpdateUserBio: userBio => dispatch(updateUserBioAction(userBio))
   };
 };
 

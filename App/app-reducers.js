@@ -12,7 +12,8 @@ const config = {
   production: {
     server: 'http://10.1.10.48:3030',
   }
-}
+};
+
 const websocketUrl = config[process.env.NODE_ENV || 'development'].server.replace('http', 'ws');
 const ws = new WebSocket(websocketUrl);
 

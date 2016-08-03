@@ -30,9 +30,14 @@ const userInfo = (state = defaultState, action) => {
         }
       }
     case UPDATE_USER_FLAG: 
+      const newFlagWithRemainingItems = oldFlags.slice(action.index + 1).splice(0,action.flag);
+      const newFlagState = _.union(
+        ...oldFlags.slice(0, action.index),
+        ...newFlagWithRemainingItems
+      );
       return {
         ...state,
-        flags: _.union(oldFlags, [action.flag]) 
+        flags: newFlagState, 
       }
     case HYDRATE_USER: 
       return action.userAppState

@@ -20,6 +20,7 @@ let topPadding = 64;
 if(Platform.OS =='android'){
   topPadding = 54
 }
+
 class ProfilePage extends Component {
   _renderProfilePictures() {
     const { chosenPhotos } = this.props.profilePictures;

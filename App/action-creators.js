@@ -19,10 +19,11 @@ const updateUserBioAction = bio => {
   };
 };
 
-const updateUserFlagAction = flag => {
+const updateUserFlagAction = ({ flag, index }) => {
   return {
     type: UPDATE_USER_FLAG,
     flag,
+    index,
   };
 };
 

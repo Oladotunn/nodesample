@@ -45,7 +45,7 @@ const profilePictures =  (state = defaultAppState, action) => {
       }
       return {
         ...state,
-        chosenPhotos: _.union(oldChosenPhotos, [oldRemovedPhotos[0]]),
+        chosenPhotos: _.remove(_.union(oldChosenPhotos, [oldRemovedPhotos[0]]), !!photoObject ),
         removedPhotos: _.slice(oldRemovedPhotos, 1),
       }
     case INIT_PROFILE_PICTURES: 
