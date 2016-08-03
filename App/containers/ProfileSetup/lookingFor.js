@@ -25,19 +25,18 @@ import Button from 'react-native-button';
 import AppStore from '../../app-store';
 import { connect } from 'react-redux';
 import {
-  updateFbReadyAction,
-  updateFbCredsAction,
-  updateUserBioAction,
-  updateProfilePictureAlbumDetailsAction,
+  updateLookingForCriteriaAction,
 } from '../../action-creators';
 import _ from 'lodash';
 
 let windowWidth = Dimensions.get('window').width;
 class LookingFor extends Component{
   constructor(props){
-    super(props)
+    super(props);
     this._saveUserAppState = _.bind(this._saveUserAppState,this);
-    this.state = {gender:''}
+    this._getActiveColor = _.bind(this._getActiveColor,this);
+    this._getAge = _.bind(this._getAge,this);
+    this._toggleGender = _.bind(this._toggleGender,this);
   }
 
   _saveUserAppState() {
@@ -57,6 +56,22 @@ class LookingFor extends Component{
     Actions.main();
   }
 
+  _getActiveColor(gender) {
+    return gender === this.props.userInfo.lookingFor.gender ? '#da1636':'#696969';
+  }
+
+  _getAge() {
+    return this.props.userInfo.lookingFor;
+  }
+
+  _toggleGender(gender) {
+    if (gender === this.props.userInfo.lookingFor.gender) return false;
+    this.props.dispatchUpdateCriteria({
+      criteria: 'gender',
+      value: gender,
+    });
+  }
+
   render() {
     return (
       <View>
@@ -68,11 +83,25 @@ class LookingFor extends Component{
         </View>
         <View style={[styles.buttonGroup,{paddingLeft:20,paddingRight:20}]}>
 
-          <TouchableOpacity  onPress={()=> this.setState({gender:'men'})} style={[styles.selectButton,{marginRight:15,height:45,borderColor: this.state.gender == 'men' ?'#da1636':'#696969',borderWidth:1},borderRadius]}>
-            <Text style={{ fontSize:16,lineHeight:33,color:this.state.gender == 'men' ? '#da1636':'#696969',textAlign:'center',marginTop:10}}>Men</Text>
+          <TouchableOpacity
+            onPress={()=> this._toggleGender('Men')}
+            style={[
+              styles.selectButton,
+              {marginLeft:15,height:45,borderColor:this._getActiveColor('Men'),borderWidth:1},
+              ,borderRadius]}>
+            <Text style={{ fontSize:16,lineHeight:33,color:this._getActiveColor('Men'),textAlign:'center',marginTop:10}}>
+              Men
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=> this.setState({gender:'women'})} style={[styles.selectButton,{marginLeft:15,height:45,borderColor:this.state.gender == 'women' ?'#da1636':'#696969'},borderRadius]}>
-            <Text style={{ fontSize:16,lineHeight:33,color:this.state.gender == 'women' ? '#da1636':'#696969',textAlign:'center',marginTop:10}}> Women</Text>
+          <TouchableOpacity
+            onPress={()=> this._toggleGender('Women')}
+            style={[
+              styles.selectButton,
+              {marginLeft:15,height:45,borderColor:this._getActiveColor('Women')},
+              borderRadius]}>
+              <Text style={{ fontSize:16,lineHeight:33,color:this._getActiveColor('Women'),textAlign:'center',marginTop:10}}>
+                Women
+              </Text>
           </TouchableOpacity>
 
         </View>
@@ -80,11 +109,15 @@ class LookingFor extends Component{
         <View style={[styles.buttonGroup,{marginTop:15}]}>
           <TouchableOpacity onPress={()=> this.props.picker.toggle()} style={[{borderColor:'#595959',
             borderWidth:1,marginRight:15,height:45,width:74},borderRadius]}>
-            <Text style={{lineHeight:33,color:'#696969',textAlign:'center',marginTop:10}}>{this.props.firstAge}</Text>
+            <Text style={{lineHeight:33,color:'#696969',textAlign:'center',marginTop:10}}>
+              {this._getAge().minAge}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={()=> this.props.picker2.toggle()} style={[{borderColor:'#595959',
             borderWidth:1,marginLeft:15,height:45,width:74},borderRadius]}>
-            <Text style={{lineHeight:33,color:'#696969',textAlign:'center',marginTop:10}}>{this.props.secondAge}</Text>
+            <Text style={{lineHeight:33,color:'#696969',textAlign:'center',marginTop:10}}>
+              {this._getAge().maxAge}
+            </Text>
           </TouchableOpacity>
         </View>
         <Text style={[{textAlign:'center',marginTop:30,marginBottom:15},styles.textColor]}>Located in:</Text>
@@ -93,22 +126,17 @@ class LookingFor extends Component{
           <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
         </TouchableOpacity>
         <View style={[{alignItems:'center',marginTop:20}]}>
-          {/*<Button style={[{fontSize: 16, color: '#fff',lineHeight:30,overflow: 'hidden'},styles.button,borderRadius]}
-             styleDisabled={{color: 'red'}}
-             onPress={()=>Actions.main()}>
-             Next Step
-             </Button> */}
-             <TouchableOpacity style={[styles.button]} onPress={this._saveUserAppState}>
-               <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
-             </TouchableOpacity>
-           </View>
-           <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
-             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-             <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
-             <Image source={require('@images/activePage.png')} style={{resizeMode:'contain'}}></Image>
-           </View>
-         </View>
+          <TouchableOpacity style={[styles.button]} onPress={this._saveUserAppState}>
+            <Text style={{fontSize: 16, color: '#fff',marginTop:10,textAlign:'center'}}>Next Step</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{flexDirection:'row',flex:1,justifyContent:'center',marginTop:20}}>
+          <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+          <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+          <Image source={require('@images/pager.png')} style={{resizeMode:'contain',marginRight:10}}></Image>
+          <Image source={require('@images/activePage.png')} style={{resizeMode:'contain'}}></Image>
+        </View>
+      </View>
     )
   }
 }
@@ -169,10 +197,11 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    dispatchUpdateCriteria: options => dispatch(updateLookingForCriteriaAction(options))
   };
 };
 
-export default  connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(LookingFor);

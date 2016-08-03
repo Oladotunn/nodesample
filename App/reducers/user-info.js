@@ -3,6 +3,7 @@ import {
   UPDATE_USER_BIO,
   UPDATE_USER_FLAG,
   UPDATE_USER_LIKE,
+  UPDATE_LOOKINGFOR_CRITERIA,
   HYDRATE_USER,
 } from '../actions';
 
@@ -22,6 +23,12 @@ const defaultState = {
     {},
     {},
   ],
+  lookingFor: {
+    gender: 'Women',
+    minAge: 18,
+    maxAge: 22,
+    located: 'Houston, TX',
+  },
   interests: {
     likes: [
       'Sports',
@@ -44,8 +51,9 @@ const defaultState = {
 
 const userInfo = (state = defaultState, action) => {
   const {
-    flags: oldFlags,
     interests,
+    flags: oldFlags,
+    lookingFor: oldLookingFor
   } = state;
 
   switch(action.type) {
@@ -63,6 +71,17 @@ const userInfo = (state = defaultState, action) => {
       return {
         ...state,
         flags: newFlagState, 
+      }
+    case UPDATE_LOOKINGFOR_CRITERIA: 
+      if (!_.has(oldLookingFor,action.criteria)) return state;
+      const updateCriteria = {};
+      updateCriteria[action.criteria] = action.value;
+      return {
+        ...state,
+        lookingFor: {
+          ...oldLookingFor,
+          ...updateCriteria,
+        }
       }
     case UPDATE_USER_LIKE: 
       const {chosenLikes: oldChosenLikes} = interests;

@@ -25,7 +25,7 @@ import Button from 'react-native-button';
 import SwipeableViews from 'react-swipeable-views/lib/index.native.animated';
 import AboutDetail from './aboutDetails'
 import ThirdView from './whatDoYouLike'
-import FourthView from './lookingFor'
+import LookingFor from './lookingFor'
 import Picker from 'react-native-picker'
 import styles from './styles';
 import _ from 'lodash';
@@ -35,6 +35,7 @@ import {
   initProfilePictureAction,
   addProfilePictureAction,
   deleteProfilePictureAction,
+  updateLookingForCriteriaAction,
 } from '../../action-creators';
 
 let windowWidth = Dimensions.get('window').width;
@@ -51,6 +52,7 @@ class ProfileSetUp extends Component {
     this._getCoverPhoto = _.bind(this._getCoverPhoto, this);
     this._buildColumn = _.bind(this._buildColumn, this);
     this._getPlusElement = _.bind(this._getPlusElement, this);
+    this._updateAge = _.bind(this._updateAge, this);
     this._removeProfilePicture = _.bind(this._removeProfilePicture, this);
     this._addProfilePicture = _.bind(this._addProfilePicture, this);
     this._getSubProfilePictures = _.bind(this._getSubProfilePictures, this);
@@ -62,6 +64,17 @@ class ProfileSetUp extends Component {
 
   _addProfilePicture() {
     this.props.dispatchAddProfilePicture();
+  }
+
+  _updateAge(key, age) {
+    const { lookingFor } = this.props.userInfo;
+    if (key === 'minAge' && age > lookingFor.maxAge) return false;
+    if (key === 'maxAge' && age < lookingFor.minAge) return false;
+
+    this.props.dispatchUpdateCriteria({
+      criteria: key,
+      value: age,
+    });
   }
 
   _getCoverPhoto(source) {
@@ -232,7 +245,7 @@ class ProfileSetUp extends Component {
                      <ThirdView callbackParent={this.thirdViewNext.bind(this)}/>
                    </View>
                    <View>
-                     <FourthView picker={this.picker} picker2={this.picker2} firstAge={this.state.firstAge} secondAge={this.state.secondAge}/>
+                     <LookingFor picker={this.picker} picker2={this.picker2} />
                    </View>
                  </SwipeableViews>
                </View>
@@ -243,14 +256,14 @@ class ProfileSetUp extends Component {
                pickerBtnText="done"
                showMask={true}
                ref={picker => this.picker = picker}
-               onPickerDone={(data)=> this.setState({firstAge:data[0]})}
+               onPickerDone={data => this._updateAge('minAge', data[0])}
                style={{
                  height: 300,
                  bottom: 0, position: 'absolute'
                }}
                showDuration={300}
                pickerData={[18,19,20,21,22,23,24,25,26,27,28,30]}
-               selectedValue={this.state.firstAge}
+               selectedValue={this.props.userInfo.lookingFor.minAge}
              />
              <Picker
                pickerTitle="Select Age"
@@ -258,14 +271,14 @@ class ProfileSetUp extends Component {
                pickerBtnText="done"
                showMask={true}
                ref={picker2 => this.picker2 = picker2}
-               onPickerDone={(data)=> this.setState({secondAge:data[0]})}
+               onPickerDone={data => this._updateAge('maxAge', data[0])}
                style={{
                  height: 300,
                  bottom: 0, position: 'absolute'
                }}
                showDuration={300}
                pickerData={[18,19,20,21,22,23,24,25,26,27,28,30]}
-               selectedValue={this.state.secondAge}
+               selectedValue={this.props.userInfo.lookingFor.maxAge}
              />
            </Container>
       )
@@ -282,6 +295,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatchAddProfilePicture: () => dispatch(addProfilePictureAction()),
     dispatchInitProfilePictures: profilePictures => dispatch(initProfilePictureAction(profilePictures)),
     dispatchDeleteProfilePicture: url => dispatch(deleteProfilePictureAction(url)),
+    dispatchUpdateCriteria: options => dispatch(updateLookingForCriteriaAction(options))
   };
 };
 

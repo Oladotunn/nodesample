@@ -8,6 +8,7 @@ import {
   UPDATE_FB_CREDS,
   HYDRATE_FB,
   UPDATE_USER_BIO,
+  UPDATE_LOOKINGFOR_CRITERIA,
   UPDATE_USER_FLAG,
   UPDATE_USER_LIKE,
   HYDRATE_USER,
@@ -34,6 +35,14 @@ const updateUserLikeAction = like => {
     like,
   };
 };
+
+const updateLookingForCriteriaAction = ({ criteria, value }) => {
+  return {
+    type: UPDATE_LOOKINGFOR_CRITERIA,
+    criteria,
+    value,
+  };
+}
 
 const hydrateUserAction = userAppState => {
   return {
@@ -115,6 +124,7 @@ export {
   updateFbReadyAction,
   hydrateFbAction,
   updateUserBioAction,
+  updateLookingForCriteriaAction,
   updateUserFlagAction,
   updateUserLikeAction,
   hydrateUserAction,

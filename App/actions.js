@@ -12,6 +12,7 @@ const HYDRATE_FB = 'HYDRATE_FB';
 const UPDATE_USER_BIO = 'updateUserBio';
 const UPDATE_USER_FLAG = 'updateUserFlag';
 const UPDATE_USER_LIKE = 'updateUserLike';
+const UPDATE_LOOKINGFOR_CRITERIA = 'updateLookingForCriteria';
 const HYDRATE_USER = 'hydrateUser';
 
 export {
@@ -25,6 +26,7 @@ export {
   UPDATE_FB_READY,
   HYDRATE_FB,
   UPDATE_USER_BIO,
+  UPDATE_LOOKINGFOR_CRITERIA,
   UPDATE_USER_FLAG,
   UPDATE_USER_LIKE,
   HYDRATE_USER,

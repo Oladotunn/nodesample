@@ -42,6 +42,16 @@ class ProfilePage extends Component {
   _getUserBio() {
     return this.props.userInfo.bio.text;
   }
+  _getFlags() {
+    const {flags} = this.props.userInfo;
+    return _.map(flags, flag => {
+      if (!flag.name) return null;
+      const source = {uri: flag.picture};
+      return (
+        <Image key={flag.name} source={source} style={[styles.flag,borderRadius]}></Image>
+      );
+    });
+  }
 
   render() {
     return (
@@ -61,9 +71,7 @@ class ProfilePage extends Component {
             <Text style={{color:'#fff',fontSize:20}}>Houston,TX</Text>
           </View>
           <View style={styles.countries}>
-            <Image source={require('@images/country/angola.png')} style={[styles.flag,borderRadius]}></Image>
-            <Image source={require('@images/country/barbados.png')} style={[styles.flag,borderRadius]}></Image>
-            <Image source={require('@images/country/brazil.png')} style={[styles.flag,borderRadius]}></Image>
+            {this._getFlags()}
           </View>
         </View>
         <View style={{flex:7,paddingBottom:100}}>

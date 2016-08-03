@@ -32,11 +32,13 @@ class WhatDoYouLike extends Component{
   constructor(props){
     super(props)
   }
+
   _renderLikes(index, end) {
     const { likes, chosenLikes } = this.props.userInfo.interests;
     return _.map(likes.slice(index, end), (like, index) => {
       return (
         <TouchableOpacity
+          key={like}
           style={[styles.checkboxButton,chosenLikes.includes(like) ? styles.activeButton:null]}
           onPress={()=> this.props.dispatchUpdateUserLike(like)}>
           <Text style={[chosenLikes.includes(like) ? styles.activeButtonTextColor:styles.buttonTextColor]}>
@@ -46,6 +48,7 @@ class WhatDoYouLike extends Component{
       )
     });
   }
+
   render() {
     return (
       <View>

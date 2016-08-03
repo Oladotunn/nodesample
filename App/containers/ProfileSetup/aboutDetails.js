@@ -59,7 +59,6 @@ class AboutDetails extends Component{
 
   _renderFlags() {
     const { flags } = this.props.userInfo;
-    console.log(flags);
     return _.map(flags, (flag, index) => {
       if (!flag.name) return this._renderBlankFlag(index);
 
