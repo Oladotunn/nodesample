@@ -25,6 +25,8 @@ class GeographicPage extends Component {
     super(props)
     this.state = {showsCancelButton:false};
     this._renderAfricanCountries = _.bind(this._renderAfricanCountries, this);
+    this._renderCountries = _.bind(this._renderCountries, this);
+    this._renderAmericasCountries = _.bind(this._renderAmericasCountries, this);
     this._updateFlagData = _.bind(this._updateFlagData, this);
   }
 
@@ -40,9 +42,20 @@ class GeographicPage extends Component {
     Actions.pop();
   }
 
+  _renderAmericasCountries() {
+    const americas = _.filter(countryList.countries, country => {
+      return (country.continent === 'NA') || (country.continent === 'SA');
+    });
+    return this._renderCountries(americas);
+  }
+
   _renderAfricanCountries() {
     const africanCountries = _.sortBy(this._getAfricanCountries(), 'name');
-    return  _.map(africanCountries, (country,index) => {
+    return this._renderCountries(africanCountries);
+  }
+
+  _renderCountries(countries) {
+    return  _.map(countries, (country,index) => {
       const c = _.pickBy(countryList.countries, countryFromList => countryFromList.name === country.name); 
       const countryCode = _.keys(c)[0].toLowerCase();
       const picture = `http://www.geonames.org/flags/x/${countryCode}.gif`;
@@ -95,64 +108,7 @@ class GeographicPage extends Component {
                   The Americas
                 </Text>
               </TouchableOpacity>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Angola
-                </Text>
-                <Image  source={require('@images/country/angola.png')} style={[styles.flag]}></Image>
-
-              </View>
-              <View style={[styles.listItem]}>
-                <Text  style={[styles.listText]}>
-                  Barbados
-                </Text>
-                <Image  source={require('@images/country/barbados.png')} style={[styles.flag]}></Image>
-              </View>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Brazil
-                </Text>
-                <Image  source={require('@images/country/brazil.png')} style={[styles.flag]}></Image>
-
-              </View>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Colombia
-                </Text>
-                <Image  source={require('@images/country/colombia.png')} style={[styles.flag]}></Image>
-              </View>
-
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Cuba
-                </Text>
-                <Image  source={require('@images/country/cuba.png')} style={[styles.flag]}></Image>
-              </View>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Dominican Republic
-                </Text>
-              </View>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Haiti
-                </Text>
-              </View>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Jamaica
-                </Text>
-              </View>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  Trinidad and Tobago
-                </Text>
-              </View>
-              <View style={[styles.listItem]}>
-                <Text style={[styles.listText]}>
-                  United States
-                </Text>
-              </View>
+              {this._renderAmericasCountries()}
               <View style={[styles.listItem,styles.sectionHeader]}>
                 <Text style={[styles.boldFonts,styles.listText]}>
                   Africa

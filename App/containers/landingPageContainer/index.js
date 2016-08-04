@@ -53,6 +53,7 @@ class LandingPage extends Component{
         albums,
         gender,
       } = response;
+      console.log(response);
       const profilePictureAlbum = _.find(albums.data, data => data.name === 'Profile Pictures');
       this.props.dispatchUpdateProfileAlbumDetails(profilePictureAlbum);
       this.props.dispatchUpdateUserBio({

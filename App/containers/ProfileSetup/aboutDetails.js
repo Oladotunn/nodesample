@@ -38,8 +38,10 @@ class AboutDetails extends Component{
   constructor(props) {
     super(props);
     this._renderFlags = _.bind(this._renderFlags, this);
+    this._saveBio = _.bind(this._saveBio, this);
   }
-  containerTouched(event) {
+
+  _saveBio(event) {
     const { text } = event.nativeEvent;
 
     this.props.dispatchUserBio({ text });
@@ -75,7 +77,7 @@ class AboutDetails extends Component{
 
   render() {
     return (
-      <View onStartShouldSetResponder={this.containerTouched.bind(this)} style={{paddingBottom:10}}>
+      <View onStartShouldSetResponder={() => true} style={{paddingBottom:10}}>
         <View style={{paddingLeft:10}}>
           <Image source={require('@images/trible_logo.png')} style={styles.logo}></Image>
         </View>
@@ -90,7 +92,7 @@ class AboutDetails extends Component{
             placeholder="Type your bio here"
             defaultValue={this.props.userInfo.bio.text}
             ref="textInput"
-            onSubmitEditing={this.containerTouched.bind(this)}
+            onEndEditing={this._saveBio}
             blurOnSubmit={true}/>
         </View>
         <View style={{alignItems:'center',marginTop:20,marginBottom:20}}>

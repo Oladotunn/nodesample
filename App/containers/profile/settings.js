@@ -3,22 +3,39 @@ import { View, Text,StyleSheet,Image,ScrollView,Platform} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from 'react-native-button';
-let topPadding;
-let bottomPadding;
+import { connect } from 'react-redux';
+import _ from 'lodash';
+
+let topPadding = 64
+let bottomPadding = 50
+
 if(Platform.OS =='android'){
   topPadding = 54
   bottomPadding = 100
-}else{
-  topPadding = 64
-  bottomPadding = 50
 }
 const { FBLoginManager } = require('react-native-facebook-login');
 
-export default class Settings extends Component {
+class Settings extends Component {
   _logout() {
     FBLoginManager.logout(() => {
       Actions.landingPage();
     });
+  }
+
+  _getGender() {
+    const { gender } = this.props.userInfo.bio;
+    if (!gender) return 'N/A';
+    return _.capitalize(gender);
+  }
+
+  _getAgePreference() {
+    const { lookingFor } = this.props.userInfo;
+    return `${lookingFor.minAge} to ${lookingFor.maxAge}`;
+  }
+
+  _getGenderPreference() {
+    const { lookingFor } = this.props.userInfo;
+    return `${lookingFor.gender}`;
   }
 
   render() {
@@ -29,11 +46,11 @@ export default class Settings extends Component {
           <View style={[styles.title]}><Text>Preferences</Text></View>
           <View style={[styles.listItem]}>
             <Text>I am a</Text>
-            <Text style={{color:'#d91434'}}>Man</Text>
+            <Text style={{color:'#d91434'}}>{this._getGender()}</Text>
           </View>
           <View style={[styles.listItem]}>
             <Text>Interested in</Text>
-            <Text style={{color:'#d91434'}}>Women</Text>
+            <Text style={{color:'#d91434'}}>{this._getGenderPreference()}</Text>
           </View>
           <View style={[styles.listItem]}>
             <Text>Located in</Text>
@@ -45,7 +62,7 @@ export default class Settings extends Component {
           </View>
           <View style={[styles.listItem]}>
             <Text>Aged</Text>
-            <Text style={{color:'#d91434'}}>24 to 27</Text>
+            <Text style={{color:'#d91434'}}>{this._getAgePreference()}</Text>
           </View>
           <View style={[styles.borderTop]}>
             <View style={[styles.title]}><Text>Notifications</Text></View></View>
@@ -84,29 +101,44 @@ export default class Settings extends Component {
   }
 }
 const styles = StyleSheet.create({
-    title:{
-        paddingTop:15,
-        paddingLeft:15,
-        paddingBottom:10,
-        backgroundColor:'#f4f4f4'
+  title:{
+    paddingTop:15,
+    paddingLeft:15,
+    paddingBottom:10,
+    backgroundColor:'#f4f4f4'
 
-    },
-    listItem:{
-        padding:15,
-        borderTopWidth:1,
-        borderColor:'#d1d1d1',
-        flexDirection:'row',
-        justifyContent:'space-between'
-    },
-    borderTop:{
-        borderTopWidth:1,
-        borderColor:'#d1d1d1',
-    },
-    linearGradient: {
-        flex: 1,
-        paddingLeft: 15,
-        paddingRight: 15,
-        borderRadius: 5
-    }
+  },
+  listItem:{
+    padding:15,
+    borderTopWidth:1,
+    borderColor:'#d1d1d1',
+    flexDirection:'row',
+    justifyContent:'space-between'
+  },
+  borderTop:{
+    borderTopWidth:1,
+    borderColor:'#d1d1d1',
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5
+  }
 
 })
+
+const mapStateToProps = state => {
+  return {
+    ...state,
+  }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Settings);
