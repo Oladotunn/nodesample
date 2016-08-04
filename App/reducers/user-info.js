@@ -16,7 +16,6 @@ const defaultState = {
     ethnicity: '',
     occupation: '',
     religion: '',
-    likes: [],
   },
   flags: [
     {},

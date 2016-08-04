@@ -62,21 +62,37 @@ export default class App extends Component {
                 navigationBarStyle={primaryThemeColor}
                 titleStyle={{color:'#fff'}}
                 icon={TabIcon} >
-                <Scene key="profileMain" component={ProfilePage} rightTitle='Edit' title="TRiBL" onRight={()=> Actions.profileEdit({type:'replace'})} rightButtonTextStyle={{color:'#fff'}}/>
-                <Scene key="profileEdit" component={EditProfilePage} rightTitle='Save' title="TRiBL" customTitle="Edit" onRight={()=> Actions.profileMain({type:'replace'})} rightButtonTextStyle={{color:'#fff'}}/>
-
+                <Scene key="profileMain" component={ProfilePage}
+                  rightTitle='Edit' title="TRiBL"
+                  onRight={()=> Actions.profileEdit({type:'replace'})} rightButtonTextStyle={{color:'#fff'}}/>
+                <Scene key="profileEdit" component={EditProfilePage}
+                  rightTitle='Save' title="TRiBL" customTitle="Edit"
+                  onRight={()=> Actions.profileMain({type:'replace'})} rightButtonTextStyle={{color:'#fff'}}/>
               </Scene>
-              <Scene key="match" navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff'}} title="Match" icon={TabIcon} customTitle="TRiBL">
+              <Scene key="match" navigationBarStyle={primaryThemeColor}
+                titleStyle={{color:'#fff'}} title="Match" icon={TabIcon} customTitle="TRiBL">
                 <Scene key="matchPreview"  component={MatchPage}  customTitle="TRiBL" />
-                <Scene key="matchDetail" component={SingleMatch} customTitle="TRiBL" onRight={()=>{}} rightButtonImage="" rightButtonIconStyle={{width:30,height:30}}  hideNavBar={false} backButtonTextStyle={whiteFont} backTitle="Back" backButtonImage={require('@images/Back-50.png')}/>
+                <Scene key="matchDetail" component={SingleMatch} customTitle="TRiBL"
+                  onRight={()=>{}} rightButtonImage=""
+                  rightButtonIconStyle={{width:30,height:30}}  hideNavBar={false} 
+                  backButtonTextStyle={whiteFont} backTitle="Back"
+                  backButtonImage={require('@images/Back-50.png')}/>
               </Scene>
-              <Scene key="messages"  title="Messages"   navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff'}} icon={TabIcon}>
+              <Scene key="messages"  title="Messages"
+                navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff'}} icon={TabIcon}>
                 <Scene key="chatList" component={Messages} title="Messages" />
-                <Scene key="singleChat" component={SingleChat} onRight={()=>{}} rightButtonImage="" rightButtonIconStyle={{width:30,height:30,borderRadius:15}} title="Messages"  hideNavBar={false} backButtonTextStyle={whiteFont} backTitle="Back" backButtonImage={require('@images/Back-50.png')}/>
+                <Scene key="singleChat" component={SingleChat}
+                  onRight={()=>{}} rightButtonImage=""
+                  rightButtonIconStyle={{width:30,height:30,borderRadius:15}} title="Messages"
+                  hideNavBar={false} backButtonTextStyle={whiteFont} backTitle="Back"
+                  backButtonImage={require('@images/Back-50.png')}/>
               </Scene>
-              <Scene key="settings" navigationBarStyle={primaryThemeColor} titleStyle={{color:'#fff',fontSize:20}}  component={Settings} title="Settings" icon={TabIcon}/>
+              <Scene key="settings" navigationBarStyle={primaryThemeColor}
+                titleStyle={{color:'#fff',fontSize:20}}
+                component={Settings} title="Settings" icon={TabIcon}/>
             </Scene>
           </Scene>
+          {/*  End root scence */}
         </Scene>
       </Router>
     </Provider>

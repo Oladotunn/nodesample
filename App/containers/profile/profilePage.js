@@ -22,12 +22,36 @@ if(Platform.OS =='android'){
 }
 
 class ProfilePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+  _getLargePic(picId) {
+    const {token} = this.props.facebook.credentials;
+    fetch(`https://graph.facebook.com/v2.7/${picId}/picture?redirect=false&access_token=${token}`)
+    .then(data => data.json())
+    .then( ({ data }) => {
+      const oldState = this.state;
+      oldState[picId] = data.url;
+      this.setState({ ...oldState })
+    })
+    .catch(err => {
+      console.log(`Error here: ${err}`)
+    })
+  }
+
+  componentWillMount() {
+    const { chosenPhotos } = this.props.profilePictures;
+    _.forEach(chosenPhotos, photo => this._getLargePic(photo.id));
+  }
+
   _renderProfilePictures() {
     const { chosenPhotos } = this.props.profilePictures;
     return _.map(chosenPhotos, photo => {
       return (
         <View key={photo.picture}>
-          <Image source={{uri: photo.picture }}
+          <Image source={{uri: this.state[photo.id] }}
             style={[{width: null, height: null,flex:1},styles.sliderImages]} />
         </View>
       );

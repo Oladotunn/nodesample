@@ -3,6 +3,7 @@ import {
   UPDATE_FB_TOKEN,
   UPDATE_FB_CREDS,
   UPDATE_FB_READY,
+  HYDRATE_FB,
 } from '../actions';
 
 const defaultState = {
@@ -26,6 +27,8 @@ const facebook = (state = defaultState, action) => {
         ...state,
         ready: action.state,
       };
+    case HYDRATE_FB: 
+      return action.userAppState;
     default: 
       return state;
   }
