@@ -24,6 +24,11 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		25BDFCCA7B9F4EB0A5C657BF /* Andale Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEC7F80D42BD4F80AF949B5A /* Andale Mono.ttf */; };
+		5DDDBE001D53E1D8005BE703 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DDDBDFC1D53E1D8005BE703 /* Fabric.framework */; };
+		5DDDBE011D53E1D8005BE703 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DDDBDFD1D53E1D8005BE703 /* TwitterKit.framework */; };
+		5DDDBE021D53E1D8005BE703 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5DDDBDFE1D53E1D8005BE703 /* TwitterKitResources.bundle */; };
+		5DDDBE031D53E1D8005BE703 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DDDBDFF1D53E1D8005BE703 /* TwitterCore.framework */; };
+		5DDDBE061D53E363005BE703 /* TwitterSignin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DDDBE051D53E363005BE703 /* TwitterSignin.m */; };
 		5DE66CE41D46F0400096199F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE66CE11D46F0400096199F /* FBSDKCoreKit.framework */; };
 		5DE66CE51D46F0400096199F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE66CE21D46F0400096199F /* FBSDKLoginKit.framework */; };
 		5DE66CE61D46F0400096199F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE66CE31D46F0400096199F /* FBSDKShareKit.framework */; };
@@ -217,6 +222,12 @@
 		4DB96FE14EAD4A1F85917E65 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		56A0F9DE553E4D599E7C528D /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
 		59457B67D4584CA389C69958 /* libRCTFBLogin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBLogin.a; sourceTree = "<group>"; };
+		5DDDBDFC1D53E1D8005BE703 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		5DDDBDFD1D53E1D8005BE703 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		5DDDBDFE1D53E1D8005BE703 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		5DDDBDFF1D53E1D8005BE703 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
+		5DDDBE041D53E363005BE703 /* TwitterSignin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterSignin.h; path = "../node_modules/react-native-twitter-signin/ios/TwitterSignin/TwitterSignin.h"; sourceTree = "<group>"; };
+		5DDDBE051D53E363005BE703 /* TwitterSignin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterSignin.m; path = "../node_modules/react-native-twitter-signin/ios/TwitterSignin/TwitterSignin.m"; sourceTree = "<group>"; };
 		5DE66CE11D46F0400096199F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		5DE66CE21D46F0400096199F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		5DE66CE31D46F0400096199F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKShareKit.framework"; sourceTree = "<group>"; };
@@ -265,10 +276,12 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				5DE66CE41D46F0400096199F /* FBSDKCoreKit.framework in Frameworks */,
+				5DDDBE001D53E1D8005BE703 /* Fabric.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				91D63A8BC3BD4CF99813BED0 /* libAppHubTestUtils.a in Frameworks */,
+				5DDDBE011D53E1D8005BE703 /* TwitterKit.framework in Frameworks */,
 				5DE66CE61D46F0400096199F /* FBSDKShareKit.framework in Frameworks */,
 				6153626D8F1A48C1A993A846 /* libRCTFBLogin.a in Frameworks */,
 				5DE66CE51D46F0400096199F /* FBSDKLoginKit.framework in Frameworks */,
@@ -277,6 +290,7 @@
 				7B822D0FCD9E472B94D820A8 /* libRNSearchBar.a in Frameworks */,
 				9F3FDED6CBD74B2BA62A0524 /* libRNSpinkit.a in Frameworks */,
 				6BFBDF51C56F4E93B1E1EC29 /* libRNTableView.a in Frameworks */,
+				5DDDBE031D53E1D8005BE703 /* TwitterCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +460,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5DDDBE041D53E363005BE703 /* TwitterSignin.h */,
+				5DDDBE051D53E363005BE703 /* TwitterSignin.m */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -478,6 +494,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5DDDBDFC1D53E1D8005BE703 /* Fabric.framework */,
+				5DDDBDFD1D53E1D8005BE703 /* TwitterKit.framework */,
+				5DDDBDFE1D53E1D8005BE703 /* TwitterKitResources.bundle */,
+				5DDDBDFF1D53E1D8005BE703 /* TwitterCore.framework */,
 				5DE66CEA1D46F1100096199F /* libz.tbd */,
 				5DE66CE71D46F0F60096199F /* SystemConfiguration.framework */,
 				5DE66CE11D46F0400096199F /* FBSDKCoreKit.framework */,
@@ -550,6 +570,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				5DDDBDFB1D53E119005BE703 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -812,6 +833,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				25BDFCCA7B9F4EB0A5C657BF /* Andale Mono.ttf in Resources */,
 				B0F11B51A13A431882EC217C /* Arial Black.ttf in Resources */,
+				5DDDBE021D53E1D8005BE703 /* TwitterKitResources.bundle in Resources */,
 				BCEEBC3AFBDF4016997EDF87 /* Arial.ttf in Resources */,
 				DD1245DE502E47D6A36FA2CD /* Chalkboard.ttc in Resources */,
 				88520BA418674F63B8C1B283 /* Cochin.ttc in Resources */,
@@ -842,6 +864,19 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		5DDDBDFB1D53E119005BE703 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 50d386af8d7b74c8627c0060619a1e5615442fe5 a58eb129d7acb14ef1f2a8e2bac0cdc3253fd15501ba75fcfc7bb2b83bfb083c";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -857,6 +892,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DDDBE061D53E363005BE703 /* TwitterSignin.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -941,7 +977,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK/**",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -955,6 +994,7 @@
 					"$(SRCROOT)/../node_modules/react-native-tableview/RNTableView",
 				);
 				INFOPLIST_FILE = trible/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -971,7 +1011,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK/**",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -985,6 +1028,7 @@
 					"$(SRCROOT)/../node_modules/react-native-tableview/RNTableView",
 				);
 				INFOPLIST_FILE = trible/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",

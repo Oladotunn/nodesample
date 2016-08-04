@@ -13,6 +13,9 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
+
 
 #import "AppHub.h"
 
@@ -21,6 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [Fabric with:@[[Twitter class]]];
   [AppHub setApplicationID:@"GoDW6bi0MjFzl3JcSQ7S"];
   NSURL *jsCodeLocation;
   
@@ -38,7 +42,7 @@
    * on the same Wi-Fi network.
    */
   
-  jsCodeLocation = [NSURL URLWithString:@"http://10.0.0.48:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [NSURL URLWithString:@"http://10.1.10.48:8081/index.ios.bundle?platform=ios&dev=true"];
   
   /**
    * OPTION 2

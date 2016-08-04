@@ -4,27 +4,103 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   Image,
   StatusBar,
+  NativeModules,
   Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager';
 import {borderRadius} from '@theme/colors'
 import { connect } from 'react-redux';
+import EditProfileInputModal from './edit-profile-input-dialog';
 import moment from 'moment';
+import {
+  updateUserEthnicityAction,
+  updateUserReligionAction,
+  updateUserTwitterAction,
+} from '../../action-creators';
+const { TwitterSignin } = NativeModules;
 
 let topPadding = 64;
 if(Platform.OS =='android'){
   topPadding = 54
 }
+
 class EditProfilePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  _getLargePic(picId) {
+    const {token} = this.props.facebook.credentials;
+    fetch(`https://graph.facebook.com/v2.7/${picId}/picture?redirect=false&access_token=${token}`)
+    .then(data => data.json())
+    .then( ({ data }) => {
+      const oldState = this.state;
+      oldState[picId] = data.url;
+      this.setState({ ...oldState })
+    })
+    .catch(err => {
+      console.log(`Error here: ${err}`)
+    })
+  }
+
+  _saveToStore() {
+    const {
+      twitter,
+      instagram,
+      ethnicity,
+      religion,
+    } = this.state;
+
+    if (twitter) this.props.dispatchUpdateTwitter(twitter);
+    if (religion) this.props.dispatchUpdateReligion(religion);
+    if (ethnicity) this.props.dispatchUpdateReligion(ethnicity);
+  }
+
+  _getInstagramHandle() {
+
+  }
+
+  _getTwitterHandle() {
+    TwitterSignin.logIn(
+      'fssXaegjxfYwUNlK070WUBejv',
+      'TAXZncan8E2ISC6holmiHXOsepjSCFQLiD3dhnR4FzKix37QAJ',
+      (error, loginData) => {
+        if (!error) {
+          this.setState({ twitter: loginData });
+        } else {
+          Alert.alert('Invalid login', 'Unable to login');
+        }
+    });
+  }
+
+  _storeEthnicity(event) {
+    const { text: ethnicity } = event.nativeEvent;
+    this.setState({ ethnicity });
+    Actions.pop();
+  }
+
+  _storeReligion(event) {
+    const { text: religion } = event.nativeEvent;
+    this.setState({ religion });
+    Actions.pop();
+  }
+
+  componentWillMount() {
+    const { chosenPhotos } = this.props.profilePictures;
+    _.forEach(chosenPhotos, photo => this._getLargePic(photo.id));
+  }
+
   _renderProfilePictures() {
     const { chosenPhotos } = this.props.profilePictures;
     return _.map(chosenPhotos, photo => {
       return (
         <View key={photo.picture}>
-          <Image source={{uri: photo.picture }}
+          <Image source={{uri: this.state[photo.id] }}
             style={[{width: null, height: null,flex:1},styles.sliderImages]} />
         </View>
       );
@@ -33,7 +109,7 @@ class EditProfilePage extends Component {
 
   _getUserDetails() {
     const { name, birthday } = this.props.userInfo.bio;
-    const age = moment().year() - moment(birthday).year();
+    const age = moment().year() - moment(new Date(birthday)).year();
     return `${name}, ${age}`;
   }
   _getInterests() {
@@ -84,20 +160,36 @@ class EditProfilePage extends Component {
             <Text style={[styles.fontColor]}>{this._getUserBio()}</Text>
           </View>
           <View style={{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}}>
-            <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
-              <Image source={require('@images/Instagram-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>
+            <TouchableOpacity
+              onPress={this._getInstagramHandle}
+              style={{
+                flex:1,
+                flexDirection:'row',
+                paddingLeft:15,
+                paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
+              <Image source={require('@images/Instagram-Filled-50.png')}
+                style={{width:20,height:20,marginRight:10}}></Image>
               <Text style={[styles.fontColor,styles.editLink]}>Add Account</Text>
-            </View>
+            </TouchableOpacity>
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15}}>
-              <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>
-              <Text style={[styles.fontColor,styles.editLink]}>Add Account</Text>
+              <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}>
+              </Image>
+              <Text onPress={this._getTwitterHandle} style={[styles.fontColor,styles.editLink]}>
+                Add Account
+              </Text>
             </View>
           </View>
           <View style={styles.list}>
             <View style={styles.listItem}>
               <Text>ETHNICITY</Text>
-              <Text style={[styles.fontColor,styles.editLink]}>Edit ethnicity</Text>
-            </View>
+              <Text style={[styles.fontColor,styles.editLink]}
+                onPress={() => Actions.customModal({ 
+                  component: () => <EditProfileInputModal placeholder='Ethnicity'
+                    saveAction={this._storeEthnicity} />
+                  })}>
+                  Edit ethnicity
+                </Text>
+              </View>
             <View style={styles.listItem}>
               <Text>EDUCATION</Text>
               <Text style={[styles.fontColor]}>Howard University</Text>
@@ -108,7 +200,14 @@ class EditProfilePage extends Component {
             </View>
             <View style={styles.listItem}>
               <Text>RELIGION</Text>
-              <Text style={[styles.fontColor,styles.editLink]}>Edit religion</Text>
+              <Text style={[styles.fontColor,styles.editLink]}
+                onPress={() => Actions.customModal({ 
+                  component: () => <EditProfileInputModal placeholder='Ethnicity'
+                    saveAction={this._storeReligion} />
+                  })}
+                >
+                  Edit religion
+                </Text>
             </View>
             <View style={styles.listItem}>
               <Text>INTERESTS</Text>
@@ -187,6 +286,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    dispatchUpdateEthnicity: ethnicity => dispatch(updateUserEthnicityAction(ethnicity)),
+    dispatchUpdateReligion: religion => dispatch(updateUserReligionAction(religion)),
   };
 };
 

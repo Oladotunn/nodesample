@@ -2,6 +2,9 @@ import _ from 'lodash';
 import {
   UPDATE_USER_BIO,
   UPDATE_USER_FLAG,
+  UPDATE_USER_TWITTER,
+  UPDATE_USER_ETHNICITY,
+  UPDATE_USER_RELIGION,
   UPDATE_USER_LIKE,
   UPDATE_LOOKINGFOR_CRITERIA,
   HYDRATE_USER,
@@ -45,7 +48,9 @@ const defaultState = {
       'Video Games',
     ],
     chosenLikes: [],
-  }
+  },
+  twitter: null,
+  instagram: null,
 };
 
 const userInfo = (state = defaultState, action) => {
@@ -63,6 +68,21 @@ const userInfo = (state = defaultState, action) => {
           ...state.bio,
           ...action.bio,
         }
+      }
+    case UPDATE_USER_TWITTER: 
+      return {
+        ...state,
+        twitter: action.twitter,
+      }
+    case UPDATE_USER_ETHNICITY: 
+      return {
+        ...state,
+        ethnicity: _.capitalize(action.ethnicity),
+      }
+    case UPDATE_USER_RELIGION: 
+      return {
+        ...state,
+        religion: _.capitalize(action.religion),
       }
     case UPDATE_USER_FLAG: 
       const newFlagState = oldFlags.slice(0);

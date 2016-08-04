@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Scene, Reducer, Router, Switch, TabBar, Modal, Schema, Actions} from 'react-native-router-flux'
+import {Scene, Reducer, Router, Switch, TabBar, Modal, Schema, Actions} from 'react-native-router-flux';
 
 import LandingPage from './containers/landingPageContainer/index';
 import PageOne from './containers/PageOne';
@@ -9,6 +9,7 @@ import ProfileAbout from './containers/ProfileSetup/aboutDetails.js';
 import Flags from './containers/flags/index';
 import {primaryFontColor,primaryThemeColor,whiteFont} from '@theme/colors';
 import TabIcon from '@components/tabIcon';
+import ErrorModal from '@components/error-modal';
 import ProfilePage from '@containers/profile/profilePage';
 import MatchPage from '@containers/profile/match';
 import DetailProfilePage from '@containers/profile/detailProfilePage';
@@ -93,6 +94,8 @@ export default class App extends Component {
             </Scene>
           </Scene>
           {/*  End root scence */}
+          <Scene key='customModal' component={ErrorModal} />
+          <Scene key='errorModal' component={ErrorModal}/>
         </Scene>
       </Router>
     </Provider>

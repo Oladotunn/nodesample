@@ -58,11 +58,19 @@ class ProfilePage extends Component {
     })
   }
 
+  _getTwitterHandle() {
+    const { twitter } = this.props;
+    if (!twitter) return 'Add Account';
+
+    return `@${twitter.userName}`;
+  }
+
   _getUserDetails() {
     const { name, birthday } = this.props.userInfo.bio;
-    const age = moment().year() - moment(birthday).year();
+    const age = moment().year() - moment(new Date(birthday)).year();
     return `${name}, ${age}`;
   }
+
   _getInterests() {
     const { chosenLikes } = this.props.userInfo.interests;
     return _.map(chosenLikes, like => {
@@ -75,6 +83,7 @@ class ProfilePage extends Component {
   _getUserBio() {
     return this.props.userInfo.bio.text;
   }
+
   _getFlags() {
     const {flags} = this.props.userInfo;
     return _.map(flags, flag => {
@@ -117,7 +126,9 @@ class ProfilePage extends Component {
             </View>
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15}}>
               <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>
-              <Text style={styles.fontColor}>@davidOK</Text>
+              <Text style={styles.fontColor}>
+                {this._getTwitterHandle}
+              </Text>
             </View>
           </View>
           <View style={styles.list}>

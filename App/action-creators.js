@@ -10,6 +10,9 @@ import {
   UPDATE_USER_BIO,
   UPDATE_LOOKINGFOR_CRITERIA,
   UPDATE_USER_FLAG,
+  UPDATE_USER_ETHNICITY,
+  UPDATE_USER_RELIGION,
+  UPDATE_USER_TWITTER,
   UPDATE_USER_LIKE,
   HYDRATE_USER,
 } from './actions';
@@ -18,6 +21,27 @@ const updateUserBioAction = bio => {
   return {
     type: UPDATE_USER_BIO,
     bio,
+  };
+};
+
+const updateUserEthnicityAction = ethnicity => {
+  return {
+    type: UPDATE_USER_ETHNICITY,
+    ethnicity,
+  };
+};
+
+const updateUserTwitterAction = twitter => {
+  return {
+    type: UPDATE_USER_TWITTER,
+    twitter,
+  };
+};
+
+const updateUserReligionAction = religion => {
+  return {
+    type: UPDATE_USER_RELIGION,
+    religion,
   };
 };
 
@@ -124,6 +148,9 @@ export {
   updateFbReadyAction,
   hydrateFbAction,
   updateUserBioAction,
+  updateUserTwitterAction,
+  updateUserEthnicityAction,
+  updateUserReligionAction,
   updateLookingForCriteriaAction,
   updateUserFlagAction,
   updateUserLikeAction,
