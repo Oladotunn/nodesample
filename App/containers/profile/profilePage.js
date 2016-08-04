@@ -65,11 +65,27 @@ class ProfilePage extends Component {
     return `@${twitter.userName}`;
   }
 
+  _getInstagramHandle() {
+    const { instagram } = this.props.userInfo;
+    if (!instagram) return 'Add Account';
+
+    return `@${instagram.userName}`;
+  }
+
   _getEthnicity() {
     const { ethnicity } = this.props.userInfo;
     if (!ethnicity) return 'Add Ethnicity';
 
     return ethnicity;
+  }
+
+  _getWork() {
+    const { work } = this.props.userInfo;
+    console.log(work);
+    if (!work) return 'N/A';
+    return 'placeholder';
+
+    // return work;
   }
 
   _getReligion() {
@@ -146,11 +162,14 @@ class ProfilePage extends Component {
             <Text style={[{backgroundColor:'#FFFFFF'},styles.fontColor]}>{this._getUserBio()}</Text></View>
           <View style={{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}}>
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
-              <Image source={require('@images/Instagram-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>
-              <Text style={styles.fontColor}>@davidOK</Text>
+              <Image source={require('@images/Instagram-Filled-50.png')}
+                style={{width:20,height:20,marginRight:10}}>
+              </Image>
+              <Text style={styles.fontColor}>{this._getInstagramHandle()}</Text>
             </View>
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15}}>
-              <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>
+              <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}>
+              </Image>
               <Text style={styles.fontColor}>
                 {this._getTwitterHandle()}
               </Text>
@@ -167,7 +186,7 @@ class ProfilePage extends Component {
             </View>
             <View style={styles.listItem}>
               <Text>OCCUPATION</Text>
-              <Text style={[styles.fontColor]}>CEO</Text>
+              <Text style={[styles.fontColor]}>{this._getWork()}</Text>
             </View>
             <View style={styles.listItem}>
               <Text>RELIGION</Text>
@@ -197,7 +216,6 @@ class ProfilePage extends Component {
           </View>
         </View>
       </ScrollView>
-
     )
   }
   _renderDotIndicator() {

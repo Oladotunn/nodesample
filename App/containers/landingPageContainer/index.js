@@ -42,7 +42,7 @@ class LandingPage extends Component{
   }
 
   _getUserPictures(token) {
-    fetch(`https://graph.facebook.com/v2.7/me/?access_token=${token}&fields=name,birthday,education,work,albums`)
+    fetch(`https://graph.facebook.com/v2.7/me/?access_token=${token}&fields=name,gender,birthday,education,work,albums`)
     .then(data => data.json())
     .then(response => {
       const {
@@ -51,6 +51,7 @@ class LandingPage extends Component{
         education,
         work,
         albums,
+        gender,
       } = response;
       const profilePictureAlbum = _.find(albums.data, data => data.name === 'Profile Pictures');
       this.props.dispatchUpdateProfileAlbumDetails(profilePictureAlbum);
@@ -59,6 +60,7 @@ class LandingPage extends Component{
         birthday,
         education,
         work,
+        gender,
       });
       Actions.profileSetup();
     })
@@ -78,8 +80,7 @@ class LandingPage extends Component{
       'user_birthday'
     ], (error, data) => {
       if (!error) {
-        this.props.dispatchUpdateFbCreds(data.credentials);
-        this._getUserPictures(data.credentials.token);
+        this._hydrateUserAppState(data);
       } else {
         console.log("Error (Facebook): ", data);
       }
