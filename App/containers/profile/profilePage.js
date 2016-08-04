@@ -59,10 +59,35 @@ class ProfilePage extends Component {
   }
 
   _getTwitterHandle() {
-    const { twitter } = this.props;
+    const { twitter } = this.props.userInfo;
     if (!twitter) return 'Add Account';
 
     return `@${twitter.userName}`;
+  }
+
+  _getEthnicity() {
+    const { ethnicity } = this.props.userInfo;
+    if (!ethnicity) return 'Add Ethnicity';
+
+    return ethnicity;
+  }
+
+  _getReligion() {
+    const { religion } = this.props.userInfo;
+    if (!religion) return 'Add Religion';
+
+    return religion;
+  }
+
+  _getEducation() {
+    const { education } = this.props.userInfo.bio;
+    if (!education) return 'N/A';
+    const mostRecent = _.orderBy(education, entry => {
+      if (entry.year) return parseInt(entry.year.name);
+      return 0;
+    },'desc')[0];
+
+    return mostRecent.school.name;
   }
 
   _getUserDetails() {
@@ -127,18 +152,18 @@ class ProfilePage extends Component {
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15}}>
               <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}></Image>
               <Text style={styles.fontColor}>
-                {this._getTwitterHandle}
+                {this._getTwitterHandle()}
               </Text>
             </View>
           </View>
           <View style={styles.list}>
             <View style={styles.listItem}>
               <Text>ETHNICITY</Text>
-              <Text style={[styles.fontColor]}>Jamaican</Text>
+              <Text style={[styles.fontColor]}>{this._getEthnicity()}</Text>
             </View>
             <View style={styles.listItem}>
               <Text>EDUCATION</Text>
-              <Text style={[styles.fontColor]}>Howard University</Text>
+              <Text style={[styles.fontColor]}>{this._getEducation()}</Text>
             </View>
             <View style={styles.listItem}>
               <Text>OCCUPATION</Text>
@@ -146,7 +171,7 @@ class ProfilePage extends Component {
             </View>
             <View style={styles.listItem}>
               <Text>RELIGION</Text>
-              <Text style={[styles.fontColor]}>Christian</Text>
+              <Text style={[styles.fontColor]}>{this._getReligion()}</Text>
             </View>
             <View style={styles.listItem}>
               <Text>INTERESTS</Text>
@@ -154,7 +179,10 @@ class ProfilePage extends Component {
             </View>
             <View style={styles.listItem}>
               <Text>On Saturday you can find me...</Text>
-              <Text style={[styles.fontColor]}>At the gym for sure. I work crazy hours during the week so I spend at least a few hours in the gym on Saturday.</Text>
+              <Text style={[styles.fontColor]}>
+                At the gym for sure.
+                I work crazy hours during the week so I spend at least a few hours in the gym on Saturday.
+              </Text>
             </View>
             <View style={styles.listItem}>
               <Text>If I had to eat the same thing for every meal...</Text>
@@ -162,7 +190,9 @@ class ProfilePage extends Component {
             </View>
             <View>
               <Text>If i could do one thing in life again...</Text>
-              <Text style={[styles.fontColor]}>I'd probably go back to college and start over. I feel like I wasteda lot of time.</Text>
+              <Text style={[styles.fontColor]}>
+                I'd probably go back to college and start over. I feel like I wasteda lot of time.
+              </Text>
             </View>
           </View>
         </View>

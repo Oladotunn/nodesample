@@ -28,6 +28,7 @@ import {
   updateLookingForCriteriaAction,
 } from '../../action-creators';
 import _ from 'lodash';
+import SyncDataToServer from '../../sync-to-server';
 
 let windowWidth = Dimensions.get('window').width;
 class LookingFor extends Component{
@@ -40,19 +41,7 @@ class LookingFor extends Component{
   }
 
   _saveUserAppState() {
-    const userAppState = AppStore.getState();
-    const { userId: facebookId } = userAppState.facebook.credentials;
-    fetch(`${userAppState.appConfig.server}/saveUserAppState/${facebookId}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userAppState)
-    })
-    .catch(err => {
-      console.log(err)
-    });
+    SyncDataToServer();
     Actions.main();
   }
 

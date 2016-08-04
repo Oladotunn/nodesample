@@ -21,6 +21,7 @@ import {
   updateUserReligionAction,
   updateUserTwitterAction,
 } from '../../action-creators';
+import SyncDataToServer from '../../sync-to-server';
 const { TwitterSignin } = NativeModules;
 
 let topPadding = 64;
@@ -32,6 +33,19 @@ class EditProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this._getTwitterHandle = _.bind(this._getTwitterHandle, this);
+    this._storeReligion = _.bind(this._storeReligion, this);
+    this._storeEthnicity = _.bind(this._storeEthnicity, this);
+    this._saveToStore = _.bind(this._saveToStore, this);
+  }
+
+  componentWillMount() {
+    const { chosenPhotos } = this.props.profilePictures;
+    _.forEach(chosenPhotos, photo => this._getLargePic(photo.id));
+  }
+
+  componentDidMount() {
+    Actions.refresh({ onRight: this._saveToStore });
   }
 
   _getLargePic(picId) {
@@ -58,7 +72,9 @@ class EditProfilePage extends Component {
 
     if (twitter) this.props.dispatchUpdateTwitter(twitter);
     if (religion) this.props.dispatchUpdateReligion(religion);
-    if (ethnicity) this.props.dispatchUpdateReligion(ethnicity);
+    if (ethnicity) this.props.dispatchUpdateEthnicity(ethnicity);
+    SyncDataToServer();
+    Actions.profileMain({type:'replace'});
   }
 
   _getInstagramHandle() {
@@ -88,11 +104,6 @@ class EditProfilePage extends Component {
     const { text: religion } = event.nativeEvent;
     this.setState({ religion });
     Actions.pop();
-  }
-
-  componentWillMount() {
-    const { chosenPhotos } = this.props.profilePictures;
-    _.forEach(chosenPhotos, photo => this._getLargePic(photo.id));
   }
 
   _renderProfilePictures() {
@@ -175,7 +186,7 @@ class EditProfilePage extends Component {
               <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}>
               </Image>
               <Text onPress={this._getTwitterHandle} style={[styles.fontColor,styles.editLink]}>
-                Add Account
+                { this.state.twitter ? `@${this.state.twitter.userName}` : 'Add Account' }
               </Text>
             </View>
           </View>
@@ -288,6 +299,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dispatchUpdateEthnicity: ethnicity => dispatch(updateUserEthnicityAction(ethnicity)),
     dispatchUpdateReligion: religion => dispatch(updateUserReligionAction(religion)),
+    dispatchUpdateTwitter: twitter => dispatch(updateUserTwitterAction(twitter)),
   };
 };
 
