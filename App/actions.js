@@ -12,6 +12,7 @@ const HYDRATE_FB = 'HYDRATE_FB';
 const UPDATE_USER_BIO = 'updateUserBio';
 const UPDATE_USER_ETHNICITY = 'updateUserEthnicity';
 const UPDATE_USER_TWITTER = 'updateUserTwitter';
+const UPDATE_USER_INSTAGRAM = 'updateUserInstagram';
 const UPDATE_USER_RELIGION = 'updateUserReligion';
 const UPDATE_USER_FLAG = 'updateUserFlag';
 const UPDATE_USER_LIKE = 'updateUserLike';
@@ -30,6 +31,7 @@ export {
   HYDRATE_FB,
   UPDATE_USER_BIO,
   UPDATE_USER_TWITTER,
+  UPDATE_USER_INSTAGRAM,
   UPDATE_USER_ETHNICITY,
   UPDATE_USER_RELIGION,
   UPDATE_LOOKINGFOR_CRITERIA,

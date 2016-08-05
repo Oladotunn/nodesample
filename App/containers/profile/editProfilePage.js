@@ -21,6 +21,7 @@ import {
   updateUserEthnicityAction,
   updateUserReligionAction,
   updateUserTwitterAction,
+  updateUserInstagramAction,
 } from '../../action-creators';
 import SyncDataToServer from '../../sync-to-server';
 
@@ -84,6 +85,7 @@ class EditProfilePage extends Component {
     } = this.state;
 
     if (twitter) this.props.dispatchUpdateTwitter(twitter);
+    if (instagram) this.props.dispatchUpdateInstagram(instagram);
     if (religion) this.props.dispatchUpdateReligion(religion);
     if (ethnicity) this.props.dispatchUpdateEthnicity(ethnicity);
     SyncDataToServer();
@@ -337,6 +339,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatchUpdateEthnicity: ethnicity => dispatch(updateUserEthnicityAction(ethnicity)),
     dispatchUpdateReligion: religion => dispatch(updateUserReligionAction(religion)),
     dispatchUpdateTwitter: twitter => dispatch(updateUserTwitterAction(twitter)),
+    dispatchUpdateInstagram: instagram => dispatch(updateUserInstagramAction(instagram)),
   };
 };
 

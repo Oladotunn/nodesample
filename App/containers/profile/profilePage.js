@@ -69,7 +69,7 @@ class ProfilePage extends Component {
     const { instagram } = this.props.userInfo;
     if (!instagram) return 'Add Account';
 
-    return `@${instagram.userName}`;
+    return `@${instagram.username}`;
   }
 
   _getEthnicity() {

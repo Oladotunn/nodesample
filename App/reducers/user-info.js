@@ -3,6 +3,7 @@ import {
   UPDATE_USER_BIO,
   UPDATE_USER_FLAG,
   UPDATE_USER_TWITTER,
+  UPDATE_USER_INSTAGRAM,
   UPDATE_USER_ETHNICITY,
   UPDATE_USER_RELIGION,
   UPDATE_USER_LIKE,
@@ -74,6 +75,11 @@ const userInfo = (state = defaultState, action) => {
       return {
         ...state,
         twitter: action.twitter,
+      }
+    case UPDATE_USER_INSTAGRAM: 
+      return {
+        ...state,
+        instagram: action.instagram,
       }
     case UPDATE_USER_ETHNICITY: 
       return {

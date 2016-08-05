@@ -13,6 +13,7 @@ import {
   UPDATE_USER_ETHNICITY,
   UPDATE_USER_RELIGION,
   UPDATE_USER_TWITTER,
+  UPDATE_USER_INSTAGRAM,
   UPDATE_USER_LIKE,
   HYDRATE_USER,
 } from './actions';
@@ -35,6 +36,13 @@ const updateUserTwitterAction = twitter => {
   return {
     type: UPDATE_USER_TWITTER,
     twitter,
+  };
+};
+
+const updateUserInstagramAction = instagram => {
+  return {
+    type: UPDATE_USER_INSTAGRAM,
+    instagram,
   };
 };
 
@@ -149,6 +157,7 @@ export {
   hydrateFbAction,
   updateUserBioAction,
   updateUserTwitterAction,
+  updateUserInstagramAction,
   updateUserEthnicityAction,
   updateUserReligionAction,
   updateLookingForCriteriaAction,
