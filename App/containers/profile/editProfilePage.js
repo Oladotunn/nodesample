@@ -8,6 +8,7 @@ import {
   Image,
   StatusBar,
   NativeModules,
+Linking,
   Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -22,7 +23,11 @@ import {
   updateUserTwitterAction,
 } from '../../action-creators';
 import SyncDataToServer from '../../sync-to-server';
+
+const simpleAuthClient = require('react-native-simple-auth');
 const { TwitterSignin } = NativeModules;
+// const RNInstagramOAuth = require('react-native-instagram-oauth');
+
 
 let topPadding = 64;
 if(Platform.OS =='android'){
@@ -34,6 +39,7 @@ class EditProfilePage extends Component {
     super(props);
     this.state = {};
     this._getTwitterHandle = _.bind(this._getTwitterHandle, this);
+    this._getInstagramHandle = _.bind(this._getInstagramHandle, this);
     this._storeReligion = _.bind(this._storeReligion, this);
     this._storeEthnicity = _.bind(this._storeEthnicity, this);
     this._saveToStore = _.bind(this._saveToStore, this);
@@ -46,6 +52,13 @@ class EditProfilePage extends Component {
 
   componentDidMount() {
     Actions.refresh({ onRight: this._saveToStore });
+    Linking.getInitialURL()
+    .then(url => {
+      if (url) {
+        console.log('Initial url is: ' + url);
+      }
+    })
+    .catch(err => console.error('An error occurred', err));
   }
 
   _getLargePic(picId) {
@@ -78,7 +91,29 @@ class EditProfilePage extends Component {
   }
 
   _getInstagramHandle() {
+    simpleAuthClient.configure('instagram', {
+      client_id: 'cf412cd65bb64d4a868e902f73c41729',
+      redirect_uri: 'http://tribl.app.link/tOLoVhpZAv',
+    })
+    .then(() => {
+      console.log('succesfuly configured ig');
+      return simpleAuthClient.authorize('instagram');
+    })
+    .then(({ data: instagram }) => this.setState({ instagram }))
+    .catch(error => {
+      console.log(`Error instagram: ${error.code} and ${error.description}`);
+    });
+  }
 
+  _getInstagramData(token) {
+    fetch(`https://api.instagram.com/v1/users/self/?access_token=${token}`)
+    .then((response) => response.json())
+    .then((responseData) => {
+      console.log(responseData);
+    })
+    .catch(err => {
+      console.log(`instagram data error: ${err}`)
+    })
   }
 
   _getTwitterHandle() {
@@ -180,7 +215,9 @@ class EditProfilePage extends Component {
                 paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
               <Image source={require('@images/Instagram-Filled-50.png')}
                 style={{width:20,height:20,marginRight:10}}></Image>
-              <Text style={[styles.fontColor,styles.editLink]}>Add Account</Text>
+              <Text style={[styles.fontColor,styles.editLink]}>
+                { this.state.instagram ? `@${this.state.instagram.username}` : 'Add Account' }
+              </Text>
             </TouchableOpacity>
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15}}>
               <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}>

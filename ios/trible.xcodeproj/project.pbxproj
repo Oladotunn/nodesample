@@ -24,11 +24,15 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		25BDFCCA7B9F4EB0A5C657BF /* Andale Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEC7F80D42BD4F80AF949B5A /* Andale Mono.ttf */; };
+		51990BBBB8D1D64E85E4791F /* libPods-trible.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF62BA9847D5B9BB54C49A0 /* libPods-trible.a */; };
+		5D194BEA1D55513A00591851 /* SimpleAuthWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D194BE91D55513A00591851 /* SimpleAuthWrapper.m */; };
 		5DDDBE001D53E1D8005BE703 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DDDBDFC1D53E1D8005BE703 /* Fabric.framework */; };
 		5DDDBE011D53E1D8005BE703 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DDDBDFD1D53E1D8005BE703 /* TwitterKit.framework */; };
 		5DDDBE021D53E1D8005BE703 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5DDDBDFE1D53E1D8005BE703 /* TwitterKitResources.bundle */; };
 		5DDDBE031D53E1D8005BE703 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DDDBDFF1D53E1D8005BE703 /* TwitterCore.framework */; };
 		5DDDBE061D53E363005BE703 /* TwitterSignin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DDDBE051D53E363005BE703 /* TwitterSignin.m */; };
+		5DDDBE131D54F4B4005BE703 /* Branch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DDDBE121D54F4B4005BE703 /* Branch.framework */; };
+		5DDDBE151D54F4F5005BE703 /* Branch-SDK in Resources */ = {isa = PBXBuildFile; fileRef = 5DDDBE141D54F4F5005BE703 /* Branch-SDK */; };
 		5DE66CE41D46F0400096199F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE66CE11D46F0400096199F /* FBSDKCoreKit.framework */; };
 		5DE66CE51D46F0400096199F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE66CE21D46F0400096199F /* FBSDKLoginKit.framework */; };
 		5DE66CE61D46F0400096199F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE66CE31D46F0400096199F /* FBSDKShareKit.framework */; };
@@ -203,6 +207,7 @@
 		00E356F21AD99517003FC87E /* tribleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tribleTests.m; sourceTree = "<group>"; };
 		01078552D77440089D7A833F /* libRNTableView.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNTableView.a; sourceTree = "<group>"; };
 		06D4200C6D074AF89C91F2AE /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		0B88F3C2F1380A8E35B4870C /* Pods-trible.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trible.release.xcconfig"; path = "../Pods/Target Support Files/Pods-trible/Pods-trible.release.xcconfig"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Trible.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trible.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +219,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = trible/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1A32B514F9084C3998500A95 /* libRNInvoke.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNInvoke.a; sourceTree = "<group>"; };
+		2FF62BA9847D5B9BB54C49A0 /* libPods-trible.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-trible.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3195FCCFB1604691AC65D0B3 /* Arial Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Arial Black.ttf"; path = "../node_modules/native-base/Fonts/Arial Black.ttf"; sourceTree = "<group>"; };
 		3D17ED53A08C42ABB2FBAB94 /* Chalkboard.ttc */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Chalkboard.ttc; path = "../node_modules/native-base/Fonts/Chalkboard.ttc"; sourceTree = "<group>"; };
 		3D1807A6A21F4A839C0A33EA /* RNInvoke.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNInvoke.xcodeproj; path = "../node_modules/react-native-invoke/ios/RNInvoke.xcodeproj"; sourceTree = "<group>"; };
@@ -222,12 +228,17 @@
 		4DB96FE14EAD4A1F85917E65 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		56A0F9DE553E4D599E7C528D /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
 		59457B67D4584CA389C69958 /* libRCTFBLogin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBLogin.a; sourceTree = "<group>"; };
+		5D194BE81D55513A00591851 /* SimpleAuthWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAuthWrapper.h; sourceTree = "<group>"; };
+		5D194BE91D55513A00591851 /* SimpleAuthWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAuthWrapper.m; sourceTree = "<group>"; };
 		5DDDBDFC1D53E1D8005BE703 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		5DDDBDFD1D53E1D8005BE703 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		5DDDBDFE1D53E1D8005BE703 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		5DDDBDFF1D53E1D8005BE703 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		5DDDBE041D53E363005BE703 /* TwitterSignin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterSignin.h; path = "../node_modules/react-native-twitter-signin/ios/TwitterSignin/TwitterSignin.h"; sourceTree = "<group>"; };
 		5DDDBE051D53E363005BE703 /* TwitterSignin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterSignin.m; path = "../node_modules/react-native-twitter-signin/ios/TwitterSignin/TwitterSignin.m"; sourceTree = "<group>"; };
+		5DDDBE091D54F097005BE703 /* Trible.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Trible.entitlements; path = trible/Trible.entitlements; sourceTree = "<group>"; };
+		5DDDBE121D54F4B4005BE703 /* Branch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Branch.framework; sourceTree = "<group>"; };
+		5DDDBE141D54F4F5005BE703 /* Branch-SDK */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Branch-SDK"; sourceTree = "<group>"; };
 		5DE66CE11D46F0400096199F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		5DE66CE21D46F0400096199F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		5DE66CE31D46F0400096199F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKShareKit.framework"; sourceTree = "<group>"; };
@@ -239,6 +250,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		861B00A3457A4A169849EB80 /* Times New Roman.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Times New Roman.ttf"; path = "../node_modules/native-base/Fonts/Times New Roman.ttf"; sourceTree = "<group>"; };
 		8C2A5C31D8104EADAA1A056F /* Arial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Arial.ttf; path = "../node_modules/native-base/Fonts/Arial.ttf"; sourceTree = "<group>"; };
+		939882B3412D32961951D97D /* Pods-trible.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trible.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-trible/Pods-trible.debug.xcconfig"; sourceTree = "<group>"; };
 		9DEC57D0F1A1498FA91BAC9A /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
 		A9832A824146496BB5511A55 /* libRNSearchBar.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSearchBar.a; sourceTree = "<group>"; };
 		BAADA22AEA724FA392DFE174 /* libAppHubTestUtils.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppHubTestUtils.a; sourceTree = "<group>"; };
@@ -265,6 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DDDBE131D54F4B4005BE703 /* Branch.framework in Frameworks */,
 				5DE66CEB1D46F1100096199F /* libz.tbd in Frameworks */,
 				5DE66CE91D46F1050096199F /* libAppHub.a in Frameworks */,
 				5DE66CE81D46F0F60096199F /* SystemConfiguration.framework in Frameworks */,
@@ -291,6 +304,7 @@
 				9F3FDED6CBD74B2BA62A0524 /* libRNSpinkit.a in Frameworks */,
 				6BFBDF51C56F4E93B1E1EC29 /* libRNTableView.a in Frameworks */,
 				5DDDBE031D53E1D8005BE703 /* TwitterCore.framework in Frameworks */,
+				51990BBBB8D1D64E85E4791F /* libPods-trible.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +387,7 @@
 		13B07FAE1A68108700A75B9A /* trible */ = {
 			isa = PBXGroup;
 			children = (
+				5DDDBE091D54F097005BE703 /* Trible.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -460,6 +475,9 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5D194BE81D55513A00591851 /* SimpleAuthWrapper.h */,
+				5D194BE91D55513A00591851 /* SimpleAuthWrapper.m */,
+				5DDDBE141D54F4F5005BE703 /* Branch-SDK */,
 				5DDDBE041D53E363005BE703 /* TwitterSignin.h */,
 				5DDDBE051D53E363005BE703 /* TwitterSignin.m */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -494,6 +512,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5DDDBE121D54F4B4005BE703 /* Branch.framework */,
 				5DDDBDFC1D53E1D8005BE703 /* Fabric.framework */,
 				5DDDBDFD1D53E1D8005BE703 /* TwitterKit.framework */,
 				5DDDBDFE1D53E1D8005BE703 /* TwitterKitResources.bundle */,
@@ -508,6 +527,8 @@
 				00E356EF1AD99517003FC87E /* tribleTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				B0DF4B2460194A6E99C95A76 /* Resources */,
+				A9E039ECE530791F4F2ECE6E /* Pods */,
+				ECED24C1252B4A1428B15BBB /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -520,6 +541,15 @@
 				00E356EE1AD99517003FC87E /* tribleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A9E039ECE530791F4F2ECE6E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				939882B3412D32961951D97D /* Pods-trible.debug.xcconfig */,
+				0B88F3C2F1380A8E35B4870C /* Pods-trible.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		B0DF4B2460194A6E99C95A76 /* Resources */ = {
@@ -539,6 +569,14 @@
 				861B00A3457A4A169849EB80 /* Times New Roman.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		ECED24C1252B4A1428B15BBB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2FF62BA9847D5B9BB54C49A0 /* libPods-trible.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -566,11 +604,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "trible" */;
 			buildPhases = (
+				210DCFBF129E12AF893BC935 /* 📦 Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				5DDDBDFB1D53E119005BE703 /* ShellScript */,
+				F598695512F63BF01EDB4597 /* 📦 Embed Pods Frameworks */,
+				AC8BD1721A83FC34C00EEF82 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -596,6 +637,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = NBLVNS5V95;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -836,6 +882,7 @@
 				5DDDBE021D53E1D8005BE703 /* TwitterKitResources.bundle in Resources */,
 				BCEEBC3AFBDF4016997EDF87 /* Arial.ttf in Resources */,
 				DD1245DE502E47D6A36FA2CD /* Chalkboard.ttc in Resources */,
+				5DDDBE151D54F4F5005BE703 /* Branch-SDK in Resources */,
 				88520BA418674F63B8C1B283 /* Cochin.ttc in Resources */,
 				C312C79DD1CD4C72B295BC3E /* Comic Sans MS.ttf in Resources */,
 				8E5143D05CD84032B8F991A4 /* Courier New.ttf in Resources */,
@@ -864,6 +911,21 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		210DCFBF129E12AF893BC935 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		5DDDBDFB1D53E119005BE703 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -876,6 +938,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 50d386af8d7b74c8627c0060619a1e5615442fe5 a58eb129d7acb14ef1f2a8e2bac0cdc3253fd15501ba75fcfc7bb2b83bfb083c";
+		};
+		AC8BD1721A83FC34C00EEF82 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-trible/Pods-trible-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F598695512F63BF01EDB4597 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-trible/Pods-trible-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -895,6 +987,7 @@
 				5DDDBE061D53E363005BE703 /* TwitterSignin.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				5D194BEA1D55513A00591851 /* SimpleAuthWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,14 +1065,18 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 939882B3412D32961951D97D /* Pods-trible.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = trible/Trible.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK/**",
 					"$(PROJECT_DIR)",
+					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -999,21 +1096,27 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codengamer.tribal;
 				PRODUCT_NAME = Trible;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B88F3C2F1380A8E35B4870C /* Pods-trible.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = trible/Trible.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK/**",
 					"$(PROJECT_DIR)",
+					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1033,9 +1136,11 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codengamer.tribal;
 				PRODUCT_NAME = Trible;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

@@ -21,6 +21,7 @@ import EditProfilePage from '@containers/profile/editProfilePage.js';
 import { Provider } from 'react-redux';
 import AppStore from './app-store';
 
+
 const getSceneStyle = () => ({
     flex: 1,
     backgroundColor: '#fff',

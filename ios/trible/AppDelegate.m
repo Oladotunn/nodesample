@@ -15,6 +15,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
+#import <Branch/Branch.h>
 
 
 #import "AppHub.h"
@@ -26,6 +27,11 @@
 {
   [Fabric with:@[[Twitter class]]];
   [AppHub setApplicationID:@"GoDW6bi0MjFzl3JcSQ7S"];
+  Branch *branch = [Branch getInstance];
+  [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+    // params are the deep linked params associated with the link that the user clicked before showing up.
+    NSLog(@"deep link data: %@", [params description]);
+  }];
   NSURL *jsCodeLocation;
   
   /**
@@ -75,12 +81,14 @@
                                   didFinishLaunchingWithOptions:launchOptions];
 }
 
+
 // Facebook SDK
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [FBSDKAppEvents activateApp];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  [[Branch getInstance] handleDeepLink:url];
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                         openURL:url
                                               sourceApplication:sourceApplication
