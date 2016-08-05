@@ -155,6 +155,34 @@ class EditProfilePage extends Component {
     })
   }
 
+
+  _getWork() {
+    const { work } = this.props.userInfo;
+    console.log(work);
+    if (!work) return 'N/A';
+    return 'placeholder';
+
+    // return work;
+  }
+
+  _getReligion() {
+    const { religion } = this.state;
+    if (!religion) return 'Add Religion';
+
+    return religion;
+  }
+
+  _getEducation() {
+    const { education } = this.props.userInfo.bio;
+    if (!education) return 'N/A';
+    const mostRecent = _.orderBy(education, entry => {
+      if (entry.year) return parseInt(entry.year.name);
+      return 0;
+    },'desc')[0];
+
+    return mostRecent.school.name;
+  }
+
   _getUserDetails() {
     const { name, birthday } = this.props.userInfo.bio;
     const age = moment().year() - moment(new Date(birthday)).year();
@@ -242,11 +270,11 @@ class EditProfilePage extends Component {
               </View>
             <View style={styles.listItem}>
               <Text>EDUCATION</Text>
-              <Text style={[styles.fontColor]}>Howard University</Text>
+              <Text style={[styles.fontColor]}>{this._getEducation()}</Text>
             </View>
             <View style={styles.listItem}>
               <Text>OCCUPATION</Text>
-              <Text style={[styles.fontColor]}>CEO</Text>
+              <Text style={[styles.fontColor]}>{this._getWork()}</Text>
             </View>
             <View style={styles.listItem}>
               <Text>RELIGION</Text>
@@ -256,7 +284,7 @@ class EditProfilePage extends Component {
                     saveAction={this._storeReligion} />
                   })}
                 >
-                  Edit religion
+                  {this._getReligion()}
                 </Text>
             </View>
             <View style={styles.listItem}>
