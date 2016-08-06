@@ -2,6 +2,8 @@ import React from 'react';
 import {View, Text, TextInput, StyleSheet, Animated, Dimensions} from "react-native";
 import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
+import {primaryFontColor,primaryThemeColor,whiteFont} from '../../../theme/colors';
+// import {MKTextField} from 'react-native-material-kit'
 
 const {
   height: deviceHeight,
@@ -57,21 +59,43 @@ export default class extends React.Component {
         <View style={{
           width: deviceWidth * 0.75,
           height: deviceHeight * 0.3,
-          justifyContent: "center",
+          borderRadius: 2,
+          justifyContent: "space-around",
           alignItems: "center",
           backgroundColor:"white" }}>
-          <TextInput
-            multiline={isMultiline}
-            returnKeyType={'next'}
-            style={[{height: 90,
-              borderColor: 'gray',
-              borderTopWidth: 1,fontSize:14,padding:10,justifyContent:'center'},
+          <View
+            style={{
+              borderBottomWidth: 1,
+              width: deviceWidth * 0.75,
+              height: 90,
+              borderBottomColor: primaryThemeColor.backgroundColor,
+            }}
+          >
+            <TextInput
+              multiline={isMultiline}
+              returnKeyType={'next'}
+              style={[
+                {
+                  height: 90,
+                  fontSize:14,
+                  padding: 5,
+                  textAlign: 'center',
+                },
               ]}
-            placeholder={placeholder}
-            ref="textInput"
-            onSubmitEditing={saveAction}
-            blurOnSubmit={true}/>
-          <Button onPress={this.closeModal.bind(this)}>
+              placeholder={placeholder}
+              ref="textInput"
+              onSubmitEditing={saveAction}
+              blurOnSubmit={true}/>
+          </View>
+          <Button onPress={this.closeModal.bind(this)}
+            style={[
+              primaryThemeColor,
+              whiteFont,
+              {
+                padding: 10,
+                borderRadius: 2,
+              }
+            ]}>
             Cancel
           </Button>
         </View>

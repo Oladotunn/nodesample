@@ -1,6 +1,7 @@
 package com.trible;
 
 import com.facebook.react.ReactActivity;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.magus.fblogin.FacebookLoginPackage;
@@ -38,6 +39,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new ReactMaterialKitPackage(),
             new RNSpinkitPackage(),
             new LinearGradientPackage(),
             new FacebookLoginPackage()

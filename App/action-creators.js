@@ -8,6 +8,7 @@ import {
   UPDATE_FB_CREDS,
   HYDRATE_FB,
   UPDATE_USER_BIO,
+  UPDATE_USER_QUESTION,
   UPDATE_LOOKINGFOR_CRITERIA,
   UPDATE_USER_FLAG,
   UPDATE_USER_ETHNICITY,
@@ -22,6 +23,14 @@ const updateUserBioAction = bio => {
   return {
     type: UPDATE_USER_BIO,
     bio,
+  };
+};
+
+const updateUserQuestionAction = ({ index, answer }) => {
+  return {
+    type: UPDATE_USER_QUESTION,
+    index,
+    answer,
   };
 };
 
@@ -156,6 +165,7 @@ export {
   updateFbReadyAction,
   hydrateFbAction,
   updateUserBioAction,
+  updateUserQuestionAction,
   updateUserTwitterAction,
   updateUserInstagramAction,
   updateUserEthnicityAction,

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import {
   UPDATE_USER_BIO,
+  UPDATE_USER_QUESTION,
   UPDATE_USER_FLAG,
   UPDATE_USER_TWITTER,
   UPDATE_USER_INSTAGRAM,
@@ -34,6 +35,20 @@ const defaultState = {
     maxAge: 22,
     located: 'Houston, TX',
   },
+  questions: [
+    {
+      question: 'On Saturday you can find me...',
+      answer: ''
+    },
+    {
+      question: 'If I had to eat the same thing for every meal...',
+      answer: ''
+    },
+    {
+      question: 'If i could do one thing in life again...',
+      answer: ''
+    }
+  ],
   interests: {
     likes: [
       'Sports',
@@ -60,6 +75,7 @@ const userInfo = (state = defaultState, action) => {
   const {
     interests,
     flags: oldFlags,
+    questions: oldQuestions,
     lookingFor: oldLookingFor
   } = state;
 
@@ -86,6 +102,13 @@ const userInfo = (state = defaultState, action) => {
       return {
         ...state,
         ethnicity: _.capitalize(action.ethnicity),
+      }
+    case UPDATE_USER_QUESTION: 
+      const newQuestionState = oldQuestions.slice(0);
+      newQuestionState[action.index].answer = action.answer;
+      return {
+        ...state,
+        question: newQuestionState, 
       }
     case UPDATE_USER_RELIGION: 
       return {

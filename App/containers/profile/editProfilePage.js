@@ -19,6 +19,7 @@ import EditProfileInputModal from './edit-profile-input-dialog';
 import moment from 'moment';
 import {
   updateUserEthnicityAction,
+  updateUserQuestionAction,
   updateUserReligionAction,
   updateUserTwitterAction,
   updateUserInstagramAction,
@@ -27,7 +28,6 @@ import SyncDataToServer from '../../sync-to-server';
 
 const simpleAuthClient = require('react-native-simple-auth');
 const { TwitterSignin } = NativeModules;
-// const RNInstagramOAuth = require('react-native-instagram-oauth');
 
 
 let topPadding = 64;
@@ -38,7 +38,7 @@ if(Platform.OS =='android'){
 class EditProfilePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { questions: {} };
     this._getTwitterHandle = _.bind(this._getTwitterHandle, this);
     this._getInstagramHandle = _.bind(this._getInstagramHandle, this);
     this._storeReligion = _.bind(this._storeReligion, this);
@@ -82,12 +82,18 @@ class EditProfilePage extends Component {
       instagram,
       ethnicity,
       religion,
+      questions,
     } = this.state;
+
+    _.forIn(questions, (answer, index) => {
+      this.props.dispatchUpdateUserQuestion({ index, answer });
+    });
 
     if (twitter) this.props.dispatchUpdateTwitter(twitter);
     if (instagram) this.props.dispatchUpdateInstagram(instagram);
     if (religion) this.props.dispatchUpdateReligion(religion);
     if (ethnicity) this.props.dispatchUpdateEthnicity(ethnicity);
+
     SyncDataToServer();
     Actions.profileMain({type:'replace'});
   }
@@ -137,6 +143,15 @@ class EditProfilePage extends Component {
     Actions.pop();
   }
 
+  _storeAnswer({ event, index }) {
+    const { text: answer } = event.nativeEvent;
+    const { questions: oldQuestions } = this.state;
+    const questions = { ...oldQuestions };
+    questions[index] = answer; 
+    this.setState({ questions });
+    Actions.pop();
+  }
+
   _storeReligion(event) {
     const { text: religion } = event.nativeEvent;
     this.setState({ religion });
@@ -170,6 +185,13 @@ class EditProfilePage extends Component {
     if (!religion) return 'Add Religion';
 
     return religion;
+  }
+
+  _getEthnicity() {
+    const { ethnicity } = this.state;
+    if (!ethnicity) return 'Add Ethnicity';
+
+    return ethnicity;
   }
 
   _getEducation() {
@@ -210,6 +232,34 @@ class EditProfilePage extends Component {
       );
     });
   }
+
+  _renderQuestions() {
+    const {questions} = this.props.userInfo;
+    return _.map(questions, (questionObj, index) => {
+      return (
+        <TouchableOpacity
+          key={questionObj.question}
+          onPress={() => {
+            Actions.customModal({ 
+              component: () => {
+                return (
+                  <EditProfileInputModal placeholder={questionObj.question}
+                    saveAction={event => this._storeAnswer({event, index })} />
+                )
+              }
+            })
+          }}
+          style={styles.listItem}
+        >
+          <Text>{questionObj.question}</Text>
+          <Text style={[styles.fontColor,styles.editLink]}>
+            {this.state.questions[index] || 'Answer this question'}
+          </Text>
+        </TouchableOpacity>
+      )
+    })
+  }
+
   render() {
     return (
       <ScrollView vertical={true} contentContainerStyle={{paddingTop:topPadding,paddingBottom:90}}>
@@ -265,7 +315,7 @@ class EditProfilePage extends Component {
                   component: () => <EditProfileInputModal placeholder='Ethnicity'
                     saveAction={this._storeEthnicity} />
                   })}>
-                  Edit ethnicity
+                  {this._getEthnicity()}
                 </Text>
               </View>
             <View style={styles.listItem}>
@@ -280,7 +330,7 @@ class EditProfilePage extends Component {
               <Text>RELIGION</Text>
               <Text style={[styles.fontColor,styles.editLink]}
                 onPress={() => Actions.customModal({ 
-                  component: () => <EditProfileInputModal placeholder='Ethnicity'
+                  component: () => <EditProfileInputModal placeholder='Religion'
                     saveAction={this._storeReligion} />
                   })}
                 >
@@ -291,18 +341,7 @@ class EditProfilePage extends Component {
               <Text>INTERESTS</Text>
               {this._getInterests()}
             </View>
-            <View style={styles.listItem}>
-              <Text>On Saturday you can find me...</Text>
-              <Text style={[styles.fontColor,styles.editLink]}>Answer this question</Text>
-            </View>
-            <View style={styles.listItem}>
-              <Text>If I had to eat the same thing for every meal...</Text>
-              <Text style={[styles.fontColor,styles.editLink]}>Answer this question</Text>
-            </View>
-            <View>
-              <Text>If i could do one thing in life again...</Text>
-              <Text style={[styles.fontColor,styles.editLink]}>Answer this question</Text>
-            </View>
+            {this._renderQuestions()}
           </View>
         </View>
       </ScrollView>
@@ -365,6 +404,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dispatchUpdateEthnicity: ethnicity => dispatch(updateUserEthnicityAction(ethnicity)),
+    dispatchUpdateUserQuestion: ({ answer, index }) => dispatch(updateUserQuestionAction({ answer, index })),
     dispatchUpdateReligion: religion => dispatch(updateUserReligionAction(religion)),
     dispatchUpdateTwitter: twitter => dispatch(updateUserTwitterAction(twitter)),
     dispatchUpdateInstagram: instagram => dispatch(updateUserInstagramAction(instagram)),

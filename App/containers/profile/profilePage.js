@@ -136,6 +136,20 @@ class ProfilePage extends Component {
     });
   }
 
+  _renderQuestions() {
+    const {questions} = this.props.userInfo;
+    return _.map(questions, questionObj => {
+      return (
+        <View key={questionObj.question} style={styles.listItem}>
+          <Text>{questionObj.question}</Text>
+          <Text style={[styles.fontColor]}>
+            {questionObj.answer || 'Answer this question'}
+          </Text>
+        </View>
+      )
+    })
+  }
+
   render() {
     return (
       <ScrollView vertical={true} contentContainerStyle={{paddingTop:topPadding}}>
@@ -196,23 +210,7 @@ class ProfilePage extends Component {
               <Text>INTERESTS</Text>
               {this._getInterests()}
             </View>
-            <View style={styles.listItem}>
-              <Text>On Saturday you can find me...</Text>
-              <Text style={[styles.fontColor]}>
-                At the gym for sure.
-                I work crazy hours during the week so I spend at least a few hours in the gym on Saturday.
-              </Text>
-            </View>
-            <View style={styles.listItem}>
-              <Text>If I had to eat the same thing for every meal...</Text>
-              <Text style={[styles.fontColor]}>I'd definitely eat pizza for every meal.</Text>
-            </View>
-            <View>
-              <Text>If i could do one thing in life again...</Text>
-              <Text style={[styles.fontColor]}>
-                I'd probably go back to college and start over. I feel like I wasteda lot of time.
-              </Text>
-            </View>
+            { this._renderQuestions()}
           </View>
         </View>
       </ScrollView>
