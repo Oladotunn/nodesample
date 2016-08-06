@@ -15,12 +15,13 @@ const defaultState = {
   bio: {
     text: '',
     name: '',
-    birthday: '',
+    birthday: null,
     education: {},
     ethnicity: '',
     occupation: '',
     religion: '',
     gender: '',
+    location: '',
   },
   flags: [
     {},

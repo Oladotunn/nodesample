@@ -23,6 +23,7 @@ import {
   hydrateFbAction,
   hydrateProfilePicturesAction,
 } from '../../action-creators';
+import moment from 'moment';
 const { FBLoginManager } = require('react-native-facebook-login');
 const Spinner = require('react-native-spinkit');
 
@@ -53,15 +54,14 @@ class LandingPage extends Component{
         albums,
         gender,
       } = response;
-      console.log(response);
       const profilePictureAlbum = _.find(albums.data, data => data.name === 'Profile Pictures');
       this.props.dispatchUpdateProfileAlbumDetails(profilePictureAlbum);
       this.props.dispatchUpdateUserBio({
         name,
-        birthday,
         education,
         work,
         gender,
+        birthday: moment(new Date(birthday)).toISOString(),
       });
       Actions.profileSetup();
     })
