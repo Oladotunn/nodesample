@@ -10,7 +10,7 @@ const config = {
     server: 'http://10.1.10.48:3030',
   },
   production: {
-    server: 'http://10.1.10.48:3030',
+    server: 'http://tribl-83401.onmodulus.net',
   }
 };
 
