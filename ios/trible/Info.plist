@@ -28,6 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>tribl</string>
+        <string>fb966176273453141</string>
 			</array>
 		</dict>
 	</array>
