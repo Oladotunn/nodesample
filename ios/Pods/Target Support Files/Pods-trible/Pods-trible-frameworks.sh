@@ -88,6 +88,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/ISO8601/ISO8601.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NSData+Base64/NSData_Base64.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ReactiveCocoa/ReactiveCocoa.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Result/Result.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleAuth/SimpleAuth.framework"
   install_framework "$BUILT_PRODUCTS_DIR/cocoa-oauth/cocoa_oauth.framework"
 fi
@@ -96,6 +97,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/ISO8601/ISO8601.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NSData+Base64/NSData_Base64.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ReactiveCocoa/ReactiveCocoa.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Result/Result.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleAuth/SimpleAuth.framework"
   install_framework "$BUILT_PRODUCTS_DIR/cocoa-oauth/cocoa_oauth.framework"
 fi

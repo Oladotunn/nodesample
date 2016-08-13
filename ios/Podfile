@@ -1,0 +1,10 @@
+platform :ios, '9.0'
+use_frameworks!
+
+target 'trible' do
+  pod 'SimpleAuth/Facebook'
+  pod 'SimpleAuth/GoogleWeb'
+  pod 'SimpleAuth/Twitter'
+  pod 'SimpleAuth/Instagram'
+  pod 'SimpleAuth/LinkedInWeb'
+end
