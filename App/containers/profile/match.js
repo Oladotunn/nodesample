@@ -158,7 +158,7 @@ class MatchPage extends Component {
   _renderActiveElement() {
     const { potentialMatchDetails } = this.state;
 
-    if (potentialMatchDetails.length) {
+    if (!potentialMatchDetails.length) {
       return [
         this._renderBannerImage(),
         <View key='summaryDetails' style={{flex:4,paddingBottom:160}}>
