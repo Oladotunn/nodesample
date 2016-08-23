@@ -45,15 +45,17 @@ class MatchPage extends Component {
     const userAppState = AppStore.getState();
     if (!userAppState) return false;
 
-    fetch(`${userAppState.appConfig.server}/getMatchesFor/${userAppState.facebook.credentials.userId}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userAppState)
-    })
-    .then(potentialMatchIds => this.setState({ potentialMatchIds: potentialMatchIds.json() }))
+    // fetch(`${userAppState.appConfig.server}/getMatchesFor/${userAppState.facebook.credentials.userId}`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(userAppState)
+    // })
+    fetch(`${userAppState.appConfig.server}/getPotentialMatchesForUserX/${userAppState.facebook.credentials.userId}`)
+    .then(potentialMatchIds => potentialMatchIds.json())
+    .then(potentialMatchIds => this.setState({ potentialMatchIds }))
     .then(() => {
       _.forEach(this.state.potentialMatchIds, userId => {
         this._getUserDetails({ userId, userAppState });
@@ -170,9 +172,11 @@ class MatchPage extends Component {
       ]
     } else {
       return (
-        <View style={
-          { flex: 1}
-        }>
+        <View style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <Spinner
           size={100}
           style={
@@ -184,6 +188,9 @@ class MatchPage extends Component {
           type='CircleFlip'
           color='#FF0000'
         />
+        <Text style={
+          { padding: 5 }
+        }>Computing Matches..</Text>
         </View>
       )
     }
