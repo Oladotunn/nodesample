@@ -1,10 +1,10 @@
 import AppStore from './app-store';
 import { Actions } from 'react-native-router-flux'
 
-export default () => {
+export default (firstTime = false) => {
   const userAppState = AppStore.getState();
   const { userId: facebookId } = userAppState.facebook.credentials;
-  fetch(`${userAppState.appConfig.server}/saveUserAppState/${facebookId}`, {
+  fetch(`${userAppState.appConfig.server}/saveUserAppState/${facebookId}/${firstTime}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

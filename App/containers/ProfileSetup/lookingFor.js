@@ -41,7 +41,7 @@ class LookingFor extends Component{
   }
 
   _saveUserAppState() {
-    SyncDataToServer();
+    SyncDataToServer(true);
     Actions.main();
   }
 

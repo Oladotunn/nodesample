@@ -31,6 +31,9 @@ class MatchPage extends Component {
       matchCursor: null,
       potentialMatchIds: [],
       potentialMatchDetails: [],
+      mutual_friends: [],
+      activePotentialUser: {},
+      userAppState: null,
     };
     this._getUserDetails = _.bind(this._getUserDetails, this);
     this._renderActiveElement = _.bind(this._renderActiveElement, this);
@@ -38,11 +41,13 @@ class MatchPage extends Component {
   }
 
   componentWillMount() {
+    const userAppState = AppStore.getState();
+    this.setState({ userAppState });
     this._getPotentialMatchesForUser();
   }
 
   _getPotentialMatchesForUser() {
-    const userAppState = AppStore.getState();
+    const {userAppState} = this.state;
     if (!userAppState) return false;
 
     // fetch(`${userAppState.appConfig.server}/getMatchesFor/${userAppState.facebook.credentials.userId}`, {
@@ -79,17 +84,34 @@ class MatchPage extends Component {
     .catch(err => console.log(`error : ${err}`))
   }
 
+  _getActiveUser() {
+    const { potentialMatchDetails } = this.state;
+    return potentialMatchDetails[potentialMatchDetails.length]; 
+  }
+
   _renderBannerImage() {
+    const activeUser = this._getActiveUser();
+    const bannerImage = activeUser.profilePictures.chosenPhotos[0].picture;
+
     return (
       <TouchableOpacity key='bannerImage' style={{flex:6}} onPress={()=> Actions.matchDetail()}>
-        <Image source={{uri: 'http://static0.passel.co/wp-content/uploads/2016/07/08113512/2016-07-04-abigail-keenan-barnimages-005-1024x683-760x507.jpg'}}
+        <Image source={{uri: bannerImage }}
           style={[{width: null, height: null,flex:1}]} >
           <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
-            <Text style={{color:'#fff',fontSize:20}}>Lisa, 27</Text>
-            <Text style={{color:'#fff',fontSize:20}}>Houston,TX</Text>
+            <Text style={{color:'#fff',fontSize:20}}>{activeUser.userInfo.bio.name}</Text>
+            <Text style={{color:'#fff',fontSize:20}}>{activeUser.userInfo.bio.location}</Text>
           </View>
           <View style={styles.countries}>
-            <Image source={require('@images/country/angola.png')} style={[styles.flag,borderRadius]}></Image>
+            {
+              _.map(activeUser.userInfo.flags, flag => {
+                if (!flag.picture) return null;
+
+                return (
+                  <Image key={flag.picture} source={{ uri: flag.picture }} style={[styles.flag,borderRadius]}>
+                  </Image>
+                  )
+              })
+            }
           </View>
         </Image>
       </TouchableOpacity>
@@ -97,39 +119,63 @@ class MatchPage extends Component {
   }
 
   _renderUserBio() {
+    const activeUser = this._getActiveUser();
     return (
       <View style={{backgroundColor:'#FFFFFF',padding:15}}>
-        <Text style={[styles.fontColor]}>Amateur model. Expert scientist</Text>
+        <Text style={[styles.fontColor]}>{activeUser.userInfo.bio.text}</Text>
       </View>
     );
   }
 
   _renderMutualFriends() {
+    const activeUser = this._getActiveUser();
+    const { userId: activeUserId, token } = activeUser.facebook.credentials;
+    const { mutual_friends } = this.state;
+
+    fetch(`https://graph.facebook.com/v2.7/${activeUserId}/?access_token=${token}&fields=context.fields%28mutual_friends.fields%28name,picture%29%29`)
+    .then(response => response.json())
+    .then(data => {
+      const { data: mutual_friends } = data.context.mutual_friends;
+      this.setState({ mutual_friends });
+    })
+    .catch(err => {
+      console.log(`error mutual_friends: ${err}`)
+    })
+
     return (
       <View style={[styles.list,{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}]}>
         <Text  style={[{lineHeight:25,marginRight:10},styles.fontColor]}>Mututal Friends:</Text>
-        <Image source={require('@images/first.png')} style={{width:40,height:40,marginRight:10}}></Image>
-        <Image source={require('@images/second.png')} style={{width:40,height:40,marginRight:10}}></Image>
-        <Image source={require('@images/third.png')} style={{width:40,height:40,marginRight:10}}></Image>
-        <Image source={require('@images/fourth.png')} style={{width:40,height:40,marginRight:10}}></Image>
-        <Image source={require('@images/first.png')} style={{width:40,height:40,marginRight:10}}></Image>
+        {
+          _.map(mutual_friends, friend => {
+            return (
+              <Image key={friend.name} source={{ uri: friend.picture.data.url }}
+                style={{width:40,height:40,marginRight:10}}>
+              </Image>
+              )
+          })
+        }
       </View>
     );
   }
 
   _renderUserSocial() {
+    const activeUser = this._getActiveUser();
+    console.log(activeUser);
+    const instagramHandle = activeUser.userInfo.instagram ? `@${activeUser.userInfo.instagram.username}` : 'N/A';
+    const twitterHandle = activeUser.userInfo.twitter ? `@${activeUser.userInfo.twitter.userName}` : 'N/A';
+
     return (
       <View style={{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}}>
         <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
           <Image source={require('@images/Instagram-Filled-50.png')}
             style={{width:20,height:20,marginRight:10}}>
           </Image>
-          <Text style={styles.fontColor}>@_LisaLisaLisa</Text>
+          <Text style={styles.fontColor}>{instagramHandle}</Text>
         </View>
         <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15}}>
           <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}>
           </Image>
-          <Text style={styles.fontColor}>@_LisaSays</Text>
+          <Text style={styles.fontColor}>{twitterHandle}</Text>
         </View>
       </View>
     );
