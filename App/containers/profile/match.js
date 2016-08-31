@@ -17,6 +17,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import AppStore from '../../app-store';
 import _ from 'lodash';
+import getLargeFacebookPhoto from '../../helpers/facebook/getLargePhoto';
 const Spinner = require('react-native-spinkit');
 
 let topPadding = 64;
@@ -34,6 +35,7 @@ class MatchPage extends Component {
       mutual_friends: [],
       activePotentialUser: {},
       userAppState: null,
+      bannerImages: {},
     };
     this._getUserDetails = _.bind(this._getUserDetails, this);
     this._renderActiveElement = _.bind(this._renderActiveElement, this);
@@ -74,6 +76,8 @@ class MatchPage extends Component {
     .then(res => res.json())
     .then(userDetails => {
       const { potentialMatchDetails: oldMatches } = this.state;
+      userDetails.appUserId = userId;
+
       this.setState({
         potentialMatchDetails: [
           ...oldMatches,
@@ -89,13 +93,25 @@ class MatchPage extends Component {
     return potentialMatchDetails[potentialMatchDetails.length]; 
   }
 
+  _setBannerImage({ data, picId }) {
+    const bannerImages = {};
+    bannerImages[picIdValue] = data.url;
+    this.setState({
+      bannerImages,
+    })
+  }
+
   _renderBannerImage() {
     const activeUser = this._getActiveUser();
-    const bannerImage = activeUser.profilePictures.chosenPhotos[0].picture;
+    const { id: picId } = activeUser.profilePictures.chosenPhotos[0];
+    const { token } = activeUser.facebook.credentials;
+
+    console.log('rerender')
+    getLargeFacebookPhoto({ picId, token, callback: this._setBannerImage });
 
     return (
       <TouchableOpacity key='bannerImage' style={{flex:6}} onPress={()=> Actions.matchDetail()}>
-        <Image source={{uri: bannerImage }}
+        <Image source={{uri: this.state.bannerImages[picId] }}
           style={[{width: null, height: null,flex:1}]} >
           <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
             <Text style={{color:'#fff',fontSize:20}}>{activeUser.userInfo.bio.name}</Text>
@@ -160,7 +176,6 @@ class MatchPage extends Component {
 
   _renderUserSocial() {
     const activeUser = this._getActiveUser();
-    console.log(activeUser);
     const instagramHandle = activeUser.userInfo.instagram ? `@${activeUser.userInfo.instagram.username}` : 'N/A';
     const twitterHandle = activeUser.userInfo.twitter ? `@${activeUser.userInfo.twitter.userName}` : 'N/A';
 
@@ -181,11 +196,30 @@ class MatchPage extends Component {
     );
   }
 
+  _passActiveUser() {
+    const { potentialMatchDetails: oldDetails } = this.state;
+    this.setState({
+      potentialMatchDetails: oldDetails.slice(0, oldDetails.length - 1)
+    });
+  }
+
+  _matchActiveUser() {
+    const activeUser = this._getActiveUser();
+    const { userId: appUserId } = this.state.userAppState.facebook.credentials;
+    fetch(`${userAppState.appConfig.server}/userxWantsToMatchUserY/${appUserId}/${activeUser.appUserId}`)
+
+    this.setState({
+      potentialMatchDetails: oldDetails.slice(0, oldDetails.length - 1)
+    });
+  }
+
   _renderMatchAndPassButtons() {
+    const activeUser = this._getActiveUser();
     return (
       <View style={{paddingTop:12,paddingBottom:12,flexDirection:'row',justifyContent:'center',paddingLeft:30,paddingRight:30}}>
         <LinearGradient colors={['#E80438', '#D2021D']} style={[styles.linearGradient,{marginRight:15}]}>
           <Button
+            onPress={this._passActiveUser}
             containerStyle={{flex:1,backgroundColor:'transparent',paddingTop:12,paddingBottom:12}}
             style={[{fontSize: 21, color: '#fff',lineHeight:30}]}>
             PASS
@@ -194,6 +228,7 @@ class MatchPage extends Component {
 
         <LinearGradient colors={['#EAFFD8', '#E6FFD1']} style={[styles.linearGradient,{marginLeft:15}]}>
           <Button
+            onPress={this._matchActiveUser}
             containerStyle={{backgroundColor:'transparent',paddingTop:12,paddingBottom:12}}
             style={[{fontSize: 21, color: '#333',lineHeight:30}]}>
             MATCH
@@ -206,7 +241,7 @@ class MatchPage extends Component {
   _renderActiveElement() {
     const { potentialMatchDetails } = this.state;
 
-    if (!potentialMatchDetails.length) {
+    if (potentialMatchDetails.length) {
       return [
         this._renderBannerImage(),
         <View key='summaryDetails' style={{flex:4,paddingBottom:160}}>

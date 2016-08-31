@@ -7,7 +7,7 @@ const React = require('react-native');
 
 const config = {
   development: {
-    server: 'http://10.1.10.48:3030',
+    server: 'http://localhost:3030',
   },
   production: {
     server: 'http://tribl-83401.onmodulus.net',

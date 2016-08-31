@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
 import AppStore from '../../app-store';
+import getLargeFacebookPhoto from '../../helpers/facebook/getLargePhoto';
 
 let topPadding = 64;
 if(Platform.OS =='android'){
@@ -24,26 +25,26 @@ if(Platform.OS =='android'){
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
+    this._getLargePic = _.bind(this._getLargePic, this);
     this.state = {
     };
   }
-  _getLargePic(picId) {
-    const {token} = this.props.facebook.credentials;
-    fetch(`https://graph.facebook.com/v2.7/${picId}/picture?redirect=false&access_token=${token}`)
-    .then(data => data.json())
-    .then( ({ data }) => {
-      const oldState = this.state;
-      oldState[picId] = data.url;
-      this.setState({ ...oldState })
-    })
-    .catch(err => {
-      console.log(`Error here: ${err}`)
-    })
+  _getLargePic({ data, picId }) {
+    console.log(`got data: ${data}`)
+    const oldState = this.state;
+    oldState[picId] = data.url;
+    this.setState({ ...oldState })
   }
 
   componentWillMount() {
     const { chosenPhotos } = this.props.profilePictures;
-    _.forEach(chosenPhotos, photo => this._getLargePic(photo.id));
+    const {token} = this.props.facebook.credentials;
+    const callback = this._getLargePic;
+
+    _.forEach(chosenPhotos, photo => {
+      const { id: picId } = photo;
+      getLargeFacebookPhoto({ picId, token, callback });
+    });
   }
 
   _renderProfilePictures() {
