@@ -34,17 +34,17 @@ class MatchPage extends Component {
       potentialMatchDetails: [],
       mutual_friends: [],
       activePotentialUser: {},
-      userAppState: null,
+      userAppState: AppStore.getState(),
       bannerImages: {},
     };
     this._getUserDetails = _.bind(this._getUserDetails, this);
+    this._getMutualFriends = _.bind(this._getMutualFriends, this);
+    this._setBannerImage = _.bind(this._setBannerImage, this);
     this._renderActiveElement = _.bind(this._renderActiveElement, this);
     this._getPotentialMatchesForUser = _.bind(this._getPotentialMatchesForUser, this);
   }
 
   componentWillMount() {
-    const userAppState = AppStore.getState();
-    this.setState({ userAppState });
     this._getPotentialMatchesForUser();
   }
 
@@ -62,19 +62,19 @@ class MatchPage extends Component {
     // })
     fetch(`${userAppState.appConfig.server}/getPotentialMatchesForUserX/${userAppState.facebook.credentials.userId}`)
     .then(potentialMatchIds => potentialMatchIds.json())
-    .then(potentialMatchIds => this.setState({ potentialMatchIds }))
+    .then(({ docs: potentialMatchIds }) => this.setState({ potentialMatchIds }))
     .then(() => {
       _.forEach(this.state.potentialMatchIds, userId => {
-        this._getUserDetails({ userId, userAppState });
+        this._getUserDetails({ userId , userAppState });
       })
     })
     .catch(err => console.log(`Error getting potential matches: ${err}`))
   }
 
   _getUserDetails({ userId, userAppState }) {
-    fetch(`${userAppState.appConfig.server}/getUserDetails/${userAppState.facebook.credentials.userId}`)
+    fetch(`${userAppState.appConfig.server}/getUserDetails/${userId}`)
     .then(res => res.json())
-    .then(userDetails => {
+    .then(({ userAppState: userDetails}) => {
       const { potentialMatchDetails: oldMatches } = this.state;
       userDetails.appUserId = userId;
 
@@ -84,18 +84,35 @@ class MatchPage extends Component {
           userDetails,
         ]
       });
+
+      const { id: picId, picture: lowResImage } = userDetails.profilePictures.chosenPhotos[0];
+      const { token } = userDetails.facebook.credentials;
+      getLargeFacebookPhoto({ picId, token, callback: this._setBannerImage });
+      this._getMutualFriends({ userId, token });
     })
     .catch(err => console.log(`error : ${err}`))
   }
 
   _getActiveUser() {
     const { potentialMatchDetails } = this.state;
-    return potentialMatchDetails[potentialMatchDetails.length]; 
+    return potentialMatchDetails[0]; 
+  }
+
+  _getMutualFriends({ userId, token }) {
+    fetch(`https://graph.facebook.com/v2.7/${userId}/?access_token=${token}&fields=context.fields%28mutual_friends.fields%28name,picture%29%29`)
+    .then(response => response.json())
+    .then(data => {
+      const { data: mutual_friends } = data.context.mutual_friends;
+      this.setState({ mutual_friends });
+    })
+    .catch(err => {
+      console.log(`error mutual_friends: ${err}`)
+    })
   }
 
   _setBannerImage({ data, picId }) {
     const bannerImages = {};
-    bannerImages[picIdValue] = data.url;
+    bannerImages[picId] = data.url;
     this.setState({
       bannerImages,
     })
@@ -103,11 +120,10 @@ class MatchPage extends Component {
 
   _renderBannerImage() {
     const activeUser = this._getActiveUser();
-    const { id: picId } = activeUser.profilePictures.chosenPhotos[0];
+    const { id: picId, picture: lowResImage } = activeUser.profilePictures.chosenPhotos[0];
     const { token } = activeUser.facebook.credentials;
 
     console.log('rerender')
-    getLargeFacebookPhoto({ picId, token, callback: this._setBannerImage });
 
     return (
       <TouchableOpacity key='bannerImage' style={{flex:6}} onPress={()=> Actions.matchDetail()}>
@@ -148,15 +164,6 @@ class MatchPage extends Component {
     const { userId: activeUserId, token } = activeUser.facebook.credentials;
     const { mutual_friends } = this.state;
 
-    fetch(`https://graph.facebook.com/v2.7/${activeUserId}/?access_token=${token}&fields=context.fields%28mutual_friends.fields%28name,picture%29%29`)
-    .then(response => response.json())
-    .then(data => {
-      const { data: mutual_friends } = data.context.mutual_friends;
-      this.setState({ mutual_friends });
-    })
-    .catch(err => {
-      console.log(`error mutual_friends: ${err}`)
-    })
 
     return (
       <View style={[styles.list,{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}]}>

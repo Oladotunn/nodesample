@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import Container from '@components/Container';
 import {
   View,
+  Alert,
   Image,
   StyleSheet,
   Text,
@@ -84,6 +85,14 @@ class LandingPage extends Component{
         this._hydrateUserAppState(data);
       } else {
         console.log("Error (Facebook): ", data);
+        Alert.alert(
+          'Error',
+          error,
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ]
+        );
+        this.setState({ ready: false });
       }
     });
   }
@@ -139,7 +148,14 @@ class LandingPage extends Component{
       }
     })
     .catch(err => {
-      console.log(`error: ${err}`);
+      Alert.alert(
+        'Error',
+        err,
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]
+      );
+      this.setState({ ready: false });
     })
   }
 

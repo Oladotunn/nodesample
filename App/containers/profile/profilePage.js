@@ -30,7 +30,6 @@ class ProfilePage extends Component {
     };
   }
   _getLargePic({ data, picId }) {
-    console.log(`got data: ${data}`)
     const oldState = this.state;
     oldState[picId] = data.url;
     this.setState({ ...oldState })
@@ -82,7 +81,6 @@ class ProfilePage extends Component {
 
   _getWork() {
     const { work } = this.props.userInfo;
-    console.log(work);
     if (!work) return 'N/A';
     return 'placeholder';
 
