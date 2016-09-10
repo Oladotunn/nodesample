@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
-    View,
-    Text,
-    ScrollView,
-    StyleSheet,
-    Image,
-    StatusBar,
-    TouchableOpacity,
-    Platform
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  StatusBar,
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager';
@@ -38,6 +38,10 @@ class MatchPage extends Component {
       bannerImages: {},
     };
     this._getUserDetails = _.bind(this._getUserDetails, this);
+    this._getActiveUser = _.bind(this._getActiveUser, this);
+    this._passActiveUser = _.bind(this._passActiveUser, this);
+    this._updatePotentialMatches = _.bind(this._updatePotentialMatches, this);
+    this._updateCurrentUser = _.bind(this._updateCurrentUser, this);
     this._getMutualFriends = _.bind(this._getMutualFriends, this);
     this._setBannerImage = _.bind(this._setBannerImage, this);
     this._renderActiveElement = _.bind(this._renderActiveElement, this);
@@ -45,6 +49,7 @@ class MatchPage extends Component {
   }
 
   componentWillMount() {
+    console.log('mounting here');
     this._getPotentialMatchesForUser();
   }
 
@@ -67,15 +72,43 @@ class MatchPage extends Component {
       _.forEach(this.state.potentialMatchIds, userId => {
         this._getUserDetails({ userId , userAppState });
       })
+      if (this.props.overrideAndPopPotentialUsers) this._passActiveUser();
     })
     .catch(err => console.log(`Error getting potential matches: ${err}`))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // updateCurrentUser if potentialMatchDetails changes and contains at least one userDetailsObject
+    const isPotentialMatchDetailsSame = this.state.potentialMatchDetails[0] === prevState.potentialMatchDetails[0];
+    if (!this.state.potentialMatchDetails[0]) return false; 
+    if (isPotentialMatchDetailsSame && !this.props.overrideAndPopPotentialUsers) return false; 
+
+    // calling overrideAndPopPotentialUsers is the equivalent of passing the activeUser
+    if (this.props.overrideAndPopPotentialUsers) {
+      console.log('supposed to pop');
+      this._passActiveUser();
+      return false;
+    };
+
+    this._updateCurrentUser();
+  }
+
+  //updateCurrentUser updates the current user in response to a state change from
+  //potentialMatchDetails
+  _updateCurrentUser() {
+    const activeUserId = this.state.potentialMatchIds[0];
+    const activeUser = this._getActiveUser();
+    const { id: picId, picture: lowResImage } = activeUser.profilePictures.chosenPhotos[0];
+    const { token } = activeUser.facebook.credentials;
+    getLargeFacebookPhoto({ picId, token, callback: this._setBannerImage });
+    this._getMutualFriends({ activeUserId, token });
   }
 
   _getUserDetails({ userId, userAppState }) {
     fetch(`${userAppState.appConfig.server}/getUserDetails/${userId}`)
     .then(res => res.json())
     .then(({ userAppState: userDetails}) => {
-      const { potentialMatchDetails: oldMatches } = this.state;
+      const { potentialMatchDetails: oldMatches, potentialMatchIds: oldMatchIds } = this.state;
       userDetails.appUserId = userId;
 
       this.setState({
@@ -84,11 +117,6 @@ class MatchPage extends Component {
           userDetails,
         ]
       });
-
-      const { id: picId, picture: lowResImage } = userDetails.profilePictures.chosenPhotos[0];
-      const { token } = userDetails.facebook.credentials;
-      getLargeFacebookPhoto({ picId, token, callback: this._setBannerImage });
-      this._getMutualFriends({ userId, token });
     })
     .catch(err => console.log(`error : ${err}`))
   }
@@ -126,7 +154,7 @@ class MatchPage extends Component {
     console.log('rerender')
 
     return (
-      <TouchableOpacity key='bannerImage' style={{flex:6}} onPress={()=> Actions.matchDetail()}>
+      <TouchableOpacity key='bannerImage' style={{flex:6}} onPress={()=> Actions.matchDetail({ userForMatching: activeUser })}>
         <Image source={{uri: this.state.bannerImages[picId] }}
           style={[{width: null, height: null,flex:1}]} >
           <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
@@ -204,9 +232,15 @@ class MatchPage extends Component {
   }
 
   _passActiveUser() {
-    const { potentialMatchDetails: oldDetails } = this.state;
+    this._updatePotentialMatches();
+  }
+
+  _updatePotentialMatches() {
+    const { potentialMatchDetails: oldDetails, potentialMatchIds: oldMatchIds } = this.state;
+
     this.setState({
-      potentialMatchDetails: oldDetails.slice(0, oldDetails.length - 1)
+      potentialMatchDetails: oldDetails.slice(0, oldDetails.length - 1),
+      potentialMatchDetails: oldMatchIds.slice(0, oldMatchIds.length - 1)
     });
   }
 
@@ -214,10 +248,7 @@ class MatchPage extends Component {
     const activeUser = this._getActiveUser();
     const { userId: appUserId } = this.state.userAppState.facebook.credentials;
     fetch(`${userAppState.appConfig.server}/userxWantsToMatchUserY/${appUserId}/${activeUser.appUserId}`)
-
-    this.setState({
-      potentialMatchDetails: oldDetails.slice(0, oldDetails.length - 1)
-    });
+    this._updatePotentialMatches();
   }
 
   _renderMatchAndPassButtons() {

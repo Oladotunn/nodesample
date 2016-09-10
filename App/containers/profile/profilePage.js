@@ -16,6 +16,8 @@ import _ from 'lodash';
 import moment from 'moment';
 import AppStore from '../../app-store';
 import getLargeFacebookPhoto from '../../helpers/facebook/getLargePhoto';
+import LinearGradient from 'react-native-linear-gradient';
+import Button from 'react-native-button';
 
 let topPadding = 64;
 if(Platform.OS =='android'){
@@ -26,6 +28,8 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this._getLargePic = _.bind(this._getLargePic, this);
+    this._getActiveUser = _.bind(this._getActiveUser, this);
+    this._getMutualFriends = _.bind(this._getMutualFriends, this);
     this.state = {
     };
   }
@@ -36,18 +40,23 @@ class ProfilePage extends Component {
   }
 
   componentWillMount() {
-    const { chosenPhotos } = this.props.profilePictures;
-    const {token} = this.props.facebook.credentials;
+    const { chosenPhotos } = this._getActiveUser().profilePictures;
+    const {token} = this._getActiveUser().facebook.credentials;
     const callback = this._getLargePic;
 
     _.forEach(chosenPhotos, photo => {
       const { id: picId } = photo;
       getLargeFacebookPhoto({ picId, token, callback });
     });
+
+    if (this.props.isForMatching) {
+      const { userId, token } = this.props.userForMatching.facebook.credentials;
+      this._getMutualFriends({ userId, token });
+    }
   }
 
   _renderProfilePictures() {
-    const { chosenPhotos } = this.props.profilePictures;
+    const { chosenPhotos } = this._getActiveUser().profilePictures;
     return _.map(chosenPhotos, photo => {
       return (
         <View key={photo.picture}>
@@ -59,28 +68,28 @@ class ProfilePage extends Component {
   }
 
   _getTwitterHandle() {
-    const { twitter } = this.props.userInfo;
+    const { twitter } = this._getActiveUser().userInfo;
     if (!twitter) return 'Add Account';
 
     return `@${twitter.userName}`;
   }
 
   _getInstagramHandle() {
-    const { instagram } = this.props.userInfo;
+    const { instagram } = this._getActiveUser().userInfo;
     if (!instagram) return 'Add Account';
 
     return `@${instagram.username}`;
   }
 
   _getEthnicity() {
-    const { ethnicity } = this.props.userInfo;
+    const { ethnicity } = this._getActiveUser().userInfo;
     if (!ethnicity) return 'Add Ethnicity';
 
     return ethnicity;
   }
 
   _getWork() {
-    const { work } = this.props.userInfo;
+    const { work } = this._getActiveUser().userInfo;
     if (!work) return 'N/A';
     return 'placeholder';
 
@@ -88,14 +97,14 @@ class ProfilePage extends Component {
   }
 
   _getReligion() {
-    const { religion } = this.props.userInfo;
+    const { religion } = this._getActiveUser().userInfo;
     if (!religion) return 'Add Religion';
 
     return religion;
   }
 
   _getEducation() {
-    const { education } = this.props.userInfo.bio;
+    const { education } = this._getActiveUser().userInfo.bio;
     if (!education) return 'N/A';
     const mostRecent = _.orderBy(education, entry => {
       if (entry.year) return parseInt(entry.year.name);
@@ -106,13 +115,13 @@ class ProfilePage extends Component {
   }
 
   _getUserDetails() {
-    const { name, birthday } = this.props.userInfo.bio;
+    const { name, birthday } = this._getActiveUser().userInfo.bio;
     const age = moment().year() - moment(new Date(birthday)).year();
     return `${name}, ${age}`;
   }
 
   _getInterests() {
-    const { chosenLikes } = this.props.userInfo.interests;
+    const { chosenLikes } = this._getActiveUser().userInfo.interests;
     return _.map(chosenLikes, like => {
       return (
         <Text key={like} style={[styles.fontColor]}>{like}</Text>
@@ -121,11 +130,17 @@ class ProfilePage extends Component {
   }
 
   _getUserBio() {
-    return this.props.userInfo.bio.text;
+    return this._getActiveUser().userInfo.bio.text;
+  }
+
+  _getActiveUser() {
+    if (this.props.isForMatching && this.props.userForMatching) this.props;
+
+    return this.props.isForMatching ? this.props.userForMatching : this.props;
   }
 
   _getFlags() {
-    const {flags} = this.props.userInfo;
+    const {flags} = this._getActiveUser().userInfo;
     return _.map(flags, flag => {
       if (!flag.name) return null;
       const source = {uri: flag.picture};
@@ -135,8 +150,20 @@ class ProfilePage extends Component {
     });
   }
 
+  _getMutualFriends({ userId, token }) {
+    fetch(`https://graph.facebook.com/v2.7/${userId}/?access_token=${token}&fields=context.fields%28mutual_friends.fields%28name,picture%29%29`)
+    .then(response => response.json())
+    .then(data => {
+      const { data: mutual_friends } = data.context.mutual_friends;
+      this.setState({ mutual_friends });
+    })
+    .catch(err => {
+      console.log(`error mutual_friends: ${err}`)
+    })
+  }
+
   _renderQuestions() {
-    const {questions} = this.props.userInfo;
+    const {questions} = this._getActiveUser().userInfo;
     return _.map(questions, questionObj => {
       return (
         <View key={questionObj.question} style={styles.listItem}>
@@ -147,6 +174,79 @@ class ProfilePage extends Component {
         </View>
       )
     })
+  }
+
+  _renderMutualFriends() {
+    const activeUser = this._getActiveUser();
+    const { userId: activeUserId, token } = activeUser.facebook.credentials;
+    const { mutual_friends } = this.state;
+
+    if (!this.isForMatching) return false;
+    if (mutual_friends && !mutual_friends.length) return false;
+
+
+    return (
+      <View style={[styles.list,{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}]}>
+        <Text  style={[{lineHeight:25,marginRight:10},styles.fontColor]}>Mututal Friends:</Text>
+        {
+          _.map(mutual_friends, friend => {
+            return (
+              <Image key={friend.name} source={{ uri: friend.picture.data.url }}
+                style={{width:40,height:40,marginRight:10}}>
+              </Image>
+              )
+          })
+        }
+      </View>
+    );
+  }
+
+  _matchActiveUser() {
+    const activeUser = this._getActiveUser();
+    const userAppState = AppStore.getState();
+    const { userId: appUserId } = userAppState.facebook.credentials;
+    fetch(`${userAppState.appConfig.server}/userxWantsToMatchUserY/${appUserId}/${activeUser.appUserId}`)
+    Actions.matchPreview({ overrideAndPopPotentialUsers: true });
+    Actions.pop({
+      refresh: {
+        overrideAndPopPotentialUsers: true
+      }
+    });
+  }
+
+  _passActiveUser() {
+    Actions.pop({
+      refresh: {
+        overrideAndPopPotentialUsers: true
+      }
+    });
+  }
+
+  _renderMatchAndPassButtons() {
+    if (!this.props.isForMatching) return false;
+
+    const activeUser = this._getActiveUser();
+    return (
+      <View style={{paddingTop:12,paddingBottom:12,flexDirection:'row',justifyContent:'center',paddingLeft:30,paddingRight:30}}>
+        <LinearGradient colors={['#E80438', '#D2021D']} style={[styles.linearGradient,{marginRight:15}]}>
+          <Button
+            onPress={this._passActiveUser}
+            containerStyle={{flex:1,backgroundColor:'transparent',paddingTop:12,paddingBottom:12}}
+            style={[{fontSize: 21, color: '#fff',lineHeight:30}]}>
+            PASS
+          </Button>
+        </LinearGradient>
+
+        <LinearGradient colors={['#EAFFD8', '#E6FFD1']} style={[styles.linearGradient,{marginLeft:15}]}>
+          <Button
+            onPress={this._matchActiveUser}
+            containerStyle={{backgroundColor:'transparent',paddingTop:12,paddingBottom:12}}
+            style={[{fontSize: 21, color: '#333',lineHeight:30}]}>
+            MATCH
+          </Button>
+        </LinearGradient>
+      </View>
+    );
   }
 
   render() {
@@ -172,7 +272,11 @@ class ProfilePage extends Component {
         </View>
         <View style={{flex:7,paddingBottom:100}}>
           <View style={[{paddingBottom:15,paddingTop:15,paddingLeft:15,paddingRight:15}]}>
-            <Text style={[{backgroundColor:'#FFFFFF'},styles.fontColor]}>{this._getUserBio()}</Text></View>
+            <Text style={[{backgroundColor:'#FFFFFF'},styles.fontColor]}>
+              {this._getUserBio()}
+          </Text>
+        </View>
+        {this._renderMutualFriends()}
           <View style={{borderTopWidth:1,borderBottomWidth:1,borderColor:'#eee',flexDirection:'row'}}>
             <View style={{flex:1,flexDirection:'row',paddingLeft:15,paddingBottom:15,paddingTop:15,borderRightWidth:1,borderColor:'#eee'}}>
               <Image source={require('@images/Instagram-Filled-50.png')}
@@ -211,6 +315,7 @@ class ProfilePage extends Component {
             </View>
             { this._renderQuestions()}
           </View>
+          {this._renderMatchAndPassButtons()}
         </View>
       </ScrollView>
     )
@@ -226,7 +331,6 @@ class ProfilePage extends Component {
       />
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -256,11 +360,25 @@ const styles = StyleSheet.create({
         color:'#656565'
     },
     list:{
-    padding:15
+      padding:15
     },
     listItem:{
-        marginBottom:15
-    }
+      marginBottom:15
+    },
+    linearGradient: {
+      flex: 1,
+      paddingLeft: 15,
+      paddingRight: 15,
+      borderRadius: 5
+    },
+    buttonText: {
+        fontSize: 18,
+        fontFamily: 'Gill Sans',
+        textAlign: 'center',
+        margin: 10,
+        color: '#ffffff',
+        backgroundColor: 'transparent',
+    },
 });
 
 const mapStateToProps = state => {
