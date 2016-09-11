@@ -29,6 +29,7 @@ class ProfilePage extends Component {
     super(props);
     this._getLargePic = _.bind(this._getLargePic, this);
     this._getActiveUser = _.bind(this._getActiveUser, this);
+    this._matchActiveUser = _.bind(this._matchActiveUser, this);
     this._getMutualFriends = _.bind(this._getMutualFriends, this);
     this.state = {
     };
