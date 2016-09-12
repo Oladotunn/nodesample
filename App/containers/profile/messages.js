@@ -60,13 +60,14 @@ export default class Messages extends Component {
     const { userId } = userAppState.facebook.credentials;       
     const otherUserId = _.without(conversation.members, userId)[0];
     const otherUserDetails = _.find(otherUsers, otherUserObject => {
-      return otherUserObject.userAppState.facebook.credentials.userId === otherUserId; 
+      console.log(otherUserObject);
+      return otherUserObjecte.facebook.credentials.userId === otherUserId; 
     })
 
     const {
       userInfo,
       profilePictures,
-    } = otherUserDetails.userAppState;
+    } = otherUserDetails;
     const lastMessageIndex = conversation.messages.length - 1;
     const lastMessage = conversation.messages[lastMessageIndex];
     return (
@@ -123,10 +124,13 @@ export default class Messages extends Component {
   }
   _renderNewMatches() {
     const newMatches = this._getNewMatches();
-    if (!newMatches.length) return null;
-
     const { userAppState, otherUsers } = this.state;
+    const containsNullOtherUsers = !_.without(otherUsers, null).length;
+    if (!newMatches.length) return null;
+    if(containsNullOtherUsers) return null;
+
     const { userId } = userAppState.facebook.credentials;       
+    console.log(otherUsers);
 
     return [
       <Text key='newMatchHeader' style={[styles.titleFontColor]}>New Matches</Text>,
