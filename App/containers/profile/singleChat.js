@@ -4,15 +4,18 @@ import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from 'react-native-button';
 import AppStore from '../../app-store';
+import { ws } from '../../app-reducers';
+import { connect } from 'react-redux';
 let topPadding = 64;
 if (Platform.OS =='android'){
   topPadding = 54
 }
 
-export default class SingleChat extends Component {
+class SingleChat extends Component {
   constructor(props) {
     super(props);
     this._sendMessage = _.bind(this._sendMessage, this);
+    this._subscribeToConversationUpdates = _.bind(this._subscribeToConversationUpdates, this);
     this.state = {
       userAppState: AppStore.getState(),
       currentMessage: '',
@@ -35,10 +38,25 @@ export default class SingleChat extends Component {
     const { userId } = userAppState.facebook.credentials;
     fetch(`${userAppState.appConfig.server}/getConversationBetween/${userId}/${otherUser}`)
     .then(res => res.json())
-    .then(({ conversation }) => this.setState({ conversation}))
+    .then(({ conversation }) => {
+      this.setState({ conversation})
+      this._subscribeToConversationUpdates({ conversation })
+    })
     .catch(err => {
       console.log(err);
     })
+  }
+
+  _subscribeToConversationUpdates({ conversation }) {
+    ws.onmessage = (({ data }) => {
+      const { type, conversation: newConversationState } = JSON.parse(data);
+      console.log(type);
+      console.log(conversation.conversationId);
+      if (type !== conversation.conversationId) return false;
+      console.log('newConversationState');
+
+      this.setState({ conversation: newConversationState });
+    }); 
   }
 
   _renderMessages() {
@@ -133,3 +151,18 @@ const styles = StyleSheet.create({
     color:'#566360'
   }
 })
+
+const mapStateToProps = state => {
+  return {
+    ...state,
+  }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+  };
+};
+
+export default  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleChat);

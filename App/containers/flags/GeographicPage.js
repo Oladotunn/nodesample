@@ -24,12 +24,12 @@ class GeographicPage extends Component {
   constructor(props){
     super(props)
     this.state = {showsCancelButton:false};
+    this._searchCountries = _.bind(this._searchCountries, this);
     this._renderAfricanCountries = _.bind(this._renderAfricanCountries, this);
     this._renderCountries = _.bind(this._renderCountries, this);
     this._renderAmericasCountries = _.bind(this._renderAmericasCountries, this);
     this._updateFlagData = _.bind(this._updateFlagData, this);
   }
-
 
   _getAfricanCountries() {
     return _.filter(countryList.countries,country => country.continent === 'AF')
@@ -43,14 +43,25 @@ class GeographicPage extends Component {
   }
 
   _renderAmericasCountries() {
+    const { countryToSearch } = this.state;
     const americas = _.filter(countryList.countries, country => {
+      if (countryToSearch) {
+        const isAmericasCountry = (country.continent === 'NA') || (country.continent === 'SA');
+        const includesName = country.name.includes(countryToSearch);
+        return  isAmericasCountry && includesName;
+      }
       return (country.continent === 'NA') || (country.continent === 'SA');
     });
     return this._renderCountries(americas);
   }
 
   _renderAfricanCountries() {
+    const { countryToSearch } = this.state;
     const africanCountries = _.sortBy(this._getAfricanCountries(), 'name');
+    if (countryToSearch) {
+      const filteredCountries = _.filter(africanCountries, country => country.name.includes(countryToSearch));
+    return this._renderCountries(filteredCountries);
+    }
     return this._renderCountries(africanCountries);
   }
 
@@ -73,6 +84,9 @@ class GeographicPage extends Component {
     });
   }
 
+  _searchCountries(countryToSearch) {
+    this.setState({ countryToSearch })
+  }
 
   render() {
     return (
@@ -85,7 +99,7 @@ class GeographicPage extends Component {
           Platform.OS =='android' ?
             <Header searchBar rounded theme={myTheme} >
               <InputGroup>
-                <Input placeholder="Search" />
+                <Input onChangeText={this._searchCountries} placeholder="Search" />
               </InputGroup>
               <Button transparent>
                 Search
@@ -95,6 +109,7 @@ class GeographicPage extends Component {
               <SearchBar
                 ref='searchBar'
                 placeholder='Search'
+                onChangeText={this._searchCountries}
                 onCancelButtonPress={() => this.setState({showsCancelButton: false})}
                 onFocus={() => this.setState({showsCancelButton: true})}
                 showsCancelButton={this.state.showsCancelButton}

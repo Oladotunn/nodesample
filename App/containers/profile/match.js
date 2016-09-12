@@ -40,6 +40,7 @@ class MatchPage extends Component {
     this._getUserDetails = _.bind(this._getUserDetails, this);
     this._getActiveUser = _.bind(this._getActiveUser, this);
     this._passActiveUser = _.bind(this._passActiveUser, this);
+    this._matchActiveUser = _.bind(this._matchActiveUser, this);
     this._updatePotentialMatches = _.bind(this._updatePotentialMatches, this);
     this._updateCurrentUser = _.bind(this._updateCurrentUser, this);
     this._getMutualFriends = _.bind(this._getMutualFriends, this);
@@ -67,9 +68,12 @@ class MatchPage extends Component {
     // })
     fetch(`${userAppState.appConfig.server}/getPotentialMatchesForUserX/${userAppState.facebook.credentials.userId}`)
     .then(potentialMatchIds => potentialMatchIds.json())
-    .then(({ docs: potentialMatchIds }) => this.setState({ potentialMatchIds }))
-    .then(() => {
-      _.forEach(this.state.potentialMatchIds, userId => {
+    .then(({ docs: potentialMatchIds }) => {
+      this.setState({ potentialMatchIds })
+      return potentialMatchIds;
+    })
+    .then(potentialMatchIds => {
+      _.forEach(potentialMatchIds, userId => {
         this._getUserDetails({ userId , userAppState });
       })
       if (this.props.overrideAndPopPotentialUsers) this._passActiveUser();
@@ -148,6 +152,7 @@ class MatchPage extends Component {
 
   _renderBannerImage() {
     const activeUser = this._getActiveUser();
+    console.log(this.state.potentialMatchDetails);
     const { id: picId, picture: lowResImage } = activeUser.profilePictures.chosenPhotos[0];
     const { token } = activeUser.facebook.credentials;
 
@@ -239,12 +244,13 @@ class MatchPage extends Component {
     const { potentialMatchDetails: oldDetails, potentialMatchIds: oldMatchIds } = this.state;
 
     this.setState({
-      potentialMatchDetails: oldDetails.slice(0, oldDetails.length - 1),
-      potentialMatchDetails: oldMatchIds.slice(0, oldMatchIds.length - 1)
+      potentialMatchDetails: oldDetails.slice(1),
+      potentialMatchIds: oldMatchIds.slice(1)
     });
   }
 
   _matchActiveUser() {
+    const { userAppState } = this.state;
     const activeUser = this._getActiveUser();
     const { userId: appUserId } = this.state.userAppState.facebook.credentials;
     fetch(`${userAppState.appConfig.server}/userxWantsToMatchUserY/${appUserId}/${activeUser.appUserId}`)
@@ -327,6 +333,7 @@ class MatchPage extends Component {
 
     )
   }
+
   _renderDotIndicator() {
     return (
       <PagerDotIndicator

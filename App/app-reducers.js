@@ -7,7 +7,7 @@ const React = require('react-native');
 
 const config = {
   development: {
-    // server: 'http://10.1.10.78:3030',
+    // server: 'http://localhost:3030',
     server: 'http://tribl-83401.onmodulus.net',
   },
   production: {
@@ -35,6 +35,8 @@ ws.onclose = (e) => {
   console.log(e.code, e.reason);
 };
 
+export { ws };
+
 const appConfig = () => {
   return config[process.env.NODE_ENV || 'development'];
 };
@@ -45,3 +47,4 @@ export default combineReducers({
   profilePictures,
   appConfig,
 });
+

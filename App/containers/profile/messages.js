@@ -79,7 +79,7 @@ export default class Messages extends Component {
         })}>
         <View style={[{backgroundColor: this._getRandomHexColor()},styles.listItem]}>
           <Image 
-            style={{flex:0.5}}
+            style={{flex:0.5, width: 50, height: 50 }}
             source={{ uri: profilePictures.chosenPhotos[0].picture }}
           >
         </Image>
