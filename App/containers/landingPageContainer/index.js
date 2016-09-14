@@ -176,9 +176,6 @@ class LandingPage extends Component{
         <Image style={styles.bgImage} source={require('@images/splash.png')}>
           <View style={styles.content}>
             <View style={[styles.upperPart,styles.center]}>
-              <Image source={require('@images/logo.png')} style={styles.logo}></Image>
-              <Text style= {[transparentBg,secondaryFont,{marginTop:40},{color:'#fff'}]}>The dating app for people</Text>
-              <Text style= {[transparentBg,secondaryFont,{color:'#fff'}]}>of all <Text style={[primaryFontColor]}>colors</Text> and <Text style={[primaryFontColor]}>cultures</Text>.</Text>
             </View>
             <View style={[styles.lowerPart,styles.center]}>
               { this._getActionComponent() }
@@ -199,7 +196,7 @@ const styles = StyleSheet.create({
     flex:1,
     width: null,
     height: null,
-    backgroundColor:'#000'
+    // backgroundColor:'#000'
   },
   content:{
     flex:1,
