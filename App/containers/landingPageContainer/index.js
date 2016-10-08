@@ -25,12 +25,12 @@ import {
   hydrateProfilePicturesAction,
 } from '../../action-creators';
 import moment from 'moment';
-const { FBLoginManager } = require('react-native-facebook-login');
+import {transparentBg,primaryFont,secondaryFont,padding20,primaryFontColor} from '@theme/colors';
+import { FBLoginManager } from 'react-native-facebook-login';
 const Spinner = require('react-native-spinkit');
 
 
 
-import {transparentBg,primaryFont,secondaryFont,padding20,primaryFontColor} from '@theme/colors';
 class LandingPage extends Component{
   constructor(props) {
     super(props);
@@ -167,6 +167,26 @@ class LandingPage extends Component{
         this.setState({ ready: true });
       }
     });
+    this.getUserLocation();
+  }
+
+  getUserLocation() {
+    const onError = error => {
+      console.log('Printing out Error');
+      alert(JSON.stringify(error));
+    }
+    const onSuccess = position => {
+      const initialPosition = JSON.stringify(position);
+      console.log('Printing out location');
+      console.log(initialPosition);
+      // this.setState({initialPosition});
+    }
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 20000,
+      maximumAge: 1000
+    }
+    navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
   }
 
   render() {
