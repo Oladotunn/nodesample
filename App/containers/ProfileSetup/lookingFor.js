@@ -37,6 +37,7 @@ class LookingFor extends Component{
     this._saveUserAppState = _.bind(this._saveUserAppState,this);
     this._getActiveColor = _.bind(this._getActiveColor,this);
     this._getAge = _.bind(this._getAge,this);
+    this._getUserLocation = _.bind(this._getUserLocation,this);
     this._toggleGender = _.bind(this._toggleGender,this);
   }
 
@@ -51,6 +52,9 @@ class LookingFor extends Component{
 
   _getAge() {
     return this.props.userInfo.lookingFor;
+  }
+  _getUserLocation() {
+    return this.props.userInfo.bio.location.city;
   }
 
   _toggleGender(gender) {
@@ -111,7 +115,7 @@ class LookingFor extends Component{
         </View>
         <Text style={[{textAlign:'center',marginTop:30,marginBottom:15},styles.textColor]}>Located in:</Text>
         <TouchableOpacity style={styles.list} >
-          <Text style={{color:'#595959'}}>Houston,TX</Text>
+          <Text style={{color:'#595959'}}>{this._getUserLocation()}</Text>
           <Image source={require('@images/Forward-32.png')} style={styles.forwardArrow}></Image>
         </TouchableOpacity>
         <View style={[{alignItems:'center',marginTop:20}]}>

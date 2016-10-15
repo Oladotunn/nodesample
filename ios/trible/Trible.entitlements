@@ -7,5 +7,9 @@
 		<string>applinks:tribl.app.link</string>
 		<string>applinks:bb4i-alternate.app.link</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)org.reactjs.native.example.trible</string>
+	</array>
 </dict>
 </plist>

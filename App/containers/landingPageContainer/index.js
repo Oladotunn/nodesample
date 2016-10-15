@@ -16,6 +16,7 @@ import _ from 'lodash';
 import AppStore from '../../app-store';
 import { connect } from 'react-redux';
 import {
+  updateUserLocationAction,
   updateFbReadyAction,
   updateFbCredsAction,
   updateUserBioAction,
@@ -84,14 +85,14 @@ class LandingPage extends Component{
       if (!error) {
         this._hydrateUserAppState(data);
       } else {
-        console.log("Error (Facebook): ", data);
-        Alert.alert(
-          'Error',
-          error,
-          [
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ]
-        );
+        console.log("Error (Facebook): ", error);
+        // Alert.alert(
+        //   'Error',
+        //   error,
+        //   [
+        //     {text: 'OK', onPress: () => console.log('OK Pressed')},
+        //   ]
+        // );
         this.setState({ ready: false });
       }
     });
@@ -133,9 +134,13 @@ class LandingPage extends Component{
   }
 
   _hydrateUserAppState(facebook) {
+    console.log('got user state');
+    console.log(`url is: ${this.props.appConfig.server}/hydrateUserAppState/${facebook.credentials.userId}`);
     fetch(`${this.props.appConfig.server}/hydrateUserAppState/${facebook.credentials.userId}`)
     .then(data => data.json())
     .then(serverState => {
+      console.log('hydrating user state');
+      console.log(serverState);
       if (!serverState) {
         this.props.dispatchUpdateFbCreds(facebook.credentials);
         this._getUserPictures(facebook.credentials.token);
@@ -148,6 +153,8 @@ class LandingPage extends Component{
       }
     })
     .catch(err => {
+      console.log('error from serverState');
+      console.log(err);
       Alert.alert(
         'Error',
         err,
@@ -176,11 +183,39 @@ class LandingPage extends Component{
       alert(JSON.stringify(error));
     }
     const onSuccess = position => {
-      const initialPosition = JSON.stringify(position);
-      console.log('Printing out location');
-      console.log(initialPosition);
-      // this.setState({initialPosition});
+      const { longitude: long, latitude: lat } = position.coords;
+      const key = 'AIzaSyCME0Djvh-kJRAOk9fArpF_ubt_fWX4Dbg';
+      const reverseGeocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&components=locality&key=${key}`;
+
+      fetch(`${reverseGeocodingUrl}`)
+      .then(data => data.json())
+      .then(res => {
+        const { results } = res;
+        console.log('address_components');
+        console.log(results[0].address_components);
+        const cityObj = _.find(results[0].address_components, component => {
+          return component.types.includes('locality') && component.types.includes('political');
+        });
+        const { long_name: city } = cityObj;
+        const userLocation = { city, lat, long };
+
+        console.log('setting user location');
+        console.log(userLocation);
+        console.log('-----print end----');
+        this.props.dispatchUpdateUserLocation(userLocation);
+      })
+      .catch(err => {
+        Alert.alert(
+          'Error',
+          err,
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ]
+        );
+        this.setState({ ready: false });
+      });
     }
+
     const options = {
       enableHighAccuracy: true,
       timeout: 20000,
@@ -256,7 +291,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatchUpdateProfileAlbumDetails: profileAlbum => {
       dispatch(updateProfilePictureAlbumDetailsAction(profileAlbum));
     }, 
-    dispatchUpdateUserBio: userBio => dispatch(updateUserBioAction(userBio))
+    dispatchUpdateUserBio: userBio => dispatch(updateUserBioAction(userBio)),
+    dispatchUpdateUserLocation: userLocation => dispatch(updateUserLocationAction(userLocation))
   };
 };
 

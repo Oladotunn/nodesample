@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import {
   UPDATE_USER_BIO,
+  UPDATE_USER_LOCATION,
   UPDATE_USER_QUESTION,
   UPDATE_USER_FLAG,
   UPDATE_USER_TWITTER,
@@ -22,7 +23,11 @@ const defaultState = {
     occupation: '',
     religion: '',
     gender: '',
-    location: '',
+    location: {
+      lat: '',
+      long: '',
+      city: '',
+    },
   },
   flags: [
     {},
@@ -86,6 +91,14 @@ const userInfo = (state = defaultState, action) => {
         bio: {
           ...state.bio,
           ...action.bio,
+        }
+      }
+    case UPDATE_USER_LOCATION:
+      return {
+        ...state,
+        bio: {
+          ...state.bio,
+          location: action.userLocation
         }
       }
     case UPDATE_USER_TWITTER: 

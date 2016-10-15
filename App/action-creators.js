@@ -7,6 +7,7 @@ import {
   UPDATE_FB_TOKEN,
   UPDATE_FB_CREDS,
   HYDRATE_FB,
+  UPDATE_USER_LOCATION,
   UPDATE_USER_BIO,
   UPDATE_USER_QUESTION,
   UPDATE_LOOKINGFOR_CRITERIA,
@@ -67,6 +68,12 @@ const updateUserFlagAction = ({ flag, index }) => {
     type: UPDATE_USER_FLAG,
     flag,
     index,
+  };
+};
+const updateUserLocationAction = userLocation => {
+  return {
+    type: UPDATE_USER_LOCATION,
+    userLocation,
   };
 };
 
@@ -165,6 +172,7 @@ export {
   updateFbReadyAction,
   hydrateFbAction,
   updateUserBioAction,
+  updateUserLocationAction,
   updateUserQuestionAction,
   updateUserTwitterAction,
   updateUserInstagramAction,

@@ -38,6 +38,10 @@ class Settings extends Component {
     return `${lookingFor.gender}`;
   }
 
+  _getUserLocation() {
+    return this.props.userInfo.bio.location.city;
+  }
+
   render() {
     return (
       <ScrollView style={{paddingTop:topPadding}}>
@@ -54,7 +58,7 @@ class Settings extends Component {
           </View>
           <View style={[styles.listItem]}>
             <Text>Located in</Text>
-            <Text style={{color:'#d91434'}}>Houston,TX</Text>
+            <Text style={{color:'#d91434'}}>{this._getUserLocation()}</Text>
           </View>
           <View style={[styles.listItem]}>
             <Text>Search Radius</Text>
