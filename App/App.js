@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Scene, Reducer, Router, Switch, TabBar, Modal, Schema, Actions} from 'react-native-router-flux';
+import {ActionConst, Scene, Reducer, Router, Switch, TabBar, Modal, Schema, Actions} from 'react-native-router-flux';
 
 import LandingPage from './containers/landingPageContainer/index';
 import PageOne from './containers/PageOne';
@@ -59,6 +59,7 @@ export default class App extends Component {
             />
             <Scene
               key="main"
+              type={ActionConst.RESET}
               tabs={true} tabBarStyle={{backgroundColor:'#fff',borderTopWidth:1,borderColor:'#eeeeee'}}>
               <Scene key="profile" initial  title="TRiBL"
                 navigationBarStyle={primaryThemeColor}

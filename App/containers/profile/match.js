@@ -156,15 +156,13 @@ class MatchPage extends Component {
     const { id: picId, picture: lowResImage } = activeUser.profilePictures.chosenPhotos[0];
     const { token } = activeUser.facebook.credentials;
 
-    console.log('rerender')
-
     return (
       <TouchableOpacity key='bannerImage' style={{flex:6}} onPress={()=> Actions.matchDetail({ userForMatching: activeUser })}>
         <Image source={{uri: this.state.bannerImages[picId] }}
           style={[{width: null, height: null,flex:1}]} >
           <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
             <Text style={{color:'#fff',fontSize:20}}>{activeUser.userInfo.bio.name}</Text>
-            <Text style={{color:'#fff',fontSize:20}}>{activeUser.userInfo.bio.location}</Text>
+            <Text style={{color:'#fff',fontSize:20}}>{activeUser.userInfo.bio.location.city}</Text>
           </View>
           <View style={styles.countries}>
             {

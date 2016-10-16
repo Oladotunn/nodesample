@@ -164,6 +164,10 @@ class ProfilePage extends Component {
     })
   }
 
+  _getUserLocation() {
+    return this.props.userInfo.bio.location.city;
+  }
+
   _renderQuestions() {
     const {questions} = this._getActiveUser().userInfo;
     return _.map(questions, questionObj => {
@@ -266,7 +270,7 @@ class ProfilePage extends Component {
           </IndicatorViewPager>
           <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
             <Text style={{color:'#fff',fontSize:20}}>{this._getUserDetails()}</Text>
-            <Text style={{color:'#fff',fontSize:20}}>Houston,TX</Text>
+            <Text style={{color:'#fff',fontSize:20}}>{this._getUserLocation()}</Text>
           </View>
           <View style={styles.countries}>
             {this._getFlags()}
