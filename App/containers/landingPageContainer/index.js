@@ -191,17 +191,12 @@ class LandingPage extends Component{
       .then(data => data.json())
       .then(res => {
         const { results } = res;
-        console.log('address_components');
-        console.log(results[0].address_components);
         const cityObj = _.find(results[0].address_components, component => {
           return component.types.includes('locality') && component.types.includes('political');
         });
         const { long_name: city } = cityObj;
         const userLocation = { city, lat, long };
 
-        console.log('setting user location');
-        console.log(userLocation);
-        console.log('-----print end----');
         this.props.dispatchUpdateUserLocation(userLocation);
       })
       .catch(err => {

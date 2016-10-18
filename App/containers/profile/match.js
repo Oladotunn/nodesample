@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import AppStore from '../../app-store';
 import _ from 'lodash';
 import getLargeFacebookPhoto from '../../helpers/facebook/getLargePhoto';
+import moment from 'moment';
 const Spinner = require('react-native-spinkit');
 
 let topPadding = 64;
@@ -88,6 +89,7 @@ class MatchPage extends Component {
     if (isPotentialMatchDetailsSame && !this.props.overrideAndPopPotentialUsers) return false; 
 
     // calling overrideAndPopPotentialUsers is the equivalent of passing the activeUser
+    // ie: the activeUser is popped off the stack of potential users
     if (this.props.overrideAndPopPotentialUsers) {
       console.log('supposed to pop');
       this._passActiveUser();
@@ -108,12 +110,39 @@ class MatchPage extends Component {
     this._getMutualFriends({ activeUserId, token });
   }
 
+  _doesUserFitSearchCriteria({ user }) {
+    const { lookingFor } = this.state.userAppState.userInfo;
+    const {
+      gender: lookingForGender,
+      minAge: lookingForMinAge,
+      maxAge: lookingForMaxAge ,
+      located: lookingForLocated,
+    } = lookingFor;
+
+    const { bio } = user.userAppState.userInfo; 
+    const { gender, birthday, location } = bio;
+
+    const userAge = moment().year() - moment(birthday).year();
+    const matchesGender = lookingForGender === gender;
+    const isGreaterThanMinAge =  userAge >= lookingForMinAge;
+    const isLessThanMaxAge = userAge <= lookingForMaxAge;
+    const isSameCity = location.city === lookingForLocated.city;
+
+    const matchesCriteria = matchesGender && isGreaterThanMinAge && isLessThanMaxAge && isSameCity;
+    return { matchesCriteria, user };
+  }
+
   _getUserDetails({ userId, userAppState }) {
     fetch(`${userAppState.appConfig.server}/getUserDetails/${userId}`)
     .then(res => res.json())
-    .then(({ userAppState: userDetails}) => {
+    .then(user => {
+      return this._doesUserFitSearchCriteria({ user });
+    })
+    .then(({ matchesCriteria, user: userDetails}) => {
       const { potentialMatchDetails: oldMatches, potentialMatchIds: oldMatchIds } = this.state;
       userDetails.appUserId = userId;
+
+      if (!matchesCriteria) return false;
 
       this.setState({
         potentialMatchDetails: [
