@@ -139,8 +139,6 @@ class LandingPage extends Component{
     fetch(`${this.props.appConfig.server}/hydrateUserAppState/${facebook.credentials.userId}`)
     .then(data => data.json())
     .then(serverState => {
-      console.log('hydrating user state');
-      console.log(serverState);
       if (!serverState) {
         this.props.dispatchUpdateFbCreds(facebook.credentials);
         this._getUserPictures(facebook.credentials.token);

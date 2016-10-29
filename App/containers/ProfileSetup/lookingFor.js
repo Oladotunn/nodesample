@@ -43,7 +43,7 @@ class LookingFor extends Component{
 
   _saveUserAppState() {
     SyncDataToServer(true);
-    Actions.main();
+    Actions.main({type: 'reset'});
   }
 
   _getActiveColor(gender) {
