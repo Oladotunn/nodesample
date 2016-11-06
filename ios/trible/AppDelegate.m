@@ -7,6 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+//#import "AppHub.h"
 #import "AppDelegate.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -19,9 +20,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+//  [AppHub setApplicationID:@"GoDW6bi0MjFzl3JcSQ7S"];
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  
+//  AHBuild *build = [[AppHub buildManager] currentBuild];
+//  jsCodeLocation = [build.bundle URLForResource:@"main"
+//                                  withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"trible"
