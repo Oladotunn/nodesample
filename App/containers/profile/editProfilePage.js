@@ -109,6 +109,7 @@ class EditProfilePage extends Component {
     })
     .then(({ data: instagram }) => this.setState({ instagram }))
     .catch(error => {
+      console.log(error);
       console.log(`Error instagram: ${error.code} and ${error.description}`);
     });
   }

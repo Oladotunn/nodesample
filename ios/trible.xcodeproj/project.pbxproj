@@ -27,8 +27,10 @@
 		31BD22C68ACE46C9A8A4CAF3 /* Skia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5815DD861EF44833A8F78E06 /* Skia.ttf */; };
 		3A86EE99B68A44A9A94DBE87 /* libRNInvoke.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDFDD50A5F24B178942A083 /* libRNInvoke.a */; };
 		4DA442820CEB4AA9AE2D4074 /* Andale Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A669F260E73E490E9DD22661 /* Andale Mono.ttf */; };
+		5421466DFF89A789A57AF845 /* Pods_trible.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93DABE47D1C0EDDADF35CF6 /* Pods_trible.framework */; };
 		5D2E304D1DCAB5F300FD501C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2E304C1DCAB5F200FD501C /* SystemConfiguration.framework */; };
 		5D2E304F1DCAB5FE00FD501C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2E304E1DCAB5FE00FD501C /* libz.tbd */; };
+		5D514F971E058F76000BBA5A /* SimpleAuthWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D514F961E058F76000BBA5A /* SimpleAuthWrapper.m */; };
 		5D80011E1DA98B28004A8C6D /* libRCTFBLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8001141DA98B07004A8C6D /* libRCTFBLogin.a */; };
 		5D8001221DA98C5C004A8C6D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D80011F1DA98C5C004A8C6D /* FBSDKCoreKit.framework */; };
 		5D8001231DA98C5C004A8C6D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8001201DA98C5C004A8C6D /* FBSDKLoginKit.framework */; };
@@ -200,8 +202,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = trible/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = trible/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1AABAC2889E4CB6C86FBA6A2 /* Pods-trible.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trible.release.xcconfig"; path = "Pods/Target Support Files/Pods-trible/Pods-trible.release.xcconfig"; sourceTree = "<group>"; };
 		307AB86A63444576945FAC0E /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		32363C2450D848B8BA0B997D /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
+		3758C0392E126E828EE0FB74 /* Pods-trible.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trible.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trible/Pods-trible.debug.xcconfig"; sourceTree = "<group>"; };
 		3DC20BE9628C4E19B6C5E497 /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		4DDFDD50A5F24B178942A083 /* libRNInvoke.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNInvoke.a; sourceTree = "<group>"; };
 		5688AC5675E14F1BAE91470E /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 		5D094EC41DB273040030E2CA /* trible.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = trible.entitlements; path = trible/trible.entitlements; sourceTree = "<group>"; };
 		5D2E304C1DCAB5F200FD501C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5D2E304E1DCAB5FE00FD501C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		5D514F951E058F76000BBA5A /* SimpleAuthWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAuthWrapper.h; path = "../node_modules/react-native-simple-auth/iOS/SimpleAuthWrapper.h"; sourceTree = "<group>"; };
+		5D514F961E058F76000BBA5A /* SimpleAuthWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleAuthWrapper.m; path = "../node_modules/react-native-simple-auth/iOS/SimpleAuthWrapper.m"; sourceTree = "<group>"; };
 		5D80010E1DA98B07004A8C6D /* RCTFBLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBLogin.xcodeproj; path = "../node_modules/react-native-facebook-login/RCTFBLogin.xcodeproj"; sourceTree = "<group>"; };
 		5D80011F1DA98C5C004A8C6D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		5D8001201DA98C5C004A8C6D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -225,6 +231,7 @@
 		99191C7AECC249E085371A6F /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		A669F260E73E490E9DD22661 /* Andale Mono.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Andale Mono.ttf"; path = "../node_modules/native-base/Fonts/Andale Mono.ttf"; sourceTree = "<group>"; };
 		C6E9393433AB4C0183A40BF4 /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
+		C93DABE47D1C0EDDADF35CF6 /* Pods_trible.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trible.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA6ECE23B7046C8B8D999D0 /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-UI-Text-Regular.otf"; path = "../node_modules/native-base/Fonts/SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		CF8EF473EDA14EFE9C92AAE6 /* Times New Roman.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Times New Roman.ttf"; path = "../node_modules/native-base/Fonts/Times New Roman.ttf"; sourceTree = "<group>"; };
 		E9789763DDB7424797297D95 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
@@ -267,6 +274,7 @@
 				6E48DDE1207343BBB35B926A /* libBVLinearGradient.a in Frameworks */,
 				69D9C1F3A130443E9974492A /* libRCTMaterialKit.a in Frameworks */,
 				E75F018CD8894598A4A306F7 /* libRNSearchBar.a in Frameworks */,
+				5421466DFF89A789A57AF845 /* Pods_trible.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +401,7 @@
 			children = (
 				5D2E304E1DCAB5FE00FD501C /* libz.tbd */,
 				5D2E304C1DCAB5F200FD501C /* SystemConfiguration.framework */,
+				C93DABE47D1C0EDDADF35CF6 /* Pods_trible.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -464,6 +473,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5D514F951E058F76000BBA5A /* SimpleAuthWrapper.h */,
+				5D514F961E058F76000BBA5A /* SimpleAuthWrapper.m */,
 				5D8001B51DA9906C004A8C6D /* RNTableView.xcodeproj */,
 				5D80010E1DA98B07004A8C6D /* RCTFBLogin.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -505,6 +516,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				4B0FB3BF9118435E92B70D3F /* Resources */,
 				5D2E304B1DCAB5F100FD501C /* Frameworks */,
+				91E63669175199CEA44F45B8 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -517,6 +529,15 @@
 				00E356EE1AD99517003FC87E /* tribleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		91E63669175199CEA44F45B8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3758C0392E126E828EE0FB74 /* Pods-trible.debug.xcconfig */,
+				1AABAC2889E4CB6C86FBA6A2 /* Pods-trible.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,10 +565,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "trible" */;
 			buildPhases = (
+				9031CCBA8B410CC716DDC504 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				A7AA441AB8F134A231BD560B /* [CP] Embed Pods Frameworks */,
+				CBE608E0889BF79D3AF5E2F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -838,6 +862,51 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		9031CCBA8B410CC716DDC504 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A7AA441AB8F134A231BD560B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trible/Pods-trible-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBE608E0889BF79D3AF5E2F1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trible/Pods-trible-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -854,6 +923,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				5D514F971E058F76000BBA5A /* SimpleAuthWrapper.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -932,13 +1002,18 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3758C0392E126E828EE0FB74 /* Pods-trible.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = trible/trible.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = NBLVNS5V95;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -949,6 +1024,7 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-search-bar/**",
 					"$(SRCROOT)/../node_modules/react-native-tableview/**",
+					"$(SRCROOT)/../Pods/**",
 				);
 				INFOPLIST_FILE = trible/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -966,12 +1042,17 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AABAC2889E4CB6C86FBA6A2 /* Pods-trible.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = trible/trible.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NBLVNS5V95;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -982,6 +1063,7 @@
 					"$(SRCROOT)/../node_modules/react-native-material-kit/iOS/RCTMaterialKit",
 					"$(SRCROOT)/../node_modules/react-native-search-bar/**",
 					"$(SRCROOT)/../node_modules/react-native-tableview/**",
+					"$(SRCROOT)/../Pods/**",
 				);
 				INFOPLIST_FILE = trible/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
