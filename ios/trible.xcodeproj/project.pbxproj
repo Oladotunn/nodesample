@@ -36,6 +36,7 @@
 		5D8001231DA98C5C004A8C6D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8001201DA98C5C004A8C6D /* FBSDKLoginKit.framework */; };
 		5D8001241DA98C5C004A8C6D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8001211DA98C5C004A8C6D /* FBSDKShareKit.framework */; };
 		5D8001BB1DA99099004A8C6D /* libRNTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8001BA1DA9906C004A8C6D /* libRNTableView.a */; };
+		5D8A4C531E0C565F00C49283 /* TwitterSignin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8A4C511E0C565F00C49283 /* TwitterSignin.m */; };
 		630F6C250DF34595A803D261 /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1CAE8D2863478CB9110ADC /* Arial Black.ttf */; };
 		66864113DEE14D59A18C1D1D /* Times New Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF8EF473EDA14EFE9C92AAE6 /* Times New Roman.ttf */; };
 		69D9C1F3A130443E9974492A /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32363C2450D848B8BA0B997D /* libRCTMaterialKit.a */; };
@@ -221,6 +222,8 @@
 		5D8001201DA98C5C004A8C6D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		5D8001211DA98C5C004A8C6D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		5D8001B51DA9906C004A8C6D /* RNTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNTableView.xcodeproj; path = "../node_modules/react-native-tableview/RNTableView.xcodeproj"; sourceTree = "<group>"; };
+		5D8A4C511E0C565F00C49283 /* TwitterSignin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterSignin.m; path = "../node_modules/react-native-twitter-signin/ios/TwitterSignin/TwitterSignin.m"; sourceTree = "<group>"; };
+		5D8A4C521E0C565F00C49283 /* TwitterSignin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterSignin.h; path = "../node_modules/react-native-twitter-signin/ios/TwitterSignin/TwitterSignin.h"; sourceTree = "<group>"; };
 		660B5310CB264542A014BFFF /* RNInvoke.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNInvoke.xcodeproj; path = "../node_modules/react-native-invoke/ios/RNInvoke.xcodeproj"; sourceTree = "<group>"; };
 		77C2E670F72E42BC9FAC6206 /* Microsoft Sans Serif.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Microsoft Sans Serif.ttf"; path = "../node_modules/native-base/Fonts/Microsoft Sans Serif.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -473,6 +476,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5D8A4C511E0C565F00C49283 /* TwitterSignin.m */,
+				5D8A4C521E0C565F00C49283 /* TwitterSignin.h */,
 				5D514F951E058F76000BBA5A /* SimpleAuthWrapper.h */,
 				5D514F961E058F76000BBA5A /* SimpleAuthWrapper.m */,
 				5D8001B51DA9906C004A8C6D /* RNTableView.xcodeproj */,
@@ -923,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				5D8A4C531E0C565F00C49283 /* TwitterSignin.m in Sources */,
 				5D514F971E058F76000BBA5A /* SimpleAuthWrapper.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -1006,6 +1012,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = trible/trible.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1046,6 +1053,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = trible/trible.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NBLVNS5V95;

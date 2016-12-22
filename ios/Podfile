@@ -4,12 +4,22 @@ use_frameworks!
 target 'trible' do
   pod 'SimpleAuth/Facebook'
   pod 'SimpleAuth/GoogleWeb'
-  pod 'SimpleAuth/Twitter'
+  pod 'SimpleAuth/TwitterWeb'
   pod 'SimpleAuth/Instagram'
   pod 'SimpleAuth/LinkedInWeb'
 
+  pod 'Fabric'
+  pod 'TwitterKit'
+  pod 'Crashlytics'
+
 
 post_install do |installer|
+  work_dir = Dir.pwd
+  file_name = "#{work_dir}/Pods/Target\ Support\ Files/SimpleAuth/SimpleAuth.xcconfig"
+  config = File.read(file_name)
+  new_config = config.gsub(/HEADER_SEARCH_PATHS = "/, 'HEADER_SEARCH_PATHS = "${PODS_ROOT}" "')
+  File.open(file_name, 'w') { |file| file << new_config }
+
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
             config.build_settings['SWIFT_VERSION'] = '2.3'  ## or '3.0'

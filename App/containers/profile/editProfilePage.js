@@ -27,8 +27,6 @@ import {
 import SyncDataToServer from '../../sync-to-server';
 
 const simpleAuthClient = require('react-native-simple-auth');
-const { TwitterSignin } = NativeModules;
-
 
 let topPadding = 64;
 if(Platform.OS =='android'){
@@ -126,16 +124,22 @@ class EditProfilePage extends Component {
   }
 
   _getTwitterHandle() {
-    TwitterSignin.logIn(
-      'fssXaegjxfYwUNlK070WUBejv',
-      'TAXZncan8E2ISC6holmiHXOsepjSCFQLiD3dhnR4FzKix37QAJ',
-      (error, loginData) => {
-        if (!error) {
-          this.setState({ twitter: loginData });
-        } else {
-          Alert.alert('Invalid login', 'Unable to login');
-        }
-    });
+    simpleAuthClient.configure('twitter-web', {
+      consumer_key: 'fssXaegjxfYwUNlK070WUBejv',
+      consumer_secret: 'TAXZncan8E2ISC6holmiHXOsepjSCFQLiD3dhnR4FzKix37QAJ',
+    })
+    .then(() => {
+      console.log('succesfuly configured twitter');
+      return simpleAuthClient.authorize('twitter-web');
+    })
+    .then((response) => {
+      console.log(response);
+      this.setState({ twitter: response });
+    })
+    .catch(err => {
+      console.log(`twitter data error: ${err}`)
+      console.log(err);
+    })
   }
 
   _storeEthnicity(event) {
