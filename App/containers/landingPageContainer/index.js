@@ -92,7 +92,7 @@ class LandingPage extends Component{
             {text: 'OK', onPress: () => console.log('OK Pressed')},
           ]
         );
-        this.setState({ ready: false });
+        this.setState({ ready: true });
       }
     });
   }
@@ -200,7 +200,7 @@ class LandingPage extends Component{
             {text: 'OK', onPress: () => console.log('OK Pressed')},
           ]
         );
-        this.setState({ ready: false });
+        this.setState({ ready: true });
       });
     }
 
