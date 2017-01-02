@@ -85,14 +85,13 @@ class LandingPage extends Component{
       if (!error) {
         this._hydrateUserAppState(data);
       } else {
-        console.log("Error (Facebook): ", error);
-        // Alert.alert(
-        //   'Error',
-        //   error,
-        //   [
-        //     {text: 'OK', onPress: () => console.log('OK Pressed')},
-        //   ]
-        // );
+        Alert.alert(
+          'Error',
+          error,
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ]
+        );
         this.setState({ ready: false });
       }
     });
@@ -134,8 +133,6 @@ class LandingPage extends Component{
   }
 
   _hydrateUserAppState(facebook) {
-    console.log('got user state');
-    console.log(`url is: ${this.props.appConfig.server}/hydrateUserAppState/${facebook.credentials.userId}`);
     fetch(`${this.props.appConfig.server}/hydrateUserAppState/${facebook.credentials.userId}`)
     .then(data => data.json())
     .then(serverState => {
@@ -151,8 +148,6 @@ class LandingPage extends Component{
       }
     })
     .catch(err => {
-      console.log('error from serverState');
-      console.log(err);
       Alert.alert(
         'Error',
         err,
@@ -160,7 +155,7 @@ class LandingPage extends Component{
           {text: 'OK', onPress: () => console.log('OK Pressed')},
         ]
       );
-      this.setState({ ready: false });
+      this.setState({ ready: true });
     })
   }
 
