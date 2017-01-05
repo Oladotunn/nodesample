@@ -38,6 +38,7 @@ class EditProfilePage extends Component {
     super(props);
     this.state = { questions: {} };
     this._getTwitterHandle = _.bind(this._getTwitterHandle, this);
+    this._getUserLocation = _.bind(this._getUserLocation, this);
     this._getInstagramHandle = _.bind(this._getInstagramHandle, this);
     this._storeReligion = _.bind(this._storeReligion, this);
     this._storeEthnicity = _.bind(this._storeEthnicity, this);
@@ -133,6 +134,7 @@ class EditProfilePage extends Component {
       return simpleAuthClient.authorize('twitter-web');
     })
     .then((response) => {
+      console.log('twitter response');
       console.log(response);
       this.setState({ twitter: response });
     })
@@ -238,6 +240,10 @@ class EditProfilePage extends Component {
     });
   }
 
+  _getUserLocation() {
+    return this.props.userInfo.bio.location.city;
+  }
+
   _renderQuestions() {
     const {questions} = this.props.userInfo;
     return _.map(questions, (questionObj, index) => {
@@ -280,7 +286,9 @@ class EditProfilePage extends Component {
           </IndicatorViewPager>
           <View style={{position:'absolute',bottom:30,left:20,backgroundColor:'transparent'}}>
             <Text style={{color:'#fff',fontSize:20}}>{this._getUserDetails()}</Text>
-            <Text style={{color:'#fff',fontSize:20}}>Houston,TX</Text>
+            <Text style={{color:'#fff',fontSize:20}}>
+              {this._getUserLocation()}
+            </Text>
           </View>
           <View style={styles.countries}>
             {this._getFlags()}
@@ -308,7 +316,7 @@ class EditProfilePage extends Component {
               <Image source={require('@images/Twitter-Filled-50.png')} style={{width:20,height:20,marginRight:10}}>
               </Image>
               <Text onPress={this._getTwitterHandle} style={[styles.fontColor,styles.editLink]}>
-                { this.state.twitter ? `@${this.state.twitter.userName}` : 'Add Account' }
+                { this.state.twitter ? `@${this.state.twitter.screen_name}` : 'Add Account' }
               </Text>
             </View>
           </View>

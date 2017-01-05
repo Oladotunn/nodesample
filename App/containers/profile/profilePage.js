@@ -73,7 +73,7 @@ class ProfilePage extends Component {
     const { twitter } = this._getActiveUser().userInfo;
     if (!twitter) return 'Add Account';
 
-    return `@${twitter.userName}`;
+    return `@${twitter.screen_name}`;
   }
 
   _getInstagramHandle() {
