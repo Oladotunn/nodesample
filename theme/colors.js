@@ -1,5 +1,9 @@
 /* @flow */
 
+
+import Dimensions from 'Dimensions';
+const windowHeight = Dimensions.get('window').height;
+
 export const DEFAULT_BACKGROUND_COLOR = 'rgb(250, 250, 250)'
 export const transparentBg = {
   backgroundColor:'transparent'
@@ -21,7 +25,8 @@ export const primaryFontColor={
 export const modalWhite ={
   backgroundColor:'#fff',
   margin:20,
-  borderRadius:4
+  borderRadius:4,
+  height: windowHeight * 0.75
 }
 
 export const borderRadius={

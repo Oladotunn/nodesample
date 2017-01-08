@@ -9,6 +9,7 @@
 
 //#import "AppHub.h"
 #import "AppDelegate.h"
+#import "CodePush.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -23,7 +24,12 @@
 //  [AppHub setApplicationID:@"GoDW6bi0MjFzl3JcSQ7S"];
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  
+#ifdef DEBUG
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+#else
+    jsCodeLocation = [CodePush bundleURL];
+#endif
   
 //  AHBuild *build = [[AppHub buildManager] currentBuild];
 //  jsCodeLocation = [build.bundle URLForResource:@"main"

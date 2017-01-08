@@ -207,7 +207,7 @@ class ProfileSetUp extends Component {
       return (
         <Container>
           <View style={styles.container}>
-            <View style={modalWhite}>
+            <View style={[modalWhite]}>
               <SwipeableViews index={this.state.currentView} onChangeIndex={(index,fromIndex)=> this.setState({currentView:index})}>
                 <View style={styles.wrapper}>
                   <View style={{alignItems:'center'}}>

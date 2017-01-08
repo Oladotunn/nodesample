@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  NetInfo,
   StatusBar
 } from 'react-native';
 import _ from 'lodash';
@@ -39,6 +40,7 @@ class LandingPage extends Component{
     this._loginWithFB = _.bind(this._loginWithFB, this);
     this._getActionComponent = _.bind(this._getActionComponent, this);
     this._hydrateUserAppState = _.bind(this._hydrateUserAppState, this);
+    this._checkNetworkConnectivity = _.bind(this._checkNetworkConnectivity, this);
     this.state = {
       ready: false,
     };
@@ -69,6 +71,14 @@ class LandingPage extends Component{
     })
     .catch(err => {
       console.log(`could not get Facebook photos: ${err}`);
+      Alert.alert(
+        'Error',
+        err,
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]
+      );
+      this.setState({ ready: true });
     });
   }
 
@@ -113,6 +123,9 @@ class LandingPage extends Component{
         />
       ); 
     } 
+    const loginWithFacebook = () => {
+      this._checkNetworkConnectivity(this._loginWithFB);
+    }
     return (
       <TouchableOpacity
         style={[
@@ -123,7 +136,7 @@ class LandingPage extends Component{
             flexDirection:"column",alignItems:'center'},
             padding20
         ]}
-        onPress={this._loginWithFB}>
+        onPress={loginWithFacebook}>
         <Text
           style={[transparentBg,styles.whiteColor,primaryFont,{textAlign:'center'}]} >
           Connect With Facebook
@@ -159,21 +172,63 @@ class LandingPage extends Component{
     })
   }
 
-  componentWillMount() {
-    FBLoginManager.getCredentials((error, data) => {
-      if (!error) {
-        this._hydrateUserAppState(data);
-      } else {
-        this.setState({ ready: true });
-      }
+  _checkNetworkConnectivity(onSuccess) {
+    const self = this;
+    NetInfo.fetch().done((reach) => {
+      console.log('Initial: ' + reach);
     });
-    this.getUserLocation();
+
+    function handleFirstConnectivityChange(reach) {
+      const lowercaseReach  = _.lowerCase(reach);
+      const noWifi = lowercaseReach === 'none';
+      const unknownData = lowercaseReach === 'unknown';
+
+      if (noWifi || unknownData) {
+        Alert.alert(
+          'Error',
+          `Failed to connect to server`,
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ]
+        );
+        self.setState({ ready: true });
+      } else {
+        NetInfo.removeEventListener(
+          'change',
+          handleFirstConnectivityChange
+        );
+        onSuccess();
+      }
+    }
+    NetInfo.addEventListener('change',handleFirstConnectivityChange);
+  }
+
+  componentWillMount() {
+    const getCredentials = () => {
+      FBLoginManager.getCredentials((error, data) => {
+        if (!error) {
+          this._hydrateUserAppState(data);
+        } else {
+          console.log('facebook error');
+          this.setState({ ready: true });
+        }
+      });
+      this.getUserLocation();
+    }
+    this._checkNetworkConnectivity(getCredentials);
   }
 
   getUserLocation() {
     const onError = error => {
       console.log('Printing out Error');
-      alert(JSON.stringify(error));
+      Alert.alert(
+        'Error',
+        JSON.stringify(error),
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]
+      );
+      this.setState({ ready: true });
     }
     const onSuccess = position => {
       const { longitude: long, latitude: lat } = position.coords;
@@ -193,6 +248,7 @@ class LandingPage extends Component{
         this.props.dispatchUpdateUserLocation(userLocation);
       })
       .catch(err => {
+        console.log('user location error');
         Alert.alert(
           'Error',
           err,
