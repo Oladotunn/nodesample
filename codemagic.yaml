@@ -42,7 +42,8 @@ workflows:
               script: |
                 # build Android
                 # cd android
-                ./gradlew assembleRelease
+                androidjs b
+                # ./gradlew assembleRelease
 
         artifacts:
             - android/app/build/outputs/**/*.apk
