@@ -47,7 +47,7 @@ workflows:
 
         artifacts:
             - android/app/build/outputs/**/*.apk
-        
-        email:
-          recipients:
-            - stephen.olabode@nautilus.tech
+        publishing:
+            email:
+              recipients:
+                  - stephen.olabode@nautilus.tech
