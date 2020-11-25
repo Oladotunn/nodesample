@@ -25,9 +25,10 @@ workflows:
         scripts:
             - name: Install npm dependencies
               script: |
-                npm install
                 npm install androidjs
                 npm install -g androidjs-builder
+                androidjs g
+                npm install
             # - name: Set Android SDK location
               # script: |
                 # echo "sdk.dir=$DevOps/nautilus/workspace/tribl/sample-app/chat-app" > "$FCI_BUILD_DIR/android/local.properties"
