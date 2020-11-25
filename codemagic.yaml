@@ -44,7 +44,7 @@ workflows:
               script: |
                 # build Android
                 # cd android
-                androidjs b
+                androidjs b -f
                 # ./gradlew assembleRelease
 
         artifacts:
