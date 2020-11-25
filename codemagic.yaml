@@ -26,8 +26,8 @@ workflows:
             - name: Install npm dependencies
               script: |
                 npm install androidjs
-                npm install -g androidjs-builder
-                androidjs g
+                # npm install -g androidjs-builder
+                androidjs init
                 npm install
             # - name: Set Android SDK location
               # script: |
