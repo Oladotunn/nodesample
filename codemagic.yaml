@@ -23,7 +23,7 @@ workflows:
                 - pattern: mobile
                   include: true
                   source: true
-          scripts:
+        scripts:
             - name: Install npm dependencies
               script: |
                 npm install
