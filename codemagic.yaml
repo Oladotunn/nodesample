@@ -125,9 +125,9 @@ workflows:
             #   script: |
             #     echo $CM_CERTIFICATE | base64 --decode > /tmp/certificate.p12
             #     keychain add-certificates --certificate /tmp/certificate.p12 --certificate-password $CM_CERTIFICATE_PASSWORD
-            - name: Use system default keychain
-              script: |
-                keychain add-certificates
+            # - name: Use system default keychain
+              # script: |
+                # keychain add-certificates
             - name: Increment build number
               script: |
                 #!/bin/sh
