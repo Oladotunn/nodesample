@@ -6,7 +6,7 @@ workflows:
         name: React Native Android
         max_build_duration: 120
         environment:
-            vars:
+            # vars:
                 # https://firebase.google.com/docs/cli#cli-ci-systems
                 # FIREBASE_TOKEN: Encrypted(...) # <-- Put your encrypted Firebase App Distribution CI token here
                 # CM_KEYSTORE: Encrypted(...) # <-- Put your encrypted keystore file here
