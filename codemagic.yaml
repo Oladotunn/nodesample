@@ -120,7 +120,7 @@ workflows:
               script: |
                 # For information about Codemagic CLI commands visit: https://github.com/codemagic-ci-cd/cli-tools/blob/master/docs/app-store-connect/README.md
                 # app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) --type IOS_APP_STORE --create
-                app-store-connect fetch-signing-files "com.codemagicreactnative" --type IOS_APP_ADHOC --create
+                # app-store-connect fetch-signing-files "com.codemagicreactnative" --type IOS_APP_ADHOC --create
             # - name: Set up signing certificate (Use with manual code signing)
             #   script: |
             #     echo $CM_CERTIFICATE | base64 --decode > /tmp/certificate.p12
