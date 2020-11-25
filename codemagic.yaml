@@ -8,11 +8,11 @@ workflows:
         environment:
             vars:
                 # https://firebase.google.com/docs/cli#cli-ci-systems
-                FIREBASE_TOKEN: Encrypted(...) # <-- Put your encrypted Firebase App Distribution CI token here
-                CM_KEYSTORE: Encrypted(...) # <-- Put your encrypted keystore file here
-                CM_KEYSTORE_PASSWORD: Encrypted(...) # <-- Put your encrypted keystore password here
-                CM_KEY_ALIAS_PASSWORD: Encrypted(...) # <-- Put your encrypted keystore alias password here
-                CM_KEY_ALIAS_USERNAME: Encrypted(...) # <-- Put your encrypted keystore alias username here
+                # FIREBASE_TOKEN: Encrypted(...) # <-- Put your encrypted Firebase App Distribution CI token here
+                # CM_KEYSTORE: Encrypted(...) # <-- Put your encrypted keystore file here
+                # CM_KEYSTORE_PASSWORD: Encrypted(...) # <-- Put your encrypted keystore password here
+                # CM_KEY_ALIAS_PASSWORD: Encrypted(...) # <-- Put your encrypted keystore alias password here
+                # CM_KEY_ALIAS_USERNAME: Encrypted(...) # <-- Put your encrypted keystore alias username here
             
             node: latest
         triggering:
