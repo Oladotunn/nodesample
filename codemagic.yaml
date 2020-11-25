@@ -50,4 +50,4 @@ workflows:
         
         email:
           recipients:
-            - stephen.olabode@nautilus.tech
+            - stephen.olabode@nautilus.tech 
