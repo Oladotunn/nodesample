@@ -37,7 +37,7 @@ workflows:
               script: |
                 # build Android
                 cd android 
-                ./gradlew clean
+                ./gradlew 
         artifacts:
             - android/app/build/outputs/**/*.apk
         publishing:
