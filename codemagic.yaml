@@ -40,7 +40,7 @@ workflows:
               script: |
                 # build Android
                 cd android
-                ./gradlew installDebug --info
+                ./gradlew installDebug --info 
                 ./gradlew 
         artifacts:
             - android/app/build/outputs/**/*.apk
