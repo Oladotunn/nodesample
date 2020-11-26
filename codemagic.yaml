@@ -44,7 +44,7 @@ workflows:
               script: |
                 # build Android
                 cd android
-                ./gradlew assembleRelease
+                ./gradlew 
             # - name: Firebase App Distribution
               # script: |
                 # https://firebase.google.com/docs/app-distribution/android/distribute-cli
