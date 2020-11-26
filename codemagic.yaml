@@ -4,16 +4,12 @@
 workflows:
     react-native-android:
         name: React Native Android
-        # max_build_duration: 120
         environment:
             # vars:
-                # https://firebase.google.com/docs/cli#cli-ci-systems
-                # FIREBASE_TOKEN: Encrypted(...) # <-- Put your encrypted Firebase App Distribution CI token here
                 # CM_KEYSTORE: Encrypted(...) # <-- Put your encrypted keystore file here
                 # CM_KEYSTORE_PASSWORD: Encrypted(...) # <-- Put your encrypted keystore password here
                 # CM_KEY_ALIAS_PASSWORD: Encrypted(...) # <-- Put your encrypted keystore alias password here
                 # CM_KEY_ALIAS_USERNAME: Encrypted(...) # <-- Put your encrypted keystore alias username here
-            
             node: latest
         triggering:
             events:
@@ -45,21 +41,6 @@ workflows:
                 # build Android
                 cd android
                 ./gradlew 
-            # - name: Firebase App Distribution
-              # script: |
-                # https://firebase.google.com/docs/app-distribution/android/distribute-cli
-                #!/usr/bin/env sh
-                # set -e   # exit on first failed command
-                # set -x   # print all executed commands to the log
-                
-                # Android Firebase App Distribution CLI
-                # Change the --app value below!!
-
-                # firebase appdistribution:distribute $FCI_BUILD_DIR/android/app/build/outputs/apk/release/app-release.apk \
-                # --app 1:831201993789:android:b9039e5b4d34d88754f271 \ 
-                # --token "$FIREBASE_TOKEN" \
-                # --release-notes "Internal Android test release" \
-                # --groups "cmrnapp-testers"
         artifacts:
             - android/app/build/outputs/**/*.apk
         publishing:
@@ -72,7 +53,6 @@ workflows:
         instance_type: mac_mini
         environment:
             vars:
-                # FIREBASE_TOKEN: Encrypted(...) # <-- Put your encrypted Firebase App Distribution CI token here
                 XCODE_WORKSPACE: "codemagicreactnative.xcworkspace" # <-- Put the name of your Xcode workspace here
                 XCODE_SCHEME: "codemagicreactnative" # <-- Put the name of your Xcode scheme here
                 # Manual Code Signing
@@ -141,28 +121,17 @@ workflows:
             # - name: Build ipa for distribution
               # script: |
                 # xcode-project build-ipa --workspace "$FCI_BUILD_DIR/ios/$XCODE_WORKSPACE" --scheme "$XCODE_SCHEME"
-            # - name: Firebase App Distribution
-              # script: |
-                #!/usr/bin/env sh
-                # set -e   # exit on first failed command
-                # set -x   # print all executed commands to the log
-                
-                # iOS Firebase App Distribution CLI
-                # Change the --app value below!!
-
-                # firebase appdistribution:distribute $FCI_BUILD_DIR/build/ios/ipa/codemagicreactnative.ipa \
-                # --app 1:830101873788:ios:05df72817d62e45253f229 \
-                # --token "$FIREBASE_TOKEN" \
-                # --release-notes "Internal iOS test release" \
-                # --groups "cmrnapp-testers"   
         artifacts:
             - build/ios/ipa/*.ipa
             - /tmp/xcodebuild_logs/*.log
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
 
-        # publishing:
-        #   app_store_connect:                 
-        #       apple_id: yourAppleId@example.com  
-        #       password: Encrypted(...) # <-- Put your App Specific Password. For more information visit: https://support.apple.com/en-us/HT204397
+        publishing:
+          # app_store_connect:                 
+              # apple_id: yourAppleId@example.com  
+              # password: Encrypted(...) # <-- Put your App Specific Password. For more information visit: https://support.apple.com/en-us/HT204397
+          email:
+            recipients:
+                - stephen.olabode@nautilus.tech
     
